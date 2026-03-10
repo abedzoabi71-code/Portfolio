@@ -112,49 +112,121 @@ body.rtl .s-btn-back::before { content: none; }
 
 /* ── HERO ── */
 .hero {
-  min-height: 100svh; display: flex; flex-direction: column;
-  justify-content: flex-end; padding: 0 2.5rem 5rem;
-  position: relative; overflow: hidden; padding-top: var(--nav-h);
+  min-height: 100svh; display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0 2.5rem;
+  padding-top: var(--nav-h);
+  position: relative; overflow: hidden; gap: 4rem;
 }
-.hero-ticker {
-  position: absolute; inset: 0; display: flex;
-  align-items: center; overflow: hidden; pointer-events: none;
+/* subtle grid overlay background */
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,194,212,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,194,212,0.035) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
 }
-.ticker-word {
-  font-family: var(--fd); font-size: clamp(22vw,28vw,36vw);
-  line-height: 0.85; white-space: nowrap;
-  color: rgba(0,194,212,0.04);
-  animation: slideLeft 18s linear infinite; flex-shrink: 0;
+/* dark fade from left so text stays readable */
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, var(--bg) 40%, transparent 100%);
+  pointer-events: none;
 }
-@keyframes slideLeft { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-.hero-content { position: relative; z-index: 2; max-width: 1400px; }
+.hero-left { position: relative; z-index: 2; }
+.hero-right {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+}
+/* glowing abstract visual — browser window mockup */
+.hero-visual {
+  width: 100%; max-width: 520px; aspect-ratio: 16/11;
+  background: var(--gray); border: 1px solid var(--gray2);
+  border-radius: 6px; overflow: hidden; position: relative;
+  box-shadow: 0 0 80px rgba(0,194,212,0.08), 0 0 0 1px rgba(0,194,212,0.06);
+}
+.hv-bar {
+  height: 32px; background: #0d1215; display: flex; align-items: center;
+  padding: 0 12px; gap: 6px; border-bottom: 1px solid #1a2226; flex-shrink: 0;
+}
+.hv-dot { width: 8px; height: 8px; border-radius: 50%; }
+.hv-dot-r { background: #3a1a1a; }
+.hv-dot-y { background: #2a2a1a; }
+.hv-dot-g { background: #1a2a1a; }
+.hv-url {
+  flex: 1; height: 16px; background: #141a1d; border-radius: 2px; margin: 0 8px;
+  display: flex; align-items: center; padding: 0 8px;
+}
+.hv-url-text { font-family: var(--fm); font-size: 0.5rem; color: #2a4050; letter-spacing: 0.08em; }
+.hv-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.hv-hero-block {
+  background: #0d1215; border-radius: 3px; padding: 18px;
+  display: flex; gap: 12px; align-items: center;
+}
+.hv-hero-text { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.hv-h { height: 10px; background: var(--white); border-radius: 1px; width: 80%; }
+.hv-h2 { height: 8px; background: var(--accent); border-radius: 1px; width: 55%; }
+.hv-p { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
+.hv-p span { height: 3px; background: #1e2a30; border-radius: 1px; }
+.hv-p .s { width: 60%; }
+.hv-btn { height: 20px; width: 70px; background: var(--accent); border-radius: 2px; margin-top: 6px; flex-shrink: 0; }
+.hv-img-placeholder {
+  width: 90px; height: 80px; background: linear-gradient(135deg, #141e22, #0d1a1e);
+  border-radius: 2px; border: 1px solid #1a2226; flex-shrink: 0;
+  position: relative; overflow: hidden;
+}
+.hv-img-placeholder::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 40% 60%, rgba(0,194,212,0.12), transparent 60%);
+}
+.hv-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.hv-card {
+  background: #0d1215; border-radius: 3px; padding: 10px;
+  border: 1px solid #1a2226; display: flex; flex-direction: column; gap: 5px;
+}
+.hv-card-img { height: 36px; background: #141e22; border-radius: 2px; margin-bottom: 2px; }
+.hv-card-img-1 { background: linear-gradient(135deg,#1a2e30,#0d2225); }
+.hv-card-img-2 { background: linear-gradient(135deg,#1e1a2e,#14102a); }
+.hv-card-img-3 { background: linear-gradient(135deg,#2e1a1a,#1a0d0d); }
+.hv-line { height: 4px; background: #1e2a30; border-radius: 1px; }
+.hv-line.accent { background: rgba(0,194,212,0.25); width: 60%; }
+/* glow dot floating */
+.hero-glow {
+  position: absolute; width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(0,194,212,0.12) 0%, transparent 70%);
+  border-radius: 50%; top: 50%; right: -50px; transform: translateY(-50%);
+  pointer-events: none; z-index: 1;
+}
 .hero-tag {
   font-family: var(--fm); font-size: 0.68rem; letter-spacing: 0.22em;
-  color: var(--accent); margin-bottom: 1.5rem;
+  color: var(--accent); margin-bottom: 1.8rem;
   display: flex; align-items: center; gap: 0.8rem;
 }
 .hero-tag::before { content:''; width:24px; height:1px; background:var(--accent); }
 .hero-h1 {
-  font-family: var(--fd); font-size: clamp(5rem,13vw,16rem);
-  line-height: 0.88; letter-spacing: 0.01em; margin-bottom: 2.5rem;
+  font-family: var(--fd); font-size: clamp(3rem, 6vw, 6.5rem);
+  line-height: 0.92; letter-spacing: 0.01em; margin-bottom: 2rem;
 }
 .hero-h1 .stroke { -webkit-text-stroke: 1.5px var(--white); color: transparent; }
 .hero-h1 .fill-accent { color: var(--accent); }
-.hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; }
-.hero-sub { max-width: 360px; font-size: 1rem; line-height: 1.7; color: #6a8090; }
+.hero-sub { max-width: 400px; font-size: 1rem; line-height: 1.7; color: #6a8090; margin-bottom: 2.5rem; }
 .hero-sub strong { color: var(--white); font-weight: 700; }
-.hero-cta-group { display: flex; flex-direction: column; align-items: flex-end; gap: 0.8rem; }
+.hero-cta-group { display: flex; align-items: center; gap: 1.5rem; }
 .btn-big {
-  display: inline-flex; align-items: center; gap: 1rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
   background: var(--accent); color: var(--bg);
-  font-family: var(--fd); font-size: 1.5rem; letter-spacing: 0.05em;
-  padding: 1rem 2rem; text-decoration: none;
+  font-family: var(--fd); font-size: 1.4rem; letter-spacing: 0.05em;
+  padding: 0.9rem 2rem; text-decoration: none; line-height: 1;
   transition: background 0.2s, transform 0.2s;
 }
-.btn-big::after { content: ''; }
 .btn-big:hover { background: var(--accent2); transform: translate(-2px,-2px); }
 .hero-scroll { font-family: var(--fm); font-size: 0.62rem; letter-spacing: 0.2em; color: #2a3a40; }
+@media(max-width:900px){
+  .hero { grid-template-columns: 1fr; padding-bottom: 4rem; align-items: flex-end; }
+  .hero-right { display: none; }
+  .hero-h1 { font-size: clamp(3rem,10vw,5rem); }
+}
 
 /* ── STRIP ── */
 .strip { background: var(--accent); padding: 0.85rem 0; overflow: hidden; white-space: nowrap; }
@@ -678,6 +750,153 @@ footer {
   .survey-nav { margin-top: 1.2rem; }
   .s-btn-next { font-size: 1rem; padding: 0.75rem 1.5rem; }
 }
+
+/* ── BRIDGE LINE ── */
+.bridge-line {
+  display: flex; align-items: center; gap: 2rem;
+  padding: 4rem 2.5rem; max-width: 1400px; margin: 0 auto;
+}
+.bridge-rule { flex: 1; height: 1px; background: #1a2226; }
+.bridge-text {
+  font-family: var(--fd); font-size: clamp(1.2rem, 2.5vw, 2rem);
+  color: var(--mid); letter-spacing: 0.04em; text-align: center;
+  white-space: nowrap;
+}
+.bridge-cta .bridge-text { color: var(--accent); }
+
+/* ── SERVICES GRID ── */
+.services { padding: 8rem 2.5rem; max-width: 1400px; margin: 0 auto; }
+.services-header { margin-bottom: 4rem; }
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+}
+.srv-card {
+  background: var(--gray); padding: 2.8rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+  border: 1px solid var(--gray2);
+  transition: border-color 0.2s;
+}
+.srv-card:hover { border-color: rgba(0,194,212,0.2); }
+.srv-card-wide {
+  grid-column: 1 / -1;
+  background: rgba(0,194,212,0.04);
+  border-color: rgba(0,194,212,0.15) !important;
+  flex-direction: row; gap: 4rem; align-items: center;
+}
+.srv-card-top {
+  display: flex; align-items: center; gap: 1rem;
+}
+.srv-card-num {
+  font-family: var(--fm); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.2em;
+}
+.srv-card-tag {
+  font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.14em;
+  color: var(--mid); border: 1px solid #1a2226; padding: 0.2rem 0.6rem;
+}
+.srv-card-name {
+  font-family: var(--fd); font-size: clamp(1.8rem, 3vw, 2.8rem);
+  letter-spacing: 0.02em; line-height: 0.95; color: var(--white);
+}
+.srv-card-desc {
+  font-size: 0.82rem; color: var(--mid); line-height: 1.75; font-weight: 300; flex: 1;
+}
+.srv-card-list {
+  list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
+}
+.srv-card-list li {
+  font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.1em;
+  color: #2a4050; padding-left: 1rem; position: relative;
+}
+.srv-card-list li::before {
+  content: '—'; position: absolute; left: 0; color: var(--accent);
+}
+.srv-card-cta {
+  font-family: var(--fd); font-size: 1rem; letter-spacing: 0.06em;
+  color: var(--accent); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: auto; padding-top: 0.5rem;
+  border-top: 1px solid #1a2226;
+  transition: gap 0.2s;
+}
+.srv-card-cta:hover { gap: 0.8rem; }
+.srv-card-wide .srv-card-name { font-size: clamp(1.6rem, 2.5vw, 2.4rem); flex: 0 0 auto; max-width: 340px; }
+.srv-card-wide .srv-card-desc { font-size: 0.88rem; }
+
+@media(max-width:700px){
+  .services-grid { grid-template-columns: 1fr; }
+  .srv-card-wide { flex-direction: column; gap: 1.5rem; }
+  .srv-card-wide .srv-card-name { max-width: 100%; }
+  .bridge-text { white-space: normal; text-align: center; }
+}
+
+
+/* ── BRIDGE LINE ── */
+.bridge-line {
+  display: flex; align-items: center; gap: 2rem;
+  padding: 3rem 2.5rem; max-width: 1400px; margin: 0 auto;
+}
+.bridge-rule { flex: 1; height: 1px; background: #1a2226; }
+.bridge-text {
+  font-family: var(--fd); font-size: clamp(1.1rem,2vw,1.8rem);
+  color: var(--mid); letter-spacing: 0.04em; text-align: center; white-space: nowrap;
+}
+.bridge-cta .bridge-text { color: var(--accent); }
+@media(max-width:700px){ .bridge-text { white-space: normal; } }
+
+/* ── SERVICES GRID ── */
+.services { padding: 8rem 2.5rem; max-width: 1400px; margin: 0 auto; }
+.services-header { margin-bottom: 4rem; }
+.services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.srv-card {
+  background: var(--gray); padding: 2.8rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+  border: 1px solid var(--gray2); transition: border-color 0.2s;
+}
+.srv-card:hover { border-color: rgba(0,194,212,0.2); }
+.srv-card-wide {
+  grid-column: 1 / -1; flex-direction: row; gap: 4rem; align-items: center;
+  background: rgba(0,194,212,0.04); border-color: rgba(0,194,212,0.12) !important;
+}
+.srv-card-top { display: flex; align-items: center; gap: 1rem; }
+.srv-card-num { font-family: var(--fm); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.2em; }
+.srv-card-tag {
+  font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.14em;
+  color: var(--mid); border: 1px solid #1a2226; padding: 0.2rem 0.6rem;
+}
+.srv-card-name {
+  font-family: var(--fd); font-size: clamp(1.8rem,3vw,2.8rem);
+  letter-spacing: 0.02em; line-height: 0.95;
+}
+.srv-card-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.75; font-weight: 300; flex: 1; }
+.srv-card-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.srv-card-list li {
+  font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.1em;
+  color: #2a4050; padding-left: 1.2rem; position: relative;
+}
+.srv-card-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+.srv-card-cta {
+  font-family: var(--fd); font-size: 1rem; letter-spacing: 0.06em; color: var(--accent);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-top: auto; padding-top: 1rem; border-top: 1px solid #1a2226;
+  transition: gap 0.2s;
+}
+.srv-card-cta:hover { gap: 0.9rem; }
+.srv-card-wide .srv-card-name { flex: 0 0 auto; max-width: 360px; font-size: clamp(1.5rem,2.5vw,2.4rem); }
+@media(max-width:900px){
+  .services-grid { grid-template-columns: 1fr; }
+  .srv-card-wide { flex-direction: column; gap: 1.5rem; }
+  .srv-card-wide .srv-card-name { max-width: 100%; }
+}
+
+/* ── PROJECT MOCKUP IMAGE SUPPORT ── */
+.proj-mockup-img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; position: absolute; inset: 0;
+}
+
 </style>
 </head>
 <body>
@@ -688,35 +907,61 @@ footer {
 <nav>
   <a href="#" class="nav-mark">UX ABDUL</a>
   <div class="nav-links">
-    <a href="#projects" data-en="Work" data-ar="أعمالي">Work</a>
-    <a href="#pain" data-en="Why" data-ar="لماذا">Why</a>
+    <a href="#pain"     data-en="Why"      data-ar="لماذا">Why</a>
+    <a href="#projects" data-en="Work"     data-ar="أعمالي">Work</a>
     <a href="#services" data-en="Services" data-ar="خدمات">Services</a>
     <div class="lang-switch">
       <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
       <button class="lang-btn" id="btnAr" onclick="setLang('ar')">ع</button>
     </div>
-    <a href="#cta" class="nav-cta" data-en="Start here &nearr;" data-ar="ابدأ هنا &nearr;">Start here ↗</a>
+    <a href="#cta" class="nav-cta" data-en="Start here ↗" data-ar="ابدأ هنا ↗">Start here ↗</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-ticker" aria-hidden="true">
-    <div class="ticker-word">WEBSITES&nbsp;&nbsp;THAT&nbsp;&nbsp;WORK&nbsp;&nbsp;WEBSITES&nbsp;&nbsp;THAT&nbsp;&nbsp;WORK&nbsp;&nbsp;</div>
-    <div class="ticker-word">WEBSITES&nbsp;&nbsp;THAT&nbsp;&nbsp;WORK&nbsp;&nbsp;WEBSITES&nbsp;&nbsp;THAT&nbsp;&nbsp;WORK&nbsp;&nbsp;</div>
-  </div>
-  <div class="hero-content">
-    <p class="hero-tag">UX/UI Design · Based in Israel · Built to convert</p>
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <!-- LEFT: copy -->
+  <div class="hero-left">
+    <p class="hero-tag">Web Design · Based in Israel · Built to convert</p>
     <h1 class="hero-h1">
-      <span class="stroke">YOUR</span><br>
-      <span>BUSINESS</span><br>
-      <span class="fill-accent">ONLINE.</span>
+      <span class="stroke">A WEBSITE</span><br>
+      <span>THAT WORKS</span><br>
+      <span class="fill-accent">WHILE YOU</span><br>
+      <span class="fill-accent">SLEEP.</span>
     </h1>
-    <div class="hero-bottom">
-      <p class="hero-sub">Businesses without a real website are <strong>losing clients to competitors</strong> who look more credible online — even if the work is worse.</p>
-      <div class="hero-cta-group">
-        <a href="#cta" class="btn-big">Start here</a>
-        <p class="hero-scroll">↓ SCROLL TO SEE THE WORK</p>
+    <p class="hero-sub">Most business websites lose the customer before they ever make contact. <strong>Unclear flow. No obvious next step.</strong> That's the gap.</p>
+    <div class="hero-cta-group">
+      <a href="#cta" class="btn-big">Start here ↗</a>
+      <p class="hero-scroll">↓ SCROLL TO SEE THE WORK</p>
+    </div>
+  </div>
+
+  <!-- RIGHT: visual -->
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hv-bar">
+        <div class="hv-dot hv-dot-r"></div>
+        <div class="hv-dot hv-dot-y"></div>
+        <div class="hv-dot hv-dot-g"></div>
+        <div class="hv-url"><span class="hv-url-text">yourwebsite.com</span></div>
+      </div>
+      <div class="hv-body">
+        <div class="hv-hero-block">
+          <div class="hv-hero-text">
+            <div class="hv-h"></div>
+            <div class="hv-h2"></div>
+            <div class="hv-p"><span></span><span></span><span class="s"></span></div>
+            <div class="hv-btn"></div>
+          </div>
+          <div class="hv-img-placeholder"></div>
+        </div>
+        <div class="hv-cards">
+          <div class="hv-card"><div class="hv-card-img hv-card-img-1"></div><div class="hv-line"></div><div class="hv-line accent"></div></div>
+          <div class="hv-card"><div class="hv-card-img hv-card-img-2"></div><div class="hv-line"></div><div class="hv-line accent"></div></div>
+          <div class="hv-card"><div class="hv-card-img hv-card-img-3"></div><div class="hv-line"></div><div class="hv-line accent"></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -725,34 +970,73 @@ footer {
 <!-- STRIP -->
 <div class="strip" aria-hidden="true">
   <div class="strip-inner">
-    <span class="strip-item">FIRST IMPRESSIONS HAPPEN ONLINE</span><span class="strip-item strip-dot">◆</span>
-    <span class="strip-item">YOUR COMPETITOR ALREADY HAS ONE</span><span class="strip-item strip-dot">◆</span>
-    <span class="strip-item">A WEBSITE WORKS WHILE YOU SLEEP</span><span class="strip-item strip-dot">◆</span>
-    <span class="strip-item">NO WEBSITE = INVISIBLE BUSINESS</span><span class="strip-item strip-dot">◆</span>
-    <span class="strip-item">FIRST IMPRESSIONS HAPPEN ONLINE</span><span class="strip-item strip-dot">◆</span>
-    <span class="strip-item">YOUR COMPETITOR ALREADY HAS ONE</span><span class="strip-item strip-dot">◆</span>
-    <span class="strip-item">A WEBSITE WORKS WHILE YOU SLEEP</span><span class="strip-item strip-dot">◆</span>
-    <span class="strip-item">NO WEBSITE = INVISIBLE BUSINESS</span><span class="strip-item strip-dot">◆</span>
+    <span class="strip-item">GOOD WORK DESERVES A GOOD FIRST IMPRESSION</span><span class="strip-item strip-dot">◆</span>
+    <span class="strip-item">MOST WEBSITES CONFUSE PEOPLE</span><span class="strip-item strip-dot">◆</span>
+    <span class="strip-item">THE BEST CLIENT IS ONE WHO ALREADY TRUSTS YOU</span><span class="strip-item strip-dot">◆</span>
+    <span class="strip-item">A CLEAR PATH BEATS A PRETTY DESIGN</span><span class="strip-item strip-dot">◆</span>
+    <span class="strip-item">GOOD WORK DESERVES A GOOD FIRST IMPRESSION</span><span class="strip-item strip-dot">◆</span>
+    <span class="strip-item">MOST WEBSITES CONFUSE PEOPLE</span><span class="strip-item strip-dot">◆</span>
+    <span class="strip-item">THE BEST CLIENT IS ONE WHO ALREADY TRUSTS YOU</span><span class="strip-item strip-dot">◆</span>
+    <span class="strip-item">A CLEAR PATH BEATS A PRETTY DESIGN</span><span class="strip-item strip-dot">◆</span>
   </div>
+</div>
+
+<!-- ══ PAIN ══ -->
+<section class="pain-section" id="pain">
+  <div class="reveal">
+    <span class="section-num">01 / THE PROBLEM</span>
+    <h2 class="section-title">SOUND<br>FAMILIAR?</h2>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-card reveal">
+      <span class="pain-emoji">🔍</span>
+      <h3>Someone searched for you.<br>Moved on.</h3>
+      <p>They had a name, a referral, or a recommendation. No website to land on. By the time they found someone else, you were already forgotten.</p>
+    </div>
+    <div class="pain-card reveal">
+      <span class="pain-emoji">📱</span>
+      <h3>Every new client starts from zero.</h3>
+      <p>What you do, what it costs, how it works — you explain it fresh each time. A website answers all of that before the conversation even starts.</p>
+    </div>
+    <div class="pain-card reveal">
+      <span class="pain-emoji">🪞</span>
+      <h3>The online version of your business<br>doesn't match the real one.</h3>
+      <p>The quality of the work is there. What's online just hasn't caught up yet. That gap is what visitors judge you by.</p>
+    </div>
+    <div class="pain-card reveal">
+      <span class="pain-emoji">📉</span>
+      <h3>A referral checked you out.<br>Went quiet.</h3>
+      <p>Someone vouched for you — that's the warmest lead there is. They looked you up. What they found didn't match what they were told.</p>
+    </div>
+    <div class="pain-card reveal">
+      <span class="pain-emoji">🤝</span>
+      <h3>Smaller competitors are winning<br>on presentation.</h3>
+      <p>Not because their work is better. Because their website makes it easier to say yes. Credibility is felt before it's earned.</p>
+    </div>
+    <div class="pain-card reveal">
+      <span class="pain-emoji">⚙️</span>
+      <h3>The website exists.<br>But it doesn't do anything.</h3>
+      <p>It loads. It has pages. But there's no clear next step, no reason to stay, nothing that turns a visitor into a contact.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BRIDGE 1 -->
+<div class="bridge-line reveal">
+  <span class="bridge-rule"></span>
+  <p class="bridge-text">So what does a website that actually works look like?</p>
+  <span class="bridge-rule"></span>
 </div>
 
 <!-- ══ PROJECTS ══ -->
 <section class="projects-section" id="projects">
   <div class="projects-header reveal">
     <div>
-      <span class="section-num">01 / PROJECTS</span>
+      <span class="section-num">02 / PROJECTS</span>
       <h2 class="section-title">SELECTED<br>WORK.</h2>
     </div>
-    <p class="projects-sub">UX thinking, visual design, live website. No handoffs, no translation loss.</p>
+    <p class="projects-sub">Real businesses. Real results. Every site built to guide the visitor — not just impress them.</p>
   </div>
-
-  <!--
-    Stack logic:
-      Card 1 sticks at: nav_h + 0*peek  = 58px
-      Card 2 sticks at: nav_h + 1*peek  = 58+56 = 114px  → card 1 peeks 56px
-      Card 3 sticks at: nav_h + 2*peek  = 58+112 = 170px → card 2 peeks 56px, card 1 peeks 56px
-    z-index increases so each new card is on top.
-  -->
   <div class="card-stack" id="cardStack">
 
     <!-- CARD 1 -->
@@ -898,56 +1182,76 @@ footer {
   </div><!-- /card-stack -->
 </section>
 
-<!-- PAIN GRID -->
-<section class="pain-section" id="pain">
-  <div class="reveal">
-    <span class="section-num">02 / SOUND FAMILIAR?</span>
-    <h2 class="section-title">WHY THIS<br>MATTERS NOW.</h2>
-  </div>
-  <div class="pain-grid">
-    <div class="pain-card reveal"><span class="pain-emoji">🔍</span><h3>They Googled you.<br>Found nothing.</h3><p>A warm lead searched your name. No website. They moved on to someone who looked ready.</p></div>
-    <div class="pain-card reveal"><span class="pain-emoji">📱</span><h3>You're selling on WhatsApp.</h3><p>Every new client needs the same info. You explain it manually, every time. A website does this while you sleep.</p></div>
-    <div class="pain-card reveal"><span class="pain-emoji">😤</span><h3>Your competitor got the deal.</h3><p>Same quality. Same price. They had a site. In the client's head, they were the safer bet.</p></div>
-    <div class="pain-card reveal"><span class="pain-emoji">📉</span><h3>Referrals aren't converting.</h3><p>Someone recommended you — great. Then they looked you up. The experience was weak. Lead gone.</p></div>
-    <div class="pain-card reveal"><span class="pain-emoji">🎭</span><h3>You look smaller than you are.</h3><p>Your work is excellent. Your online presence doesn't show that. The gap costs you real money.</p></div>
-    <div class="pain-card reveal"><span class="pain-emoji">⏰</span><h3>You're always explaining yourself.</h3><p>Prices, portfolio, process — you repeat it constantly. A website answers every question before they even ask.</p></div>
-  </div>
-</section>
-
-<!-- SERVICES -->
+<!-- ══ SERVICES ══ -->
 <section class="services" id="services">
-  <div class="reveal" style="margin-bottom:3rem">
+  <div class="services-header reveal">
     <span class="section-num">03 / SERVICES</span>
-    <h2 class="section-title">WHAT<br>I BUILD.</h2>
+    <h2 class="section-title">WHAT<br>I DO.</h2>
   </div>
-  <div class="services-list">
-    <div class="service-row reveal"><span class="srv-num">01</span><span class="srv-name">Landing Pages</span><span class="srv-tag">FROM $X · 7 DAYS</span><span class="srv-arrow">→</span></div>
-    <div class="service-row reveal"><span class="srv-num">02</span><span class="srv-name">Business Websites</span><span class="srv-tag">FROM $X · 14 DAYS</span><span class="srv-arrow">→</span></div>
-    <div class="service-row reveal"><span class="srv-num">03</span><span class="srv-name">Online Stores</span><span class="srv-tag">FROM $X · 21 DAYS</span><span class="srv-arrow">→</span></div>
-    <div class="service-row reveal"><span class="srv-num">04</span><span class="srv-name">Redesigns</span><span class="srv-tag">LET'S TALK</span><span class="srv-arrow">→</span></div>
+  <div class="services-grid">
+
+    <div class="srv-card reveal">
+      <div class="srv-card-top">
+        <span class="srv-card-num">01</span>
+        <span class="srv-card-tag">NEW BUILD</span>
+      </div>
+      <h3 class="srv-card-name">WEBSITE<br>DEVELOPMENT</h3>
+      <p class="srv-card-desc">Built from zero. I design the path your visitor takes — from landing to contacting you. Every step is intentional.</p>
+      <ul class="srv-card-list">
+        <li>Custom design, no templates</li>
+        <li>Clear flow from landing to contact</li>
+        <li>Fast, mobile-first, live in weeks</li>
+      </ul>
+      <a href="#cta" class="srv-card-cta">Get a website ↗</a>
+    </div>
+
+    <div class="srv-card reveal">
+      <div class="srv-card-top">
+        <span class="srv-card-num">02</span>
+        <span class="srv-card-tag">FIX WHAT'S BROKEN</span>
+      </div>
+      <h3 class="srv-card-name">UX AUDIT &amp;<br>REDESIGN</h3>
+      <p class="srv-card-desc">Already have a website? I'll find where you're losing people. Most sites bleed leads silently — a few fixes can change that.</p>
+      <ul class="srv-card-list">
+        <li>Full visitor journey audit</li>
+        <li>Identify exactly where people drop off</li>
+        <li>Redesign what's hurting conversions</li>
+      </ul>
+      <a href="#cta" class="srv-card-cta">Audit my site ↗</a>
+    </div>
+
+    <div class="srv-card srv-card-wide reveal">
+      <div class="srv-card-top">
+        <span class="srv-card-num">03</span>
+        <span class="srv-card-tag">THE DIFFERENCE</span>
+      </div>
+      <h3 class="srv-card-name">WEBSITES THAT WORK —<br>NOT JUST LOOK GOOD.</h3>
+      <p class="srv-card-desc">A good-looking website that confuses people is just an expensive brochure. Every site I build has one job: take the visitor from "I found you" to "I'm calling you." I design the path, then I build it.</p>
+    </div>
+
   </div>
 </section>
 
-<!-- SURVEY / CTA -->
+<!-- BRIDGE 2 -->
+<div class="bridge-line bridge-cta reveal">
+  <span class="bridge-rule"></span>
+  <p class="bridge-text">Ready to close the gap?</p>
+  <span class="bridge-rule"></span>
+</div>
+
+<!-- ══ SURVEY / CTA ══ -->
 <section class="survey-section" id="cta">
   <div class="survey-bg-text" aria-hidden="true">GO</div>
   <div class="survey-inner">
-
     <div id="surveyHeader">
       <p class="survey-eyebrow">TAKES 60 SECONDS · NO COMMITMENT</p>
       <h2 class="survey-h">TELL ME<br>ABOUT YOUR<br>BUSINESS.</h2>
       <p class="survey-sub">A few quick questions so I can reach out with something actually useful.</p>
       <div class="survey-dots" id="surveyDots">
-        <div class="s-dot active" data-i="0"></div>
-        <div class="s-dot" data-i="1"></div>
-        <div class="s-dot" data-i="2"></div>
-        <div class="s-dot" data-i="3"></div>
-        <div class="s-dot" data-i="4"></div>
-        <div class="s-dot" data-i="5"></div>
-        <div class="s-dot" data-i="6"></div>
+        <div class="s-dot active"></div><div class="s-dot"></div><div class="s-dot"></div>
+        <div class="s-dot"></div><div class="s-dot"></div><div class="s-dot"></div><div class="s-dot"></div>
       </div>
     </div>
-
     <div class="survey-steps" id="surveySteps">
 
       <!-- Step 0: business type -->
@@ -1062,20 +1366,18 @@ footer {
       </div>
 
     </div><!-- /survey-steps -->
-
     <div class="survey-thanks" id="surveyThanks">
       <span class="thanks-icon">✦</span>
       <h3 class="thanks-h">GOT IT.<br>I'LL BE IN<br>TOUCH.</h3>
       <p class="thanks-p">I'll review your answers and reach out within 24 hours. No pressure, just a conversation.</p>
     </div>
-
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="reveal">
-    <span class="section-num">05 / CONTACT</span>
+    <span class="section-num">04 / CONTACT</span>
     <h2 class="section-title">LET'S<br>TALK.</h2>
   </div>
   <div class="contact-grid">
@@ -1094,9 +1396,9 @@ footer {
         <div class="ch-info"><div class="ch-label">INSTAGRAM</div><div class="ch-val">@renderlabs.3d</div></div>
         <span class="ch-arrow">→</span>
       </a>
-      <a href="/cdn-cgi/l/email-protection#5d3c3f383927323c3f34646c6a1d3a303c3431733e3230" class="channel">
+      <a href="/cdn-cgi/l/email-protection#bcddded9d8c6d3ddded5858d8bfcdbd1ddd5d092dfd3d1" class="channel">
         <span class="ch-icon">✉️</span>
-        <div class="ch-info"><div class="ch-label">EMAIL</div><div class="ch-val"><span class="__cf_email__" data-cfemail="a6c7c4c3c2dcc9c7c4cf9f9791e6c1cbc7cfca88c5c9cb">[email&#160;protected]</span></div></div>
+        <div class="ch-info"><div class="ch-label">EMAIL</div><div class="ch-val"><span class="__cf_email__" data-cfemail="fa9b989f9e80959b9893c3cbcdba9d979b9396d4999597">[email&#160;protected]</span></div></div>
         <span class="ch-arrow">→</span>
       </a>
     </div>
@@ -1107,13 +1409,13 @@ footer {
   <a href="#" class="f-logo">UX ABDUL</a>
   <span class="f-note">© 2025 · UX ABDUL · WEB DESIGN FOR SERIOUS BUSINESSES</span>
 </footer>
+<script>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // CURSOR
 const cur = document.getElementById('cur');
 document.addEventListener('mousemove', e => {
   cur.style.left = e.clientX + 'px';
-  cur.style.top = e.clientY + 'px';
+  cur.style.top  = e.clientY + 'px';
 });
 
 // PROGRESS BAR
@@ -1143,237 +1445,220 @@ window.addEventListener('resize', setCardTops);
 const painGrid = document.querySelector('.pain-grid');
 if (painGrid) {
   let isDown = false, startX, scrollLeft;
-  painGrid.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - painGrid.offsetLeft; scrollLeft = painGrid.scrollLeft; painGrid.style.cursor = 'grabbing'; });
-  painGrid.addEventListener('mouseleave', () => { isDown = false; painGrid.style.cursor = 'grab'; });
-  painGrid.addEventListener('mouseup', () => { isDown = false; painGrid.style.cursor = 'grab'; });
+  painGrid.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - painGrid.offsetLeft; scrollLeft = painGrid.scrollLeft; });
+  painGrid.addEventListener('mouseleave', () => { isDown = false; });
+  painGrid.addEventListener('mouseup', () => { isDown = false; });
   painGrid.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); painGrid.scrollLeft = scrollLeft - (e.pageX - painGrid.offsetLeft - startX) * 1.4; });
 }
 
 // ── LANGUAGE SYSTEM ──
 const translations = {
   en: {
-    'hero-tag': 'UX/UI Design · Based in Israel · Built to convert',
-    'hero-h1-1': 'YOUR', 'hero-h1-2': 'BUSINESS', 'hero-h1-3': 'ONLINE.',
-    'hero-sub': 'Businesses without a real website are <strong>losing clients to competitors</strong> who look more credible online — even if the work is worse.',
+    'hero-tag': 'Web Design · Based in Israel · Built to convert',
+    'hero-h1-1': 'A WEBSITE', 'hero-h1-2': 'THAT WORKS', 'hero-h1-3': 'WHILE YOU', 'hero-h1-4': 'SLEEP.',
+    'hero-sub': 'Most business websites lose the customer before they ever make contact. <strong>Unclear flow. No obvious next step.</strong> That\'s the gap.',
     'hero-scroll': '↓ SCROLL TO SEE THE WORK',
     'hero-cta': 'Start here ↗',
-    'projects-label': '01 / PROJECTS',
-    'projects-title': 'SELECTED\nWORK.',
-    'projects-sub': 'UX thinking, visual design, live website. No handoffs, no translation loss.',
-    'pain-label': '02 / WHY IT MATTERS',
-    'pain-title': 'YOUR WEBSITE\nIS LOSING YOU\nMONEY.',
+    'pain-label': '01 / THE PROBLEM',
+    'pain-title': 'SOUND FAMILIAR?',
+    'projects-label': '02 / PROJECTS',
+    'projects-title': 'SELECTED WORK.',
+    'projects-sub': 'Real businesses. Real results. Every site built to guide the visitor — not just impress them.',
     'services-label': '03 / SERVICES',
-    'services-title': 'WHAT I\nBUILD.',
-    'about-label': '04 / ABOUT',
-    'about-title': 'DESIGN\nMEETS RESULTS.',
-    'about-p1': "I'm Abdul, a UX/UI designer who builds websites that actually <strong>convert visitors into clients</strong>. Every decision starts with the user — not just what looks good.",
-    'about-p2': 'Most designers hand off their work to a developer and hope it survives. I take it all the way to launch — <strong>same vision, no translation loss.</strong>',
+    'services-title': 'WHAT I DO.',
     'cta-eyebrow': 'TAKES 60 SECONDS · NO COMMITMENT',
     'cta-title': 'TELL ME\nABOUT YOUR\nBUSINESS.',
     'cta-sub': 'A few quick questions so I can reach out with something actually useful.',
-    'contact-title': 'PREFER TO\nREACH OUT\n<em>DIRECTLY?</em>',
+    'contact-title': 'READY WHEN\n<em>YOU ARE.</em>',
     'contact-sub': 'No forms, no waiting. Pick your channel.',
     'step-q-0': 'What type of business do you have?',
     'step-q-1': 'Do you currently have a website?',
-    'step-q-2': "What's your main goal?",
-    'step-q-3': "What's your biggest problem right now?",
-    'step-q-4': "What's been stopping you from getting a website?",
+    'step-q-2': 'What\'s your main goal?',
+    'step-q-3': 'What\'s your biggest challenge right now?',
+    'step-q-4': 'What\'s held you back from sorting this?',
     'step-q-5': 'When are you usually free to chat?',
     'step-q-6': 'Last thing — where should I reach you?',
     'input-name': 'Your name',
     'input-contact': 'Email or WhatsApp number',
     'thanks-h': 'GOT IT.\nI\'LL BE IN\nTOUCH.',
-    'thanks-p': "I'll review your answers and reach out within 24 hours. No pressure, just a conversation.",
+    'thanks-p': 'I\'ll review your answers and reach out within 24 hours. No pressure, just a conversation.',
+    'bridge-1': 'So what does a website that actually works look like?',
+    'bridge-2': 'Ready to close the gap?',
+    'srv-name-1': 'WEBSITE\nDEVELOPMENT',
+    'srv-desc-1': 'Built from zero. I design the path your visitor takes — from landing to contacting you. Every step is intentional.',
+    'srv-list-1-a': 'Custom design, no templates',
+    'srv-list-1-b': 'Clear flow from landing to contact',
+    'srv-list-1-c': 'Fast, mobile-first, live in weeks',
+    'srv-cta-1': 'Get a website ↗',
+    'srv-name-2': 'UX AUDIT &\nREDESIGN',
+    'srv-desc-2': 'Already have a website? I\'ll find where you\'re losing people. Most sites bleed leads silently — a few fixes can change that.',
+    'srv-list-2-a': 'Full visitor journey audit',
+    'srv-list-2-b': 'Identify exactly where people drop off',
+    'srv-list-2-c': 'Redesign what\'s hurting conversions',
+    'srv-cta-2': 'Audit my site ↗',
+    'srv-wide-name': 'WEBSITES THAT WORK —\nNOT JUST LOOK GOOD.',
+    'srv-wide-desc': 'A good-looking website that confuses people is just an expensive brochure. Every site I build has one job: take the visitor from "I found you" to "I\'m calling you." I design the path, then I build it.',
   },
   ar: {
-    'hero-tag': 'تصميم UX/UI · من إسرائيل · مصمَّم للتحويل',
-    'hero-h1-1': 'شركتك', 'hero-h1-2': 'على', 'hero-h1-3': 'الإنترنت.',
-    'hero-sub': 'الشركات بدون موقع حقيقي <strong>تخسر عملاء لصالح المنافسين</strong> الذين يبدون أكثر مصداقية — حتى لو كان عملهم أسوأ.',
+    'hero-tag': 'تصميم ويب · من إسرائيل · مصمَّم للتحويل',
+    'hero-h1-1': 'موقع', 'hero-h1-2': 'يعمل', 'hero-h1-3': 'وأنت', 'hero-h1-4': 'نائم.',
+    'hero-sub': 'معظم مواقع الأعمال تخسر العميل قبل أن يتواصل. <strong>مسار غير واضح. لا خطوة تالية.</strong> هذه هي الفجوة.',
     'hero-scroll': '↓ مرر لترى الأعمال',
     'hero-cta': 'ابدأ هنا ↗',
-    'projects-label': '٠١ / الأعمال',
-    'projects-title': 'أعمال\nمختارة.',
-    'projects-sub': 'تفكير UX، تصميم بصري، موقع حقيقي. بدون تسليم ناقص.',
-    'pain-label': '٠٢ / لماذا يهم',
-    'pain-title': 'موقعك\nيكلّفك\nعملاء.',
+    'pain-label': '٠١ / المشكلة',
+    'pain-title': 'هل يبدو مألوفاً؟',
+    'projects-label': '٠٢ / الأعمال',
+    'projects-title': 'أعمال مختارة.',
+    'projects-sub': 'أعمال حقيقية. نتائج حقيقية. كل موقع مصمَّم ليقود الزائر — لا لمجرد إبهاره.',
     'services-label': '٠٣ / الخدمات',
-    'services-title': 'ماذا\nأبني.',
-    'about-label': '٠٤ / عني',
-    'about-title': 'التصميم\nيحقق نتائج.',
-    'about-p1': 'أنا عبدالله، مصمم UX/UI يبني مواقع <strong>تحوّل الزوار إلى عملاء</strong>. كل قرار يبدأ من المستخدم — وليس فقط من المظهر.',
-    'about-p2': 'معظم المصممين يسلّمون عملهم لمطوّر ويأملون بسلامته. أنا أتابع المشروع حتى الإطلاق — <strong>نفس الرؤية، بدون خسارة في الترجمة.</strong>',
+    'services-title': 'ما الذي أقدمه.',
     'cta-eyebrow': 'دقيقة واحدة فقط · بدون أي التزام',
     'cta-title': 'أخبرني\nعن\nمشروعك.',
     'cta-sub': 'أسئلة سريعة حتى أتواصل معك بما يفيدك فعلاً.',
-    'contact-title': 'تفضّل\nالتواصل\n<em>مباشرة؟</em>',
+    'contact-title': 'جاهز\n<em>متى تريد.</em>',
     'contact-sub': 'بدون نماذج، بدون انتظار. اختر القناة.',
     'step-q-0': 'ما نوع مشروعك؟',
     'step-q-1': 'هل لديك موقع حالياً؟',
     'step-q-2': 'ما هدفك الأساسي؟',
-    'step-q-3': 'ما أكبر مشكلة تواجهها الآن؟',
-    'step-q-4': 'ما الذي أخّرك عن بناء موقع؟',
+    'step-q-3': 'ما أكبر تحدٍّ تواجهه الآن؟',
+    'step-q-4': 'ما الذي أخّرك عن معالجة هذا؟',
     'step-q-5': 'متى تكون متاحاً عادةً للحديث؟',
     'step-q-6': 'آخر شيء — كيف أتواصل معك؟',
     'input-name': 'اسمك',
     'input-contact': 'البريد الإلكتروني أو واتساب',
     'thanks-h': 'وصلت.\nسأتواصل\nمعك قريباً.',
     'thanks-p': 'سأراجع إجاباتك وأتواصل معك خلال 24 ساعة. بدون ضغط، فقط محادثة.',
+    'bridge-1': 'كيف يبدو الموقع الذي يعمل فعلاً؟',
+    'bridge-2': 'مستعد لإغلاق الفجوة؟',
+    'srv-name-1': 'تطوير\nالمواقع',
+    'srv-desc-1': 'من الصفر. أصمم المسار الذي يسلكه زائرك — من اللحظة التي يصل فيها حتى يتواصل معك. كل خطوة مقصودة.',
+    'srv-list-1-a': 'تصميم مخصص، بدون قوالب جاهزة',
+    'srv-list-1-b': 'مسار واضح من الوصول إلى التواصل',
+    'srv-list-1-c': 'سريع، مناسب للموبايل، يُطلَق في أسابيع',
+    'srv-cta-1': 'احصل على موقع ↗',
+    'srv-name-2': 'تدقيق UX\nوإعادة التصميم',
+    'srv-desc-2': 'لديك موقع بالفعل؟ سأجد أين تخسر الزوار. معظم المواقع تتسرب منها العملاء بصمت — بعض التعديلات يمكن أن تغير ذلك.',
+    'srv-list-2-a': 'تدقيق كامل لرحلة الزائر',
+    'srv-list-2-b': 'تحديد نقاط المغادرة بدقة',
+    'srv-list-2-c': 'إعادة تصميم ما يضر بالتحويل',
+    'srv-cta-2': 'دقق موقعي ↗',
+    'srv-wide-name': 'مواقع تعمل —\nلا مجرد مواقع تبدو جميلة.',
+    'srv-wide-desc': 'الموقع الجميل الذي يحيّر الزوار ما هو إلا كتيّب مكلف. كل موقع أبنيه له مهمة واحدة: أخذ الزائر من "وجدتك" إلى "سأتصل بك". أصمم المسار، ثم أبنيه.',
   }
 };
 
 function setLang(lang) {
   const t = translations[lang];
   const isAr = lang === 'ar';
-
-  // body class + dir
   document.body.classList.toggle('rtl', isAr);
   document.documentElement.lang = lang;
-  document.documentElement.dir = isAr ? 'rtl' : 'ltr';
-
-  // toggle active btn
+  document.documentElement.dir  = isAr ? 'rtl' : 'ltr';
   document.getElementById('btnEn').classList.toggle('active', !isAr);
-  document.getElementById('btnAr').classList.toggle('active', isAr);
+  document.getElementById('btnAr').classList.toggle('active',  isAr);
+  document.querySelectorAll('[data-en][data-ar]').forEach(el => { el.textContent = el.dataset[lang]; });
 
-  // nav links
-  document.querySelectorAll('[data-en][data-ar]').forEach(el => {
-    el.textContent = el.dataset[lang];
-  });
+  const q  = (sel)      => document.querySelector(sel);
+  const st = (sel, key) => { const e = q(sel); if (e && t[key]) e.innerHTML = (t[key]).replace(/\n/g,'<br>'); };
 
   // hero
-  const heroTag = document.querySelector('.hero-tag');
-  if (heroTag) heroTag.textContent = t['hero-tag'];
-  const h1spans = document.querySelectorAll('.hero-h1 span');
-  if (h1spans[0]) h1spans[0].textContent = t['hero-h1-1'];
-  if (h1spans[1]) h1spans[1].textContent = t['hero-h1-2'];
-  if (h1spans[2]) h1spans[2].textContent = t['hero-h1-3'];
-  const heroSub = document.querySelector('.hero-sub');
-  if (heroSub) heroSub.innerHTML = t['hero-sub'];
-  const heroScroll = document.querySelector('.hero-scroll');
-  if (heroScroll) heroScroll.textContent = t['hero-scroll'];
-  const heroCta = document.querySelector('.btn-big');
-  if (heroCta) heroCta.textContent = t['hero-cta'];
+  if (q('.hero-tag'))    q('.hero-tag').textContent = t['hero-tag'];
+  const spans = document.querySelectorAll('.hero-h1 span');
+  ['hero-h1-1','hero-h1-2','hero-h1-3','hero-h1-4'].forEach((k,i) => { if (spans[i] && t[k]) spans[i].textContent = t[k]; });
+  if (q('.hero-sub'))    q('.hero-sub').innerHTML = t['hero-sub'];
+  if (q('.hero-scroll')) q('.hero-scroll').textContent = t['hero-scroll'];
+  if (q('.btn-big'))     q('.btn-big').textContent = t['hero-cta'];
 
-  // section labels + titles
-  const sectionMap = [
-    ['.projects-section .section-num', 'projects-label'],
-    ['.projects-section .section-title', 'projects-title'],
-    ['.projects-sub', 'projects-sub'],
-    ['.pain-section .section-num', 'pain-label'],
-    ['.pain-section .section-title', 'pain-title'],
-    ['.services .section-num', 'services-label'],
-    ['.services .section-title', 'services-title'],
-    ['.about-text .section-num', 'about-label'],
-  ];
-  sectionMap.forEach(([sel, key]) => {
-    const el = document.querySelector(sel);
-    if (el && t[key]) el.textContent = t[key].replace(/\n/g,' ');
+  // sections
+  st('.pain-section .section-num',     'pain-label');
+  st('.pain-section .section-title',   'pain-title');
+  st('.projects-section .section-num', 'projects-label');
+  st('.projects-section .section-title','projects-title');
+  const ps = q('.projects-sub'); if (ps && t['projects-sub']) ps.textContent = t['projects-sub'];
+  st('.services-header .section-num',  'services-label');
+  st('.services-header .section-title','services-title');
+
+  // bridge lines
+  document.querySelectorAll('.bridge-text').forEach((b, i) => {
+    if (t[i === 0 ? 'bridge-1' : 'bridge-2']) b.textContent = t[i === 0 ? 'bridge-1' : 'bridge-2'];
   });
 
-  // about title with <em>
-  const aboutTitle = document.querySelector('.about-text h2');
-  if (aboutTitle) {
-    if (isAr) { aboutTitle.innerHTML = 'التصميم<br>يحقق <em>نتائج.</em>'; }
-    else { aboutTitle.innerHTML = 'DESIGN<br>MEETS <em>RESULTS.</em>'; }
-  }
-  const aboutPs = document.querySelectorAll('.about-text > p');
-  if (aboutPs[0]) aboutPs[0].innerHTML = t['about-p1'];
-  if (aboutPs[1]) aboutPs[1].innerHTML = t['about-p2'];
+  // services
+  const srvNames = document.querySelectorAll('.srv-card-name');
+  const srvDescs = document.querySelectorAll('.srv-card-desc');
+  const srvCtas  = document.querySelectorAll('.srv-card-cta');
+  const srvLists = document.querySelectorAll('.srv-card-list');
+  if (srvNames[0]) srvNames[0].innerHTML = (t['srv-name-1']||'').replace(/\n/g,'<br>');
+  if (srvNames[1]) srvNames[1].innerHTML = (t['srv-name-2']||'').replace(/\n/g,'<br>');
+  if (srvNames[2]) srvNames[2].innerHTML = (t['srv-wide-name']||'').replace(/\n/g,'<br>');
+  if (srvDescs[0]) srvDescs[0].textContent = t['srv-desc-1']||'';
+  if (srvDescs[1]) srvDescs[1].textContent = t['srv-desc-2']||'';
+  if (srvDescs[2]) srvDescs[2].textContent = t['srv-wide-desc']||'';
+  if (srvCtas[0])  srvCtas[0].textContent  = t['srv-cta-1']||'';
+  if (srvCtas[1])  srvCtas[1].textContent  = t['srv-cta-2']||'';
+  if (srvLists[0]) { const li = srvLists[0].querySelectorAll('li'); ['a','b','c'].forEach((x,i) => { if (li[i] && t['srv-list-1-'+x]) li[i].textContent = t['srv-list-1-'+x]; }); }
+  if (srvLists[1]) { const li = srvLists[1].querySelectorAll('li'); ['a','b','c'].forEach((x,i) => { if (li[i] && t['srv-list-2-'+x]) li[i].textContent = t['srv-list-2-'+x]; }); }
 
   // survey
-  const surveyEyebrow = document.querySelector('.survey-eyebrow');
-  if (surveyEyebrow) surveyEyebrow.textContent = t['cta-eyebrow'];
-  const surveyH = document.querySelector('.survey-h');
-  if (surveyH) surveyH.innerHTML = t['cta-title'].replace(/\n/g,'<br>');
-  const surveySub = document.querySelector('.survey-sub');
-  if (surveySub) surveySub.textContent = t['cta-sub'];
-
-  // step questions
-  document.querySelectorAll('.step-q').forEach((el, i) => {
-    if (t['step-q-'+i]) el.textContent = t['step-q-'+i];
-  });
-
-  // inputs
-  const inputName = document.getElementById('inputName');
-  if (inputName) inputName.placeholder = t['input-name'];
-  const inputEmail = document.getElementById('inputEmail');
-  if (inputEmail) inputEmail.placeholder = t['input-contact'];
-
-  // thanks
-  const thanksH = document.querySelector('.thanks-h');
-  if (thanksH) thanksH.innerHTML = t['thanks-h'].replace(/\n/g,'<br>');
-  const thanksP = document.querySelector('.thanks-p');
-  if (thanksP) thanksP.textContent = t['thanks-p'];
+  st('.survey-eyebrow', 'cta-eyebrow');
+  const sh = q('.survey-h'); if (sh) sh.innerHTML = (t['cta-title']||'').replace(/\n/g,'<br>');
+  const ss = q('.survey-sub'); if (ss) ss.textContent = t['cta-sub']||'';
+  document.querySelectorAll('.step-q').forEach((e,i) => { if (t['step-q-'+i]) e.textContent = t['step-q-'+i]; });
+  const iN = document.getElementById('inputName');   if (iN) iN.placeholder = t['input-name'];
+  const iE = document.getElementById('inputEmail');  if (iE) iE.placeholder = t['input-contact'];
+  const th = q('.thanks-h'); if (th) th.innerHTML = (t['thanks-h']||'').replace(/\n/g,'<br>');
+  const tp = q('.thanks-p'); if (tp) tp.textContent = t['thanks-p']||'';
 
   // contact
-  const contactTitle = document.querySelector('.contact-left h3');
-  if (contactTitle) contactTitle.innerHTML = t['contact-title'].replace(/\n/g,'<br>');
-  const contactSub = document.querySelector('.contact-left p');
-  if (contactSub) contactSub.textContent = t['contact-sub'];
+  st('.contact-left h3', 'contact-title');
+  const cs = q('.contact-left p'); if (cs) cs.textContent = t['contact-sub']||'';
 
   localStorage.setItem('uxabdul-lang', lang);
 }
 
-// Auto-detect language on load
 (function() {
   const saved = localStorage.getItem('uxabdul-lang');
-  const browserLang = navigator.language || navigator.userLanguage || '';
-  const defaultLang = saved || (browserLang.startsWith('ar') ? 'ar' : 'en');
-  setLang(defaultLang);
+  const bl = navigator.language || '';
+  setLang(saved || (bl.startsWith('ar') ? 'ar' : 'en'));
 })();
 
 // ── SURVEY ──
 let currentStep = 0;
-const TOTAL_STEPS = 7; // steps 0-6
 const answers = {};
 
-// Wire up option clicks — single select per question
 document.querySelectorAll('.s-opt').forEach(opt => {
   opt.addEventListener('click', () => {
     const q = opt.dataset.q;
-
-    // deselect siblings
     document.querySelectorAll(`.s-opt[data-q="${q}"]`).forEach(o => o.classList.remove('selected'));
     opt.classList.add('selected');
+    answers[q] = opt.dataset.val;
 
-    const val = opt.dataset.val;
-    answers[q] = val;
-
-    // "Other" — show/hide free-text input
-    const otherInput = document.getElementById(`other${q}`);
+    const otherInput = document.getElementById('other' + q);
     if (otherInput) {
-      if (val === 'Other') {
+      if (opt.dataset.val === 'Other') {
         otherInput.classList.add('show');
         otherInput.focus();
-        // update answer as they type
-        otherInput.addEventListener('input', () => {
-          answers[q] = otherInput.value.trim() || 'Other';
-        });
+        otherInput.addEventListener('input', () => { answers[q] = otherInput.value.trim() || 'Other'; });
       } else {
         otherInput.classList.remove('show');
       }
     }
-
-    // enable next
-    const nextBtn = document.getElementById(`next${q}`);
+    const nextBtn = document.getElementById('next' + q);
     if (nextBtn) nextBtn.disabled = false;
   });
 });
 
-// Contact inputs
 function checkContactInputs() {
-  const name = document.getElementById('inputName').value.trim();
-  const contact = document.getElementById('inputEmail').value.trim();
-  document.getElementById('next6').disabled = !(name && contact);
+  const n = document.getElementById('inputName').value.trim();
+  const c = document.getElementById('inputEmail').value.trim();
+  document.getElementById('next6').disabled = !(n && c);
 }
 document.getElementById('inputName').addEventListener('input', checkContactInputs);
 document.getElementById('inputEmail').addEventListener('input', checkContactInputs);
-
-// Submit wired to next6
 document.getElementById('next6').addEventListener('click', submitSurvey);
 
 function updateDots(step) {
   document.querySelectorAll('.s-dot').forEach((dot, i) => {
-    dot.classList.remove('active', 'done');
+    dot.classList.remove('active','done');
     if (i < step) dot.classList.add('done');
     else if (i === step) dot.classList.add('active');
   });
@@ -1395,47 +1680,35 @@ function goBack() {
   updateDots(currentStep);
 }
 
-// Wire next buttons for steps 0-5
 [0,1,2,3,4,5].forEach(i => {
-  document.getElementById(`next${i}`).addEventListener('click', () => goNext(i));
+  document.getElementById('next'+i).addEventListener('click', () => goNext(i));
 });
 
 function submitSurvey() {
   const name    = document.getElementById('inputName').value.trim();
   const contact = document.getElementById('inputEmail').value.trim();
-
-  // Show thank you immediately — don't make user wait
   document.getElementById('surveyHeader').style.display = 'none';
-  document.getElementById('surveySteps').style.display = 'none';
+  document.getElementById('surveySteps').style.display  = 'none';
   document.getElementById('surveyThanks').classList.add('show');
 
-  // ── HOW TO ACTIVATE EMAIL SENDING ──
-  // 1. Go to https://formspree.io and sign up free
-  // 2. Create a new form, set your email to abedzoabi917@gmail.com
-  // 3. Copy the form ID (looks like: xpwzabcd) and paste it below
-  const FORMSPREE_ID = 'YOUR_FORM_ID'; // ← paste your Formspree form ID here
-
-  const payload = {
-    name,
-    contact,
-    business_type:    answers[0] || '—',
-    website_status:   answers[1] || '—',
-    main_goal:        answers[2] || '—',
-    biggest_problem:  answers[3] || '—',
-    stopping_them:    answers[4] || '—',
-    best_time:        answers[5] || '—',
-    _subject: `New lead from website — ${name}`,
-    _replyto: contact
-  };
-
-  if (FORMSPREE_ID !== 'YOUR_FORM_ID') {
-    fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(() => {}); // fail silently — user already sees thank you
-  }
-  // No fallback mailto — just shows thank you screen silently
+  // Web3Forms: go to web3forms.com, enter abedzoabi917@gmail.com, paste your key below
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      access_key:      'YOUR_WEB3FORMS_KEY',
+      subject:         'New lead from UX Abdul — ' + name,
+      from_name:       'UX Abdul Website',
+      name,
+      contact,
+      business_type:   answers[0] || '—',
+      website_status:  answers[1] || '—',
+      main_goal:       answers[2] || '—',
+      biggest_problem: answers[3] || '—',
+      stopping_them:   answers[4] || '—',
+      best_time:       answers[5] || '—',
+    })
+  }).catch(() => {});
 }
 
 </script>
