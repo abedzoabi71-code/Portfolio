@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aroma Mist — Premium Home Fragrance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --sand: #c8a46e;
+    --sand-light: #e8d5b4;
+    --dark: #1c1a17;
+    --mid: #3d3730;
+    --text: #2a2520;
+    --muted: #7a7068;
+    --white: #faf8f4;
+    --border: #e8e2d9;
+    --bg2: #f4f0eb;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* NAV */
+  nav {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 26px 56px;
+  }
+  .logo { display: flex; align-items: center; gap: 11px; }
+  .logo-mark {
+    width: 40px; height: 40px; border-radius: 50%;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark img { width: 100%; height: 100%; object-fit: contain; }
+  .logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: #fff; letter-spacing: .06em; font-weight: 400;
+  }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+    font-size: 13px; color: rgba(255,255,255,.82); letter-spacing: .03em;
+  }
+  .nav-links a {
+    position: relative;
+    transition: color .2s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    height: 1px;
+    background: #fff;
+    width: 0;
+    transition: width .28s ease;
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-right { display: flex; gap: 12px; align-items: center; }
+  .nav-icon {
+    width: 36px; height: 36px; background: rgba(255,255,255,.12); border-radius: 50%;
+    backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.18);
+    display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer;
+    transition: background .2s;
+  }
+  .nav-icon:hover { background: rgba(255,255,255,.24); }
+
+  /* HERO — The Cut Line */
+  .hero {
+    position: relative; height: 100vh; min-height: 700px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('Candle_bg.webp') right center/cover no-repeat;
+    animation: heroZoom 16s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.07); }
+    to   { transform: scale(1); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(6,4,2,.45) 0%, transparent 22%, transparent 52%, rgba(6,4,2,.97) 100%),
+      linear-gradient(to right, rgba(6,4,2,.35) 0%, transparent 55%);
+  }
+
+  /* headline above the cut */
+  .hero-above {
+    position: absolute; bottom: 42%; left: 0; right: 0;
+    z-index: 2; text-align: center;
+    padding: 0 56px 32px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7.5vw, 108px); font-weight: 300;
+    line-height: .97; color: #fff; letter-spacing: -.02em;
+  }
+  .hero-h1-top {
+    display: block;
+    opacity: 0; animation: fadeUp .9s .1s ease forwards;
+  }
+  .hero-h1-bot {
+    display: block; font-style: italic; color: var(--sand-light);
+    opacity: 0; animation: fadeUp .9s .25s ease forwards;
+  }
+
+  /* the cut line with stat items */
+  .hero-cut {
+    position: absolute; top: 58%; left: 0; right: 0;
+    z-index: 3; transform: translateY(-50%);
+    display: flex; align-items: center;
+    padding: 0 56px;
+    opacity: 0; animation: fadeIn .8s .5s ease forwards;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .hero-cut-line { flex: 1; height: 1px; background: rgba(255,255,255,.3); }
+  .hero-cut-stats { display: flex; gap: 0; }
+  .hero-cut-stat {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 0 32px;
+    border-right: 1px solid rgba(255,255,255,.25);
+  }
+  .hero-cut-stat:last-child { border-right: none; }
+  .hero-cut-stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; color: #fff; font-weight: 300; line-height: 1;
+    text-shadow: 0 1px 12px rgba(0,0,0,.6);
+  }
+  .hero-cut-stat-l {
+    font-size: 7.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+    text-shadow: 0 1px 8px rgba(0,0,0,.8);
+  }
+
+  /* below the cut */
+  .hero-below {
+    position: absolute; top: 58%; left: 0; right: 0;
+    z-index: 2; padding: 28px 56px 0;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 3rem;
+    opacity: 0; animation: fadeUp .9s .65s ease forwards;
+  }
+  .hero p {
+    font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.75;
+    max-width: 340px; font-weight: 300; margin: 0;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-shrink: 0; }
+  .btn-primary {
+    background: var(--sand); color: #fff;
+    font-size: 10.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+    padding: 13px 28px; transition: background .2s;
+    display: inline-flex; align-items: center;
+  }
+  .btn-primary:hover { background: #b8945e; }
+  .btn-ghost {
+    background: none; border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.5);
+    font-size: 10.5px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase;
+    padding: 13px 24px; transition: all .25s;
+    display: inline-flex; align-items: center;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,.6); color: #fff; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* category strip */
+  .hero-cats { display: flex; width: 100%; }
+  .hero-cat {
+    flex: 1; position: relative; height: 160px; overflow: hidden; cursor: pointer;
+  }
+  .hero-cat img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(.55) saturate(1.0);
+    transition: filter .5s, transform .6s cubic-bezier(.25,.46,.45,.94);
+  }
+  .hero-cat:hover img { filter: brightness(.78) saturate(1.15); transform: scale(1.08); }
+  .hero-cat-label {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 16px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 60%);
+  }
+  .hero-cat-label span {
+    color: #fff; font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; letter-spacing: .04em; font-weight: 300;
+  }
+  .hero-cat-label::before {
+    content: ''; display: block; width: 0; height: 1px;
+    background: var(--sand); margin-bottom: 8px;
+    transition: width .4s ease;
+  }
+  .hero-cat:hover .hero-cat-label::before { width: 28px; }
+  .hero-cat + .hero-cat { border-left: 1px solid rgba(255,255,255,.08); }
+
+  /* WHY */
+  .why {
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding: 100px 72px; gap: 88px; background: var(--white);
+  }
+  .why-img-wrap { position: relative; }
+  .why-img { border-radius: 2px; overflow: hidden; aspect-ratio: 4/4.2; }
+  .why-img img { width: 100%; height: 100%; object-fit: cover; }
+  .why-img-accent {
+    position: absolute; bottom: -20px; right: -20px;
+    width: 60%; height: 55%; border: 1.5px solid var(--sand);
+    border-radius: 2px; z-index: -1; opacity: .5;
+  }
+  .why-label {
+    font-size: 10.5px; font-weight: 500; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--sand); margin-bottom: 14px;
+  }
+  .why h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 3.8vw, 50px); font-weight: 300;
+    line-height: 1.1; margin-bottom: 20px; color: var(--dark);
+  }
+  .why-desc {
+    font-size: 14px; line-height: 1.85; color: var(--muted);
+    margin-bottom: 36px; font-weight: 300; border-left: 2px solid var(--sand); padding-left: 16px;
+  }
+  .why-points { display: flex; flex-direction: column; }
+  .why-point {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 18px 0; border-bottom: 1px solid var(--border);
+  }
+  .why-point:first-child { border-top: 1px solid var(--border); }
+  .why-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .why-point-text { font-size: 13.5px; color: var(--mid); line-height: 1.65; font-weight: 300; }
+
+  /* PRODUCTS */
+  .products { padding: 84px 72px; background: var(--bg2); }
+  .section-header {
+    display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px;
+  }
+  .products h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3.8vw, 48px); font-weight: 300; color: var(--dark);
+  }
+  .products > p { font-size: 14px; color: var(--muted); margin-bottom: 32px; font-weight: 300; }
+  .prod-tabs { display: flex; gap: 6px; margin-bottom: 40px; flex-wrap: wrap; }
+  .tab {
+    padding: 8px 20px; border-radius: 1px; font-size: 12px; letter-spacing: .06em;
+    text-transform: uppercase; border: 1px solid var(--border); cursor: pointer;
+    background: transparent; color: var(--muted); transition: all .2s; font-family: 'Inter', sans-serif;
+  }
+  .tab.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+  .tab:hover:not(.active) { border-color: var(--muted); color: var(--dark); }
+
+  /* HORIZONTAL SCROLL */
+  .prod-scroll-wrap { position: relative; }
+  .prod-scroll {
+    display: flex; gap: 20px;
+    overflow-x: auto; padding-bottom: 16px; padding-right: 72px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .prod-scroll::-webkit-scrollbar { display: none; }
+  .prod-card {
+    flex: 0 0 220px;
+    background: var(--white); border-radius: 2px; overflow: hidden;
+    border: 1px solid var(--border); transition: box-shadow .3s, transform .3s;
+    scroll-snap-align: start;
+  }
+  .prod-card:hover { box-shadow: 0 16px 40px rgba(0,0,0,.09); transform: translateY(-4px); }
+  .prod-card-img { width: 100%; aspect-ratio: 1/1.1; overflow: hidden; background: #ede8e1; }
+  .prod-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
+  .prod-card:hover .prod-card-img img { transform: scale(1.07); }
+  .prod-card-body { padding: 14px 16px 16px; }
+  .prod-card h4 { font-size: 13px; font-weight: 500; margin-bottom: 3px; color: var(--dark); }
+  .prod-card .sub { font-size: 11.5px; color: var(--muted); margin-bottom: 12px; font-weight: 300; }
+  .prod-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .prod-card .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 400; color: var(--dark); white-space: nowrap;
+  }
+  .btn-cart {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--dark); color: #fff; padding: 7px 11px; border-radius: 2px;
+    font-size: 10.5px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase;
+    cursor: pointer; transition: background .2s; white-space: nowrap;
+  }
+  .btn-cart:hover { background: var(--mid); }
+
+  /* scroll arrows */
+  .scroll-arrow {
+    position: absolute; top: 40%; transform: translateY(-50%);
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--white); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 4; font-size: 16px; color: var(--dark);
+    box-shadow: 0 4px 16px rgba(0,0,0,.1); transition: background .2s;
+    user-select: none;
+  }
+  .scroll-arrow:hover { background: var(--sand-light); }
+  .arrow-left { left: -18px; }
+  .arrow-right { right: -18px; }
+
+  /* REVIEWS */
+  .reviews { padding: 84px 72px; background: var(--white); }
+  .reviews h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.8vw, 46px); font-weight: 300; color: var(--dark); margin-bottom: 6px;
+  }
+  .reviews > p { font-size: 14px; color: var(--muted); margin-bottom: 40px; font-weight: 300; }
+
+  .reviews-scroll {
+    display: flex; gap: 24px;
+    overflow-x: auto; padding-bottom: 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .reviews-scroll::-webkit-scrollbar { display: none; }
+  .review-card {
+    flex: 0 0 340px;
+    padding: 28px 30px; border-radius: 2px;
+    border: 1px solid var(--border); background: var(--bg2);
+    position: relative; overflow: hidden;
+    scroll-snap-align: start;
+  }
+  .review-card::before {
+    content: '\201C'; position: absolute; top: -10px; right: 18px;
+    font-family: 'Cormorant Garamond', serif; font-size: 110px;
+    color: var(--border); line-height: 1; pointer-events: none;
+  }
+  .stars { color: #c8943a; font-size: 14px; margin-bottom: 14px; letter-spacing: 3px; }
+  .review-text {
+    font-size: 13.5px; line-height: 1.8; color: var(--mid);
+    margin-bottom: 20px; font-style: italic; font-weight: 300; position: relative; z-index: 1;
+  }
+  .review-divider { height: 1px; background: var(--border); margin-bottom: 16px; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+  .reviewer-name { font-size: 13px; font-weight: 500; color: var(--dark); }
+  .reviewer-title { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* FAQs */
+  .faqs { padding: 84px 72px; background: var(--bg2); }
+  .faqs h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.8vw, 46px); font-weight: 300; color: var(--dark); margin-bottom: 6px;
+  }
+  .faqs > p { font-size: 14px; color: var(--muted); margin-bottom: 40px; font-weight: 300; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:first-of-type { border-top: 1px solid var(--border); }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 4px; font-size: 14px; font-weight: 500; cursor: pointer; color: var(--dark);
+  }
+  .faq-x {
+    width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--muted); flex-shrink: 0;
+  }
+  .faq-a { padding: 0 4px 20px; font-size: 13.5px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+  /* STILL */
+  .still {
+    padding: 80px 72px; background: var(--dark);
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  }
+  .still-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 3.5vw, 42px); font-weight: 300; color: #fff; margin-bottom: 8px;
+  }
+  .still-text p { font-size: 14px; color: rgba(255,255,255,.45); font-weight: 300; }
+  .btn-outline {
+    display: inline-block; padding: 14px 36px;
+    border: 1px solid rgba(255,255,255,.3); border-radius: 2px;
+    font-size: 12px; color: #fff; letter-spacing: .1em; text-transform: uppercase;
+    white-space: nowrap; transition: all .25s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.6); }
+
+  /* FOOTER */
+  footer { background: #100e0b; color: rgba(255,255,255,.6); padding: 56px 72px 28px; }
+  .footer-top {
+    display: grid; grid-template-columns: 1.3fr 1fr 1.6fr; gap: 56px; margin-bottom: 48px;
+    padding-bottom: 44px; border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px;
+    color: rgba(255,255,255,.85); display: block; margin-bottom: 14px; letter-spacing: .06em;
+  }
+  .footer-brand p { font-size: 13px; line-height: 1.75; color: rgba(255,255,255,.35); font-weight: 300; max-width: 200px; }
+  .footer-col h5 { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+  .footer-col a { display: block; font-size: 13.5px; color: rgba(255,255,255,.55); margin-bottom: 11px; transition: color .2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-sub h5 { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 18px; }
+  .sub-form { display: flex; border: 1px solid rgba(255,255,255,.12); border-radius: 2px; overflow: hidden; margin-bottom: 10px; }
+  .sub-form input {
+    flex: 1; padding: 12px 14px; background: rgba(255,255,255,.05);
+    border: none; color: #fff; font-size: 13px; outline: none; font-family: 'Inter', sans-serif;
+  }
+  .sub-form input::placeholder { color: rgba(255,255,255,.25); }
+  .sub-form button {
+    padding: 12px 20px; background: var(--sand); color: var(--dark);
+    border: none; font-size: 12px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif;
+    letter-spacing: .04em; transition: background .2s;
+  }
+  .sub-form button:hover { background: var(--sand-light); }
+  .footer-note { font-size: 11px; color: rgba(255,255,255,.22); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11.5px; color: rgba(255,255,255,.25);
+  }
+  .footer-bottom-links { display: flex; gap: 24px; }
+  .footer-bottom-links a { color: rgba(255,255,255,.25); transition: color .2s; }
+  .footer-bottom-links a:hover { color: rgba(255,255,255,.6); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: rgba(255,255,255,.85);
+    transition: transform .3s, opacity .3s;
+  }
+
+  /* MOBILE MENU OVERLAY */
+  .mob-menu {
+    display: flex; position: fixed; inset: 0; z-index: 200;
+    background: var(--dark);
+    flex-direction: column; padding: 28px 28px 40px;
+    transform: translateX(100%);
+    transition: transform .4s cubic-bezier(.77,0,.18,1);
+    visibility: hidden;
+  }
+  .mob-menu.open { transform: translateX(0); visibility: visible; }
+  .mob-menu-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 48px; flex-shrink: 0;
+  }
+  .mob-close {
+    background: none; border: none; color: rgba(255,255,255,.5);
+    font-size: 32px; cursor: pointer; line-height: 1; padding: 4px;
+    flex-shrink: 0; z-index: 1;
+  }
+  .mob-close:hover { color: #fff; }
+  .mob-links {
+    display: flex; flex-direction: column; flex: 1; justify-content: center; gap: 4px;
+  }
+  .mob-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 8vw, 3rem); font-weight: 300;
+    color: rgba(255,255,255,.25); padding: .6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    transition: color .2s; display: block;
+  }
+  .mob-links a:last-child { border-bottom: none; }
+  .mob-links a:hover { color: #fff; }
+  .mob-actions { margin-top: 32px; flex-shrink: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-above { padding: 0 28px 18px; }
+    .hero h1 { font-size: clamp(38px, 9vw, 64px); }
+    .hero-cut { padding: 0 28px; }
+    .hero-cut-stats { gap: 1px; }
+    .hero-cut-stat { padding: 7px 12px; }
+    .hero-cut-stat-n { font-size: 18px; }
+    .hero-below { padding: 24px 28px 0; flex-direction: column; gap: 20px; }
+    .hero-actions { width: 100%; }
+    .hero-cats { flex-wrap: wrap; }
+    .hero-cats .hero-cat { flex: 0 0 50%; height: 130px; }
+    .hero-cat + .hero-cat { border-left: none; }
+    .hero-cats .hero-cat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.12); }
+    .hero-cats .hero-cat:nth-child(1),
+    .hero-cats .hero-cat:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,.12); }
+    .why { grid-template-columns: 1fr; padding: 60px 28px; gap: 44px; }
+    .products, .reviews, .faqs { padding: 60px 28px; }
+    .still { flex-direction: column; padding: 56px 28px; text-align: center; }
+    footer { padding: 48px 28px 24px; }
+    .footer-top { grid-template-columns: 1fr; gap: 36px; }
+    .arrow-left { left: 4px; }
+    .arrow-right { right: 4px; }
+  }
+  @media (max-width: 560px) {
+    .hero-cats .hero-cat { height: 110px; }
+    .hero-cats .hero-cat-label span { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">
+      <img src="https://framerusercontent.com/images/ICqUUeUqPKQjWAyIj5cnI2XznRg.png" alt="Aroma Mist logo">
+    </div>
+    <span class="logo-name">Aroma Mist</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Contact Us</a></li>
+    <li><a href="#">More Info ▾</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+    </div>
+    <div class="nav-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <div class="mob-menu-top">
+    <div class="logo">
+      <div class="logo-mark">
+        <img src="https://framerusercontent.com/images/ICqUUeUqPKQjWAyIj5cnI2XznRg.png" alt="Aroma Mist logo">
+      </div>
+      <span class="logo-name">Aroma Mist</span>
+    </div>
+    <button class="mob-close" id="mobClose">×</button>
+  </div>
+  <div class="mob-links">
+    <a href="#" onclick="closeMob()">Home</a>
+    <a href="#products" onclick="closeMob()">Products</a>
+    <a href="#" onclick="closeMob()">Contact Us</a>
+    <a href="#" onclick="closeMob()">More Info</a>
+  </div>
+  <div class="mob-actions">
+    <a href="#products" onclick="closeMob()" style="display:inline-flex;align-items:center;gap:9px;background:#fff;color:#1c1a17;padding:14px 32px;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;">Shop Now →</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-above">
+    <h1>
+      <span class="hero-h1-top">Your home deserves</span>
+      <span class="hero-h1-bot">a signature scent</span>
+    </h1>
+  </div>
+
+  <div class="hero-cut">
+    <div class="hero-cut-line"></div>
+    <div class="hero-cut-stats">
+      <div class="hero-cut-stat"><div class="hero-cut-stat-n">120+</div><div class="hero-cut-stat-l">Unique Scents</div></div>
+      <div class="hero-cut-stat"><div class="hero-cut-stat-n">100%</div><div class="hero-cut-stat-l">Natural Wax</div></div>
+      <div class="hero-cut-stat"><div class="hero-cut-stat-n">40hr</div><div class="hero-cut-stat-l">Burn Time</div></div>
+    </div>
+    <div class="hero-cut-line"></div>
+  </div>
+
+  <div class="hero-below">
+    <p>Candles, incense, diffusers and oils —<br>crafted to make any room feel like yours.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-ghost">Explore Collections</a>
+      <a href="#products" class="btn-primary">Shop Now →</a>
+    </div>
+  </div>
+</section>
+
+<div class="hero-cats">
+    <div class="hero-cat">
+      <img src="https://framerusercontent.com/images/ZSfJJPruxb1vuRbf4itPkBYSxKk.png" alt="Candles">
+      <div class="hero-cat-label"><span>Candles</span></div>
+    </div>
+    <div class="hero-cat">
+      <img src="https://framerusercontent.com/images/GHeLHMChe3u1LT3KJ7fstNjIZ0.png" alt="Incenses">
+      <div class="hero-cat-label"><span>Incenses</span></div>
+    </div>
+    <div class="hero-cat">
+      <img src="https://framerusercontent.com/images/oAwkNPqiGBM0JH9D9wR4qXT5sKY.png" alt="Diffusers">
+      <div class="hero-cat-label"><span>Diffusers</span></div>
+    </div>
+    <div class="hero-cat">
+      <img src="https://framerusercontent.com/images/gNwMemKwUTa5kUiEJGTuCmRBCS4.png" alt="Essential Oils">
+      <div class="hero-cat-label"><span>Essential Oils</span></div>
+    </div>
+  </div>
+
+<section class="why">
+  <div class="why-img-wrap">
+    <div class="why-img">
+      <img src="https://framerusercontent.com/images/h26ZWqNnGZocGtUA6UqRwiKLj3M.png" alt="Incense holder">
+    </div>
+    <div class="why-img-accent"></div>
+  </div>
+  <div class="why-text">
+    <div class="why-label">Quality Promise</div>
+    <h2>Why choose us</h2>
+    <p class="why-desc">Indulge in the soothing ambiance created by our scented candles. Crafted to elevate your space, they blend elegance with functionality.</p>
+    <div class="why-points">
+      <div class="why-point"><span class="why-icon">🍃</span><span class="why-point-text">Thoughtful design enhances relaxation and creates a calming atmosphere.</span></div>
+      <div class="why-point"><span class="why-icon">🕯️</span><span class="why-point-text">High-quality wax ensures a clean burn and lasting fragrance.</span></div>
+      <div class="why-point"><span class="why-icon">🌱</span><span class="why-point-text">Eco-conscious production practices make for a sustainable and guilt-free choice.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="section-header">
+    <h2>Products</h2>
+  </div>
+  <p>Explore our unique collection of premium candles and home fragrances designed to bring warmth and joy to every space.</p>
+  <div class="prod-tabs">
+    <div class="tab active">Candles</div>
+    <div class="tab">Incense</div>
+    <div class="tab">Diffusers</div>
+    <div class="tab">Essential Oils</div>
+  </div>
+  <div class="prod-scroll-wrap">
+    <div class="scroll-arrow arrow-left" onclick="document.getElementById('prod-scroll').scrollBy({left:-480,behavior:'smooth'})">&#8592;</div>
+    <div class="prod-scroll" id="prod-scroll">
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="https://framerusercontent.com/images/0rEbUhiikG5qKdHwwb8pckdjT0.png" alt="Midnight Woods"></div>
+        <div class="prod-card-body"><h4>Midnight Woods Candle</h4><div class="sub">Rich Sandalwood</div><div class="prod-card-footer"><span class="price">$32.99</span><span class="btn-cart">🛒 Add</span></div></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="https://framerusercontent.com/images/1KR5RejXFkJQeXitjinssOYeWM.png" alt="Vanilla Dream"></div>
+        <div class="prod-card-body"><h4>Vanilla Dream Candle</h4><div class="sub">Classic Vanilla</div><div class="prod-card-footer"><span class="price">$19.99</span><span class="btn-cart">🛒 Add</span></div></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="https://framerusercontent.com/images/X1S1tlUKD8iQtD5ev9m0iAl2gPM.png" alt="Citrus Burst"></div>
+        <div class="prod-card-body"><h4>Citrus Burst Candle</h4><div class="sub">Zesty Lemon</div><div class="prod-card-footer"><span class="price">$22.99</span><span class="btn-cart">🛒 Add</span></div></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="https://framerusercontent.com/images/qTlaOU50H0PMnO17PiFMfOetJc.png" alt="Ocean Breeze"></div>
+        <div class="prod-card-body"><h4>Ocean Breeze Candle</h4><div class="sub">Crisp Sea Salt</div><div class="prod-card-footer"><span class="price">$27.99</span><span class="btn-cart">🛒 Add</span></div></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="https://framerusercontent.com/images/OMKdQDofzRxZoBn2kkHX8KzKoRI.png" alt="Crimson Glow"></div>
+        <div class="prod-card-body"><h4>Crimson Glow Candle</h4><div class="sub">Vibrant Red</div><div class="prod-card-footer"><span class="price">$24.99</span><span class="btn-cart">🛒 Add</span></div></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="https://framerusercontent.com/images/vzQJU3JGekt1379YPD2C3Pp4MSM.png" alt="Scented Bliss"></div>
+        <div class="prod-card-body"><h4>Scented Bliss Candle</h4><div class="sub">Lavender Dream</div><div class="prod-card-footer"><span class="price">$29.99</span><span class="btn-cart">🛒 Add</span></div></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="https://framerusercontent.com/images/GHeLHMChe3u1LT3KJ7fstNjIZ0.png" alt="Amber Oud Incense"></div>
+        <div class="prod-card-body"><h4>Amber Oud Incense</h4><div class="sub">Warm Amber</div><div class="prod-card-footer"><span class="price">$14.99</span><span class="btn-cart">🛒 Add</span></div></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="https://framerusercontent.com/images/oAwkNPqiGBM0JH9D9wR4qXT5sKY.png" alt="Cedar Mist Diffuser"></div>
+        <div class="prod-card-body"><h4>Cedar Mist Diffuser</h4><div class="sub">Forest Cedar</div><div class="prod-card-footer"><span class="price">$38.99</span><span class="btn-cart">🛒 Add</span></div></div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-card-img"><img src="https://framerusercontent.com/images/gNwMemKwUTa5kUiEJGTuCmRBCS4.png" alt="Rose Petal Oil"></div>
+        <div class="prod-card-body"><h4>Rose Petal Oil</h4><div class="sub">Fresh Rose</div><div class="prod-card-footer"><span class="price">$21.99</span><span class="btn-cart">🛒 Add</span></div></div>
+      </div>
+    </div>
+    <div class="scroll-arrow arrow-right" onclick="document.getElementById('prod-scroll').scrollBy({left:480,behavior:'smooth'})">&#8594;</div>
+  </div>
+</section>
+
+<section class="reviews">
+  <h2>Customer Reviews</h2>
+  <p>See what our customers are saying!</p>
+  <div class="reviews-scroll" id="reviews-scroll">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"The scented candle I purchased exceeded my expectations in every way! The fragrance fills the room beautifully, creating a warm and inviting atmosphere that I absolutely adore!"</p>
+      <div class="review-divider"></div>
+      <div class="reviewer"><img src="https://framerusercontent.com/images/1i7OoFsYF3WzYCmTSIIdHH9UL4g.png" alt="John Doe"><div><div class="reviewer-name">John Doe</div><div class="reviewer-title">Photographer, Freelance</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Fantastic service and quality products! I was genuinely impressed with how quickly my order arrived, and the items were even better than I had hoped. Highly recommend!"</p>
+      <div class="review-divider"></div>
+      <div class="reviewer"><img src="https://framerusercontent.com/images/EM4Po2FhCViY1rIMgNfWn2Bpp4.png" alt="Jane Smith"><div><div class="reviewer-name">Jane Smith</div><div class="reviewer-title">Editor, Magazine</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"These candles are absolutely delightful! The scents are rich and inviting, making my home feel cozy and warm. I especially love the lavender one — it helps me unwind after a long day."</p>
+      <div class="review-divider"></div>
+      <div class="reviewer"><img src="https://framerusercontent.com/images/Ygb3mq04PAnP5K1TGnaoHFEHg.png" alt="Emily Johnson"><div><div class="reviewer-name">Emily Johnson</div><div class="reviewer-title">Content Creator</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"These candles are absolutely fantastic! They burn evenly and last a long time, filling the room with a delightful fragrance. My whole family loves them!"</p>
+      <div class="review-divider"></div>
+      <div class="reviewer"><img src="https://framerusercontent.com/images/c38hAtnPq2G3knZBR7UNCzWQulI.png" alt="Michael Brown"><div><div class="reviewer-name">Michael Brown</div><div class="reviewer-title">Videographer, Studio</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★☆</div>
+      <p class="review-text">"The Midnight Woods candle is my absolute favorite — the sandalwood scent is deep and grounding. Perfect for evening meditation or just winding down with a good book."</p>
+      <div class="review-divider"></div>
+      <div class="reviewer"><img src="https://framerusercontent.com/images/1i7OoFsYF3WzYCmTSIIdHH9UL4g.png" alt="Sara K."><div><div class="reviewer-name">Sara K.</div><div class="reviewer-title">Yoga Instructor</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Ordered as a gift for my mom and she absolutely loved it. The packaging was beautiful and the candles smelled incredible the moment we opened the box. Will definitely order again."</p>
+      <div class="review-divider"></div>
+      <div class="reviewer"><img src="https://framerusercontent.com/images/EM4Po2FhCViY1rIMgNfWn2Bpp4.png" alt="Lena M."><div><div class="reviewer-name">Lena M.</div><div class="reviewer-title">Interior Designer</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="faqs">
+  <h2>FAQs</h2>
+  <p>Find answers to your most common questions about our products and services.</p>
+  <div class="faq-item"><div class="faq-q">What's the burn time? <div class="faq-x">✕</div></div><div class="faq-a">Our scented candles burn for approximately 40 hours, providing a long-lasting fragrance experience. Ideal for creating a cozy atmosphere at home.</div></div>
+  <div class="faq-item"><div class="faq-q">Do you offer free shipping? <div class="faq-x">✕</div></div><div class="faq-a">Yes, we provide free shipping on all orders over $50. Your fragrant items will arrive within 5–7 business days.</div></div>
+  <div class="faq-item"><div class="faq-q">What is the return policy? <div class="faq-x">✕</div></div><div class="faq-a">We offer a 30-day return policy on all our products. If you're not satisfied, please return them in their original condition.</div></div>
+  <div class="faq-item"><div class="faq-q">Can I exchange items? <div class="faq-x">✕</div></div><div class="faq-a">Yes, exchanges are allowed within 30 days of purchase. Just ensure the items are unused and in their original packaging.</div></div>
+  <div class="faq-item"><div class="faq-q">How can I get in touch? <div class="faq-x">✕</div></div><div class="faq-a">You can contact us through our website's contact form or via email. Our support team is available 24/7 to assist you.</div></div>
+</section>
+
+<section class="still">
+  <div class="still-text">
+    <h2>Still have questions?</h2>
+    <p>We're here to help you!</p>
+  </div>
+  <a href="#" class="btn-outline">Contact Us</a>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Aroma Mist</span>
+      <p>Premium scented candles and home fragrances crafted for every aroma lover.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Links</h5>
+      <a href="#">Contact Us</a>
+      <a href="#">About Us</a>
+      <a href="#">Shop Now</a>
+      <a href="#">Customer Support</a>
+      <a href="#">Gift Cards</a>
+    </div>
+    <div class="footer-sub">
+      <h5>Subscribe</h5>
+      <div class="sub-form">
+        <input type="email" placeholder="Enter your email">
+        <button>Subscribe</button>
+      </div>
+      <p class="footer-note">By subscribing you agree to our Privacy Policy</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookies Settings</a>
+    </div>
+    <span>© 2025 Aroma Mist. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  function closeMob() {
+    document.getElementById('mobMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('hamburger').onclick = function() {
+    document.getElementById('mobMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  document.getElementById('mobClose').onclick = closeMob;
+</script>
+</body>
+</html>

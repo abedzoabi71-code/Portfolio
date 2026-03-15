@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vitalcore Clinic — Treatment & Booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#0d9488;
+  --gd:#0a7568;
+  --ink:#0a0a0a;
+  --w:#ffffff;
+  --off:#f8f8f8;
+  --grey:#ececec;
+  --mid:#888;
+  --border:#e4e4e4;
+  --ff:'Playfair Display',Georgia,serif;
+  --fb:'Outfit',system-ui,sans-serif;
+
+  /* ── PHOTOS: one variable per image slot — swap a URL here to update everywhere ── */
+  --photo-1: url('photo-1.webp'); /* About: large banner image                    */
+  --photo-2: url('photo-2.webp'); /* About: small left image                      */
+  --photo-3: url('photo-3.webp'); /* About: small right image                     */
+  --photo-4: url('photo-4.webp'); /* Service card 01 — Initial Consultation       */
+  --photo-5: url('photo-5.webp'); /* Service card 02 — Deep Tissue Therapy        */
+  --photo-6: url('photo-6.webp'); /* Service card 03 — Rehabilitation & Recovery  */
+  --photo-7: url('photo-7.webp'); /* Service card 04 — Wellness Packages          */
+}
+html{scroll-behavior:smooth}
+body{background:var(--w);color:var(--ink);font-family:var(--fb);font-weight:300;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block;width:100%;height:100%;object-fit:cover}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 2.5rem;height:68px;
+  transition:background .35s,border-color .35s,box-shadow .35s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(16px);
+  border-color:var(--border);
+  box-shadow:0 1px 24px rgba(0,0,0,.05);
+}
+.nav-brand{display:flex;align-items:center;gap:.65rem}
+.nav-mark{flex-shrink:0}
+.nav-name{
+  font-family:var(--ff);font-size:1.05rem;font-weight:400;
+  letter-spacing:.06em;color:#fff;transition:color .35s;
+  line-height:1;
+}
+nav.scrolled .nav-name{color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:2.2rem}
+.nav-links a{
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:400;
+  color:rgba(255,255,255,.7);transition:color .2s;
+}
+nav.scrolled .nav-links a{color:var(--mid)}
+.nav-links a:hover{color:#fff}
+nav.scrolled .nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  background:var(--g);color:#fff;border:none;
+  padding:.55rem 1.4rem;font-family:var(--fb);font-size:.72rem;
+  font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s;
+}
+.nav-cta:hover{background:var(--gd)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.3rem}
+.hamburger span{display:block;width:24px;height:1.5px;background:#fff;transition:background .3s,transform .3s,opacity .3s}
+nav.scrolled .hamburger span{background:var(--ink)}
+
+/* ─── MOBILE MENU ─── */
+.mob{
+  position:fixed;inset:0;z-index:200;
+  background:var(--ink);
+  display:flex;flex-direction:column;
+  padding:2rem 2.5rem 3rem;
+  transform:translateX(100%);
+  transition:transform .4s cubic-bezier(.77,0,.18,1);
+  visibility:hidden;
+}
+.mob.open{transform:translateX(0);visibility:visible}
+.mob-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3rem}
+.mob-brand{display:flex;align-items:center;gap:.6rem}
+.mob-name{font-family:var(--ff);font-size:1rem;color:#fff;letter-spacing:.06em}
+.mob-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.8rem;cursor:pointer;line-height:1;padding:.2rem}
+.mob-close:hover{color:#fff}
+.mob-links{display:flex;flex-direction:column;flex:1;justify-content:center;gap:.3rem}
+.mob-links a{
+  font-family:var(--ff);font-size:clamp(2rem,7vw,3rem);font-weight:400;
+  color:rgba(255,255,255,.25);
+  padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.06);
+  transition:color .2s;
+}
+.mob-links a:last-child{border-bottom:none}
+.mob-links a:hover{color:#fff}
+.mob-foot{margin-top:2.5rem}
+.mob-foot-cta{
+  display:block;width:100%;background:var(--g);color:#fff;border:none;
+  padding:1rem;font-family:var(--fb);font-size:.8rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;cursor:pointer;text-align:center;
+  transition:background .2s;
+}
+.mob-foot-cta:hover{background:var(--gd)}
+.mob-contact{margin-top:1.2rem;font-size:.78rem;color:rgba(255,255,255,.3);text-align:center;letter-spacing:.06em}
+.mob-contact a{color:rgba(255,255,255,.5);transition:color .2s}
+.mob-contact a:hover{color:#fff}
+
+/* ─── HERO ─── */
+.hero{
+  height:100svh;min-height:640px;
+  display:grid;place-items:end start;
+  padding:0 2.5rem 5.5rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(105deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.2) 60%, transparent 100%),
+    linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%),
+    url('./hero-bg.png') center/cover no-repeat;
+}
+/* subtle green tint bar on left */
+.hero-bg::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--g);
+}
+.hero-inner{position:relative;z-index:2;max-width:620px}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+  color:var(--g);margin-bottom:1.4rem;
+}
+.hero-tag::before{content:'';display:block;width:32px;height:1px;background:var(--g)}
+.hero h1{
+  font-family:var(--ff);font-size:clamp(3rem,6vw,5.2rem);font-weight:400;
+  line-height:1.04;color:#fff;margin-bottom:1.4rem;
+}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,.55);font-weight:400}
+.hero-sub{
+  font-size:.95rem;color:rgba(255,255,255,.6);line-height:1.85;
+  max-width:420px;margin-bottom:2.5rem;font-weight:300;
+}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.btn-g{
+  background:var(--g);color:#fff;border:none;
+  padding:.9rem 2.2rem;font-family:var(--fb);font-size:.75rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .2s;
+}
+.btn-g:hover{background:var(--gd)}
+.btn-line{
+  background:none;color:rgba(255,255,255,.75);
+  border:1px solid rgba(255,255,255,.25);
+  padding:.9rem 2.2rem;font-family:var(--fb);font-size:.75rem;font-weight:400;
+  letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .2s;
+}
+.btn-line:hover{border-color:rgba(255,255,255,.7);color:#fff}
+/* bottom info strip */
+.hero-strip{
+  position:absolute;bottom:0;left:0;right:0;z-index:3;
+  display:flex;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.hs-item{
+  flex:1;padding:1.1rem 2.5rem;
+  border-right:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;gap:.9rem;
+}
+.hs-item:last-child{border-right:none}
+.hs-num{font-family:var(--ff);font-size:1.5rem;font-weight:400;color:#fff;line-height:1}
+.hs-lbl{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.15rem}
+
+/* ─── SECTIONS ─── */
+.sec{padding:7rem 2.5rem}
+.sec-in{max-width:1160px;margin:0 auto}
+.lbl{
+  font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+  color:var(--g);margin-bottom:1rem;display:flex;align-items:center;gap:.7rem;
+}
+.lbl::before{content:'';display:block;width:24px;height:1px;background:var(--g)}
+.sh{font-family:var(--ff);font-size:clamp(2rem,3.8vw,3.2rem);font-weight:400;line-height:1.1;margin-bottom:.9rem}
+.ssub{font-size:.9rem;color:var(--mid);line-height:1.85;max-width:500px}
+
+/* ─── ABOUT ─── */
+.about-sec{background:#f0faf9}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:6rem;align-items:center}
+.about-body{font-size:.95rem;color:#555;line-height:1.95;margin-top:1.6rem;max-width:440px}
+.about-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
+.pill{
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+  border:1px solid var(--border);padding:.4rem .9rem;color:var(--mid);
+  transition:border-color .2s,color .2s;
+}
+.pill:hover{border-color:var(--g);color:var(--g)}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ai-big{grid-column:1/3;height:250px;overflow:hidden}
+.ai-sm{height:175px;overflow:hidden;position:relative}
+.ai-sm::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(13,148,136,.15),transparent);
+  pointer-events:none;
+}
+.about-imgs img,.ai-big img{transition:transform .7s ease}
+.about-imgs div:hover img{transform:scale(1.04)}
+
+/* photo divs — replace <img> tags, driven by CSS variables above */
+.photo-div{width:100%;height:100%;background-size:cover;background-position:center;transition:transform .7s ease}
+.about-imgs .ai-big:hover .photo-div,
+.about-imgs .ai-sm:hover .photo-div{transform:scale(1.04)}
+.svc-card:hover .photo-div{transform:scale(1.06)}
+.ph1{background-image:var(--photo-1)}
+.ph2{background-image:var(--photo-2)}
+.ph3{background-image:var(--photo-3)}
+.ph4{background-image:var(--photo-4)}
+.ph5{background-image:var(--photo-5)}
+.ph6{background-image:var(--photo-6)}
+.ph7{background-image:var(--photo-7)}
+
+/* ─── SERVICES ─── */
+.svc-sec{background:#f0f3f5}
+.svc-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;gap:2rem;flex-wrap:wrap}
+.svc-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--border);
+}
+.svc-card{
+  border-right:1px solid var(--border);
+  overflow:hidden;transition:background .2s;background:#f0f3f5;
+  cursor:default;
+}
+.svc-card:last-child{border-right:none}
+.svc-card:hover{background:#e6eaec}
+.svc-photo{height:200px;overflow:hidden}
+.svc-photo img{transition:transform .55s ease}
+.svc-card:hover .svc-photo img{transform:scale(1.06)}
+.svc-body{padding:1.5rem 1.3rem 1.8rem}
+.svc-num{
+  font-size:.68rem;color:var(--g);letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:.6rem;font-weight:500;
+}
+.svc-title{font-family:var(--ff);font-size:1.1rem;font-weight:400;line-height:1.25;margin-bottom:.55rem}
+.svc-desc{font-size:.78rem;color:var(--mid);line-height:1.75}
+
+/* ─── BOOKING ─── */
+.book-sec{background:#faf8f5}
+.book-grid{display:grid;grid-template-columns:1fr .85fr;gap:4rem;margin-top:3.5rem;align-items:start}
+
+.cal-wrap{border:1px solid var(--border)}
+.cal-head{
+  background:var(--ink);padding:1.4rem 1.6rem;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.cal-month-lbl{font-family:var(--ff);font-size:1rem;color:#fff;font-weight:400}
+.cal-arrows{display:flex;gap:.5rem}
+.cal-arr{
+  background:none;border:1px solid rgba(255,255,255,.15);
+  color:#fff;width:30px;height:30px;cursor:pointer;font-size:1rem;
+  transition:border-color .2s,color .2s;
+}
+.cal-arr:hover{border-color:var(--g);color:var(--g)}
+.cal-body{padding:1.2rem 1.4rem}
+.wd-row{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px}
+.wd{font-size:.62rem;text-align:center;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);padding:.3rem 0;font-weight:500}
+.dates-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.d{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;font-weight:300;color:#ccc;
+  transition:background .12s,color .12s;
+}
+.d.av{color:var(--ink);cursor:pointer;font-weight:400}
+.d.av:hover{background:rgba(13,148,136,.1);color:var(--g)}
+.d.sel{background:var(--g)!important;color:#fff!important;font-weight:500}
+.d.tod{outline:1px solid var(--g);outline-offset:-2px}
+.d.tod.av{color:var(--g)}
+
+.times-section{padding:1.2rem 1.4rem;border-top:1px solid var(--border);display:none}
+.times-section.show{display:block}
+.t-head{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:.8rem;font-weight:500}
+.t-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.ts{
+  background:var(--off);border:1px solid var(--border);
+  padding:.6rem;text-align:center;font-size:.78rem;
+  cursor:pointer;transition:.12s;color:var(--ink);font-weight:400;
+}
+.ts:hover{border-color:var(--g);color:var(--g)}
+.ts.sel{background:var(--g);color:#fff;border-color:var(--g)}
+.cal-next-btn{
+  margin:1.2rem 1.4rem 1.4rem;width:calc(100% - 2.8rem);
+  background:var(--g);color:#fff;border:none;padding:.85rem;
+  font-family:var(--fb);font-size:.75rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  transition:background .2s;display:none;
+}
+.cal-next-btn:hover{background:var(--gd)}
+
+/* form step */
+.form-step{padding:1.6rem;display:none}
+.form-date-tag{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--g);margin-bottom:1.4rem;font-weight:500;
+}
+.form-date-tag::before{content:'';display:block;width:18px;height:1px;background:var(--g)}
+.form-title{font-family:var(--ff);font-size:1.4rem;font-weight:400;margin-bottom:1.4rem}
+.f-fields{display:flex;flex-direction:column;gap:.75rem}
+.f-inp{
+  width:100%;border:1px solid var(--border);border-bottom:1px solid var(--ink);
+  border-top:none;border-left:none;border-right:none;
+  background:transparent;padding:.7rem 0;
+  font-family:var(--fb);font-size:.88rem;font-weight:300;color:var(--ink);
+  outline:none;transition:border-color .2s;
+}
+.f-inp::placeholder{color:#bbb}
+.f-inp:focus{border-bottom-color:var(--g)}
+.f-err{font-size:.76rem;color:#c0392b;display:none;margin-top:.2rem}
+.f-btns{display:flex;gap:.6rem;margin-top:1.2rem}
+.f-back{
+  flex:1;background:none;border:1px solid var(--border);color:var(--mid);
+  padding:.8rem;font-family:var(--fb);font-size:.72rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.2s;
+}
+.f-back:hover{border-color:var(--ink);color:var(--ink)}
+.f-submit{
+  flex:2;background:var(--ink);color:#fff;border:none;
+  padding:.8rem;font-family:var(--fb);font-size:.75rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .2s;
+}
+.f-submit:hover{background:#222}
+
+/* confirmed step */
+.confirmed-step{
+  padding:3rem 1.6rem;display:none;
+  flex-direction:column;align-items:center;text-align:center;min-height:320px;justify-content:center;
+}
+.conf-ring{
+  width:56px;height:56px;border-radius:50%;
+  border:1.5px solid var(--g);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.6rem;
+}
+.conf-title{font-family:var(--ff);font-size:1.6rem;font-weight:400;margin-bottom:.5rem}
+.conf-detail{font-size:.83rem;color:var(--mid);line-height:1.9}
+
+/* booking aside */
+.bk-aside{}
+.bk-title{font-family:var(--ff);font-size:1.3rem;font-weight:400;margin-bottom:1.5rem}
+.bk-items{border-top:1px solid var(--border)}
+.bk-item{padding:1.3rem 0;border-bottom:1px solid var(--border);display:flex;gap:1rem;align-items:flex-start}
+.bk-icon{
+  width:32px;height:32px;border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;
+  font-size:.85rem;
+}
+.bk-text-lbl{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:.3rem;font-weight:500}
+.bk-text-val{font-size:.85rem;color:var(--ink);line-height:1.6}
+.bk-callout{
+  margin-top:1.8rem;padding:1.3rem 1.2rem;
+  border-left:2px solid var(--g);background:rgba(13,148,136,.04);
+}
+.bk-callout p{font-size:.82rem;color:#555;line-height:1.75}
+.bk-callout strong{color:var(--g)}
+
+/* ─── FAQ ─── */
+.faq-sec{background:var(--ink)}
+.faq-sec .lbl{color:var(--g)}
+.faq-sec .lbl::before{background:var(--g)}
+.faq-sec .sh{color:#fff}
+.faq-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:start}
+.faq-left .ssub{color:rgba(255,255,255,.4)}
+.faq-list{margin-top:1rem}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.08)}
+.faq-btn{
+  width:100%;background:none;border:none;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 0;text-align:left;gap:1rem;
+}
+.faq-q{font-size:.92rem;color:rgba(255,255,255,.75);line-height:1.4;font-weight:300}
+.faq-ico{
+  width:24px;height:24px;border:1px solid rgba(255,255,255,.2);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:var(--g);font-size:1rem;transition:transform .3s,border-color .3s;
+}
+.faq-item.open .faq-ico{transform:rotate(45deg);border-color:var(--g)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .38s ease}
+.faq-item.open .faq-body{max-height:300px}
+.faq-ans{font-size:.83rem;color:rgba(255,255,255,.4);line-height:1.9;padding-bottom:1.3rem}
+
+/* ─── CONTACT ─── */
+.contact-band{
+  background:var(--g);padding:4.5rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap;
+}
+.cb-left h2{font-family:var(--ff);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;color:#fff;margin-bottom:.4rem}
+.cb-left p{font-size:.88rem;color:rgba(255,255,255,.65);max-width:460px;line-height:1.7}
+.cb-right{display:flex;gap:1rem;flex-wrap:wrap}
+.cb-btn{
+  background:#fff;color:var(--g);border:none;
+  padding:.9rem 2rem;font-family:var(--fb);font-size:.75rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+  transition:background .2s,color .2s;white-space:nowrap;
+}
+.cb-btn:hover{background:var(--gd);color:#fff}
+.cb-btn-line{
+  background:none;color:#fff;border:1px solid rgba(255,255,255,.4);
+  padding:.9rem 2rem;font-family:var(--fb);font-size:.75rem;font-weight:400;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+  transition:border-color .2s;white-space:nowrap;
+}
+.cb-btn-line:hover{border-color:#fff}
+
+.contacts-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.07);background:var(--ink)}
+.cc{
+  padding:2.5rem 2.5rem;border-right:1px solid rgba(255,255,255,.07);
+  transition:background .2s;background:var(--ink);
+}
+.cc:last-child{border-right:none}
+.cc:hover{background:#161616}
+.cc-icon{
+  width:40px;height:40px;border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;margin-bottom:1.2rem;border-radius:50%;
+}
+.cc-lbl{font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.4rem;font-weight:500}
+.cc-val{font-size:.9rem;color:rgba(255,255,255,.8);font-weight:400}
+.cc-val a{color:var(--g);transition:opacity .2s}
+.cc-val a:hover{opacity:.7}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--ink);
+  padding:2.5rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.f-brand{display:flex;align-items:center;gap:.6rem}
+.f-name{font-family:var(--ff);font-size:.95rem;color:rgba(255,255,255,.4);letter-spacing:.06em}
+.f-right{display:flex;flex-direction:column;align-items:flex-end;gap:.3rem}
+.f-copy{font-size:.68rem;letter-spacing:.1em;color:rgba(255,255,255,.2)}
+.f-links{display:flex;gap:1.5rem}
+.f-links a{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);transition:color .2s}
+.f-links a:hover{color:rgba(255,255,255,.6)}
+
+/* ─── REVEAL ─── */
+.rev{opacity:1;transform:none}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1000px){
+  .about-grid,.book-grid{grid-template-columns:1fr}
+  .faq-inner{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .svc-card{border-bottom:1px solid var(--border)}
+  .hero-strip{
+    position:static;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .hs-item{border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:1.1rem 1.4rem}
+  .hs-item:nth-child(2),.hs-item:nth-child(4){border-right:none}
+  .hs-item:nth-child(3),.hs-item:nth-child(4){border-bottom:none}
+  .hero{padding:0 1.6rem 0}
+  .sec{padding:4.5rem 1.6rem}
+  .contacts-grid{grid-template-columns:1fr}
+  .cc{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .cc:last-child{border-bottom:none}
+  footer{flex-direction:column;gap:1.2rem;text-align:center;padding:2rem 1.6rem}
+  .f-right{align-items:center}
+  .contact-band{flex-direction:column;text-align:center}
+  .cb-right{justify-content:center}
+}
+@media(max-width:960px){
+  nav{padding:0 1.6rem}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+}
+@media(max-width:640px){
+  .svc-grid{grid-template-columns:1fr}
+  .t-grid{grid-template-columns:repeat(3,1fr)}
+  .hero h1{font-size:2.8rem}
+  nav{height:60px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">
+    <svg class="nav-mark" width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="14" r="13" stroke="#0d9488" stroke-width="1.2"/>
+      <line x1="14" y1="7" x2="14" y2="21" stroke="#0d9488" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="7" y1="14" x2="21" y2="14" stroke="#0d9488" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="14" cy="14" r="2.5" fill="#0d9488"/>
+    </svg>
+    <span class="nav-name">VITALCORE</span>
+  </div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#faqs">FAQs</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book Now</button>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob" id="mob">
+  <div class="mob-top">
+    <div class="mob-brand">
+      <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="13" stroke="#0d9488" stroke-width="1.2"/>
+        <line x1="14" y1="7" x2="14" y2="21" stroke="#0d9488" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="7" y1="14" x2="21" y2="14" stroke="#0d9488" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="2.5" fill="#0d9488"/>
+      </svg>
+      <span class="mob-name">VITALCORE</span>
+    </div>
+    <button class="mob-close" id="mobClose">×</button>
+  </div>
+  <div class="mob-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#booking">Book</a>
+    <a href="#faqs">FAQs</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="mob-foot">
+    <button class="mob-foot-cta" onclick="closeMob();document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
+      Book a Consultation
+    </button>
+    <p class="mob-contact"><a href="tel:+972501234567">+972 50-123-4567</a> &nbsp;·&nbsp; <a href="mailto:hello@vitalcore.co.il">hello@vitalcore.co.il</a></p>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <p class="hero-tag rev">Private Medical Care · Tel Aviv</p>
+    <h1 class="rev rev-d1">Care that<br><em>puts you first.</em></h1>
+    <p class="hero-sub rev rev-d2">Personalised treatment plans, qualified specialists, and a clinic built around your comfort — not a waiting room.</p>
+    <div class="hero-btns rev rev-d3">
+      <button class="btn-g" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book a Free Consultation</button>
+      <button class="btn-line" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-item">
+      <div>
+        <div class="hs-num">3,200+</div>
+        <div class="hs-lbl">Patients treated</div>
+      </div>
+    </div>
+    <div class="hs-item">
+      <div>
+        <div class="hs-num">97%</div>
+        <div class="hs-lbl">Satisfaction rate</div>
+      </div>
+    </div>
+    <div class="hs-item">
+      <div>
+        <div class="hs-num">14 yrs</div>
+        <div class="hs-lbl">In practice</div>
+      </div>
+    </div>
+    <div class="hs-item">
+      <div>
+        <div class="hs-num">4</div>
+        <div class="hs-lbl">Specialists on staff</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec about-sec" id="about">
+  <div class="sec-in">
+    <div class="about-grid">
+      <div class="rev">
+        <p class="lbl">Who We Are</p>
+        <h2 class="sh">Fourteen years of care.<br>Built around you.</h2>
+        <p class="about-body">Vitalcore was founded by Dr. Noa Friedman in 2011 with one principle: that private medical care should feel personal, not transactional. Our team of four senior specialists brings together orthopaedic therapy, sports rehabilitation, and integrative wellness — all under one roof on Rothschild Boulevard. We don't rush appointments. We don't apply generic protocols. Every patient leaves with a plan that was written for them.</p>
+        <div class="about-pills">
+          <span class="pill">Deep Tissue</span>
+          <span class="pill">Rehabilitation</span>
+          <span class="pill">Wellness</span>
+          <span class="pill">Follow-up Care</span>
+          <span class="pill">Consultations</span>
+        </div>
+      </div>
+      <div class="about-imgs rev rev-d1">
+        <div class="ai-big"><div class="photo-div ph1"></div></div>
+        <div class="ai-sm"><div class="photo-div ph2"></div></div>
+        <div class="ai-sm"><div class="photo-div ph3"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec svc-sec" id="services">
+  <div class="sec-in">
+    <div class="svc-head rev">
+      <div>
+        <p class="lbl">What We Offer</p>
+        <h2 class="sh">Our treatments</h2>
+      </div>
+      <p class="ssub">Each treatment is carried out by a named specialist — not rotated between staff. You see the same clinician every visit, so nothing gets lost between sessions.</p>
+    </div>
+    <div class="svc-grid rev">
+      <div class="svc-card">
+        <div class="svc-photo"><div class="photo-div ph4"></div></div>
+        <div class="svc-body">
+          <div class="svc-num">01</div>
+          <div class="svc-title">Initial Consultation</div>
+          <p class="svc-desc">A 60-minute one-on-one assessment covering your history, movement patterns, and goals. You leave with a clear diagnosis and a written treatment plan — same day.</p>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-photo"><div class="photo-div ph5"></div></div>
+        <div class="svc-body">
+          <div class="svc-num">02</div>
+          <div class="svc-title">Deep Tissue Therapy</div>
+          <p class="svc-desc">Clinically directed manual therapy targeting chronic tension, restricted fascia, and muscular imbalances. Effective for desk workers, athletes, and post-surgical patients alike.</p>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-photo"><div class="photo-div ph6"></div></div>
+        <div class="svc-body">
+          <div class="svc-num">03</div>
+          <div class="svc-title">Rehabilitation &amp; Recovery</div>
+          <p class="svc-desc">Structured programmes for injury recovery, post-operative care, and return to sport. Progress is tracked at every session and your plan adjusts as you improve.</p>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-photo"><div class="photo-div ph7"></div></div>
+        <div class="svc-body">
+          <div class="svc-num">04</div>
+          <div class="svc-title">Wellness Packages</div>
+          <p class="svc-desc">Prepaid blocks of 5 or 10 sessions at a reduced rate, designed for patients who want consistent, ongoing care rather than ad-hoc appointments.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="sec book-sec" id="booking">
+  <div class="sec-in">
+    <div class="rev">
+      <p class="lbl">Book Online</p>
+      <h2 class="sh">Reserve your appointment</h2>
+    </div>
+    <div class="book-grid">
+
+      <!-- Calendar widget -->
+      <div class="rev rev-d1">
+
+        <!-- Step 1 -->
+        <div id="calView" class="cal-wrap">
+          <div class="cal-head">
+            <span class="cal-month-lbl" id="calMonth"></span>
+            <div class="cal-arrows">
+              <button class="cal-arr" id="prevMonth">‹</button>
+              <button class="cal-arr" id="nextMonth">›</button>
+            </div>
+          </div>
+          <div class="cal-body">
+            <div class="wd-row" id="calDays"></div>
+            <div class="dates-grid" id="calDates"></div>
+          </div>
+          <div class="times-section" id="timeWrap">
+            <div class="t-head">Available times</div>
+            <div class="t-grid" id="timesGrid"></div>
+          </div>
+          <button class="cal-next-btn" id="toFormBtn">Continue →</button>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="form-step cal-wrap" id="bookForm">
+          <div class="form-date-tag" id="formDateLabel"></div>
+          <div class="form-title">Your details</div>
+          <div class="f-fields">
+            <input class="f-inp" id="fName" type="text" placeholder="Full name" autocomplete="name">
+            <input class="f-inp" id="fPhone" type="tel" placeholder="Phone number" autocomplete="tel">
+            <input class="f-inp" id="fEmail" type="email" placeholder="Email address" autocomplete="email">
+            <div class="f-err" id="formErr">Please fill in all fields.</div>
+            <div class="f-btns">
+              <button class="f-back" id="backBtn">← Back</button>
+              <button class="f-submit" id="submitBtn">Confirm Booking</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="confirmed-step cal-wrap" id="calConfirm">
+          <div class="conf-ring">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="conf-title">Booking confirmed</div>
+          <p class="conf-detail" id="confirmDetail"></p>
+        </div>
+
+      </div>
+
+      <!-- Aside info -->
+      <div class="bk-aside rev rev-d2">
+        <div class="bk-title">Before you arrive</div>
+        <div class="bk-items">
+          <div class="bk-item">
+            <div class="bk-icon">⏱</div>
+            <div>
+              <div class="bk-text-lbl">Session length</div>
+              <div class="bk-text-val">Initial consultations are 60 minutes. Follow-up and therapy sessions run 30 – 45 minutes.</div>
+            </div>
+          </div>
+          <div class="bk-item">
+            <div class="bk-icon">✉</div>
+            <div>
+              <div class="bk-text-lbl">Confirmation</div>
+              <div class="bk-text-val">You'll receive a confirmation by email and WhatsApp within minutes of booking, including your specialist's name and room number.</div>
+            </div>
+          </div>
+          <div class="bk-item">
+            <div class="bk-icon">↩</div>
+            <div>
+              <div class="bk-text-lbl">Cancellation</div>
+              <div class="bk-text-val">Cancel or reschedule at no charge up to 24 hours before your appointment. Late cancellations are charged at 50% of the session fee.</div>
+            </div>
+          </div>
+          <div class="bk-item">
+            <div class="bk-icon">🅿</div>
+            <div>
+              <div class="bk-text-lbl">Parking</div>
+              <div class="bk-text-val">Paid parking is available in the Rothschild Tower car park directly below the building. We validate for the duration of your session.</div>
+            </div>
+          </div>
+        </div>
+        <div class="bk-callout">
+          <p>Not sure which treatment is right for you? Call <strong>+972 50-123-4567</strong> or send a WhatsApp — we'll point you in the right direction before you book.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq-sec" id="faqs">
+  <div class="sec-in">
+    <div class="faq-inner">
+      <div class="rev">
+        <p class="lbl">Common Questions</p>
+        <h2 class="sh">Before you book</h2>
+        <p class="ssub" style="margin-top:.8rem">Still have questions? Call us on +972 50-123-4567 or send a WhatsApp — we typically respond within two hours during clinic hours.</p>
+      </div>
+      <div class="faq-list rev rev-d1">
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-q">How long does a session take?</span><span class="faq-ico">+</span></button>
+          <div class="faq-body"><p class="faq-ans">Initial consultations are always 60 minutes — we don't rush the first appointment. Subsequent therapy and follow-up sessions are typically 30 to 45 minutes. Your specialist will confirm exact timing when they send your personalised plan.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-q">Will I see the same specialist every time?</span><span class="faq-ico">+</span></button>
+          <div class="faq-body"><p class="faq-ans">Yes. From your first appointment onwards you are assigned to a named specialist who manages your full care. We don't rotate patients between staff — continuity is a core part of how we work.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-q">Is there anything I should do to prepare?</span><span class="faq-ico">+</span></button>
+          <div class="faq-body"><p class="faq-ans">Wear comfortable, loose-fitting clothing that allows access to the area being treated. For your first visit, arrive five minutes early so we can complete a brief intake form. Any relevant scans, referral letters, or prior medical notes are welcome — bring them if you have them.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-q">What is your cancellation policy?</span><span class="faq-ico">+</span></button>
+          <div class="faq-body"><p class="faq-ans">You can cancel or reschedule at no charge up to 24 hours before your appointment. Cancellations with less than 24 hours' notice are charged at 50% of the session fee. No-shows are charged in full. To cancel, reply to your confirmation message or call the clinic directly.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-q">Do you accept insurance?</span><span class="faq-ico">+</span></button>
+          <div class="faq-body"><p class="faq-ans">We work directly with Maccabi, Clalit Mushlam, and Leumit supplemental health plans. If you're covered by a different provider, we can issue a detailed receipt for you to submit a reimbursement claim independently. Contact us before booking and we'll check your specific coverage.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn"><span class="faq-q">Where exactly is the clinic?</span><span class="faq-ico">+</span></button>
+          <div class="faq-body"><p class="faq-ans">We're located on the 4th floor of 14 Rothschild Boulevard, Tel Aviv — a two-minute walk from the Habima Square light rail stop. Paid parking is available in the Rothschild Tower underground car park; we validate for the duration of your session.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA BAND -->
+<!-- CONTACT DETAILS -->
+<div class="contacts-grid rev" id="contact">
+  <div class="cc">
+    <div class="cc-icon">💬</div>
+    <div class="cc-lbl">WhatsApp</div>
+    <div class="cc-val"><a href="https://wa.me/972501234567" target="_blank">+972 50-123-4567</a></div>
+  </div>
+  <div class="cc">
+    <div class="cc-icon">✉️</div>
+    <div class="cc-lbl">Email</div>
+    <div class="cc-val"><a href="/cdn-cgi/l/email-protection#2b4a5b5b4442455f464e455f586b5d425f4a474844594e48474245424805484446"><span class="__cf_email__" data-cfemail="127362627d7b7c667f777c666152647b66737e717d6077717e7b7c7b713c717d7f">[email&#160;protected]</span></a></div>
+  </div>
+  <div class="cc">
+    <div class="cc-icon">📍</div>
+    <div class="cc-lbl">Location</div>
+    <div class="cc-val">14 Rothschild Blvd, Tel Aviv</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand">
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="14" r="13" stroke="#0d9488" stroke-width="1.2"/>
+      <line x1="14" y1="7" x2="14" y2="21" stroke="#0d9488" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="7" y1="14" x2="21" y2="14" stroke="#0d9488" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="14" cy="14" r="2.5" fill="#0d9488"/>
+    </svg>
+    <span class="f-name">VITALCORE CLINIC</span>
+  </div>
+  <div class="f-right">
+    <div class="f-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#faqs">FAQs</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="f-copy">© <span id="yr"></span> Vitalcore Clinic. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), {passive:true});
+
+// Mobile menu
+function openMob()  { document.getElementById('mob').classList.add('open');    document.body.style.overflow='hidden'; }
+function closeMob() { document.getElementById('mob').classList.remove('open'); document.body.style.overflow=''; }
+document.getElementById('hamburger').onclick = openMob;
+document.getElementById('mobClose').onclick  = closeMob;
+document.getElementById('mob').querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click', closeMob);
+});
+
+// FAQ
+document.querySelectorAll('.faq-btn').forEach(function(b){
+  b.onclick = function(){ b.closest('.faq-item').classList.toggle('open'); };
+});
+
+// ── CALENDAR ──
+const availCache = {};
+function getAvail(y, m) {
+  const key = y+'-'+m;
+  if (availCache[key]) return availCache[key];
+  const total = new Date(y, m+1, 0).getDate();
+  const set = new Set();
+  for (let d = 1; d <= total; d++) { if (Math.random() > 0.35) set.add(d); }
+  availCache[key] = set;
+  return set;
+}
+const MN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DN = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+const TS = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM'];
+let cur = new Date(), selD = null, selT = null;
+
+function renderCal() {
+  const y = cur.getFullYear(), m = cur.getMonth();
+  document.getElementById('calMonth').textContent = MN[m] + ' ' + y;
+  document.getElementById('calDays').innerHTML = DN.map(d=>`<div class="wd">${d}</div>`).join('');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const first = new Date(y,m,1).getDay(), total = new Date(y,m+1,0).getDate();
+  const avail = getAvail(y,m);
+  let html = '';
+  for(let i=0;i<first;i++) html+='<div class="d"></div>';
+  for(let d=1;d<=total;d++){
+    const date=new Date(y,m,d), past=date<today;
+    const isAv=!past&&avail.has(d), isT=date.getTime()===today.getTime();
+    const isSel=selD&&selD.getTime()===date.getTime();
+    let cls='d';
+    if(isAv) cls+=' av';
+    if(isT) cls+=' tod';
+    if(isSel) cls+=' sel';
+    html+=`<div class="${cls}"${isAv?` data-ts="${date.getTime()}"`:''} >${d}</div>`;
+  }
+  const el = document.getElementById('calDates');
+  el.innerHTML = html;
+  el.querySelectorAll('.av').forEach(e => e.addEventListener('click', () => {
+    selD = new Date(parseInt(e.dataset.ts)); selT = null;
+    renderCal(); showTimes();
+  }));
+}
+
+function showTimes() {
+  const wrap = document.getElementById('timeWrap');
+  const grid = document.getElementById('timesGrid');
+  wrap.classList.add('show');
+  grid.innerHTML = TS.map(t=>`<div class="ts">${t}</div>`).join('');
+  document.getElementById('toFormBtn').style.display = 'none';
+  grid.querySelectorAll('.ts').forEach(e => {
+    e.onclick = () => {
+      grid.querySelectorAll('.ts').forEach(s=>s.classList.remove('sel'));
+      e.classList.add('sel'); selT = e.textContent;
+      document.getElementById('toFormBtn').style.display = 'block';
+    };
+  });
+}
+
+document.getElementById('toFormBtn').onclick = () => {
+  if(!selD||!selT) return;
+  const d=selD, label=`${MN[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} at ${selT}`;
+  document.getElementById('formDateLabel').textContent = label;
+  document.getElementById('calView').style.display = 'none';
+  document.getElementById('bookForm').style.display = 'block';
+};
+
+document.getElementById('backBtn').onclick = () => {
+  document.getElementById('bookForm').style.display = 'none';
+  document.getElementById('calView').style.display = 'block';
+};
+
+document.getElementById('submitBtn').onclick = () => {
+  const name=document.getElementById('fName').value.trim();
+  const phone=document.getElementById('fPhone').value.trim();
+  const email=document.getElementById('fEmail').value.trim();
+  const err=document.getElementById('formErr');
+  if(!name||!phone||!email){ err.style.display='block'; return; }
+  err.style.display='none';
+  const d=selD, label=`${MN[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} at ${selT}`;
+  document.getElementById('confirmDetail').innerHTML = `${name} · ${label}<br>Confirmation sent to ${email}`;
+  document.getElementById('bookForm').style.display = 'none';
+  const c = document.getElementById('calConfirm');
+  c.style.display = 'flex';
+};
+
+document.getElementById('prevMonth').onclick = () => {
+  const d=new Date(cur); d.setMonth(d.getMonth()-1);
+  const now=new Date();
+  if(d>=new Date(now.getFullYear(),now.getMonth(),1)){
+    cur=d; selD=null; selT=null; renderCal();
+  }
+};
+
+document.getElementById('nextMonth').onclick = () => {
+  cur=new Date(cur); cur.setMonth(cur.getMonth()+1);
+  selD=null; selT=null; renderCal();
+};
+
+renderCal();
+</script>
