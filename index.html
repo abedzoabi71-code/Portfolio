@@ -106,127 +106,99 @@ body.rtl .about-text h2 {
 body.rtl .hero-tag::before,
 body.rtl .hero-eyebrow::before { display: none; }
 body.rtl .strip-inner { animation-direction: reverse; }
-body.rtl .nav-links { flex-direction: row-reverse; }
+/* RTL nav lays out correctly via direction:rtl — no flex overrides needed */
 body.rtl .about-section { direction: rtl; }
 body.rtl .s-btn-back::before { content: none; }
 
 /* ── HERO ── */
 .hero {
-  min-height: 100svh; display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  padding: 0 2.5rem;
+  min-height: 100svh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 0 2.5rem 5rem;
   padding-top: var(--nav-h);
-  position: relative; overflow: hidden; gap: 4rem;
-}
-/* subtle grid overlay background */
-.hero::before {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(0,194,212,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,194,212,0.035) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-}
-/* dark fade from left so text stays readable */
-.hero::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(90deg, var(--bg) 40%, transparent 100%);
-  pointer-events: none;
-}
-.hero-left { position: relative; z-index: 2; }
-.hero-right {
-  position: relative; z-index: 2;
-  display: flex; align-items: center; justify-content: center;
-}
-/* glowing abstract visual — browser window mockup */
-.hero-visual {
-  width: 100%; max-width: 520px; aspect-ratio: 16/11;
-  background: var(--gray); border: 1px solid var(--gray2);
-  border-radius: 6px; overflow: hidden; position: relative;
-  box-shadow: 0 0 80px rgba(0,194,212,0.08), 0 0 0 1px rgba(0,194,212,0.06);
-}
-.hv-bar {
-  height: 32px; background: #0d1215; display: flex; align-items: center;
-  padding: 0 12px; gap: 6px; border-bottom: 1px solid #1a2226; flex-shrink: 0;
-}
-.hv-dot { width: 8px; height: 8px; border-radius: 50%; }
-.hv-dot-r { background: #3a1a1a; }
-.hv-dot-y { background: #2a2a1a; }
-.hv-dot-g { background: #1a2a1a; }
-.hv-url {
-  flex: 1; height: 16px; background: #141a1d; border-radius: 2px; margin: 0 8px;
-  display: flex; align-items: center; padding: 0 8px;
-}
-.hv-url-text { font-family: var(--fm); font-size: 0.5rem; color: #2a4050; letter-spacing: 0.08em; }
-.hv-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
-.hv-hero-block {
-  background: #0d1215; border-radius: 3px; padding: 18px;
-  display: flex; gap: 12px; align-items: center;
-}
-.hv-hero-text { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-.hv-h { height: 10px; background: var(--white); border-radius: 1px; width: 80%; }
-.hv-h2 { height: 8px; background: var(--accent); border-radius: 1px; width: 55%; }
-.hv-p { display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
-.hv-p span { height: 3px; background: #1e2a30; border-radius: 1px; }
-.hv-p .s { width: 60%; }
-.hv-btn { height: 20px; width: 70px; background: var(--accent); border-radius: 2px; margin-top: 6px; flex-shrink: 0; }
-.hv-img-placeholder {
-  width: 90px; height: 80px; background: linear-gradient(135deg, #141e22, #0d1a1e);
-  border-radius: 2px; border: 1px solid #1a2226; flex-shrink: 0;
   position: relative; overflow: hidden;
 }
-.hv-img-placeholder::after {
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 75% 40%, rgba(0,194,212,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 20% 70%, rgba(0,80,90,0.04) 0%, transparent 60%),
+    #060c0f;
+}
+.hero-bg::before {
   content: ''; position: absolute; inset: 0;
-  background: radial-gradient(circle at 40% 60%, rgba(0,194,212,0.12), transparent 60%);
+  background-image:
+    linear-gradient(rgba(0,194,212,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,194,212,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 60% 40%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 60% 40%, black 20%, transparent 75%);
 }
-.hv-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-.hv-card {
-  background: #0d1215; border-radius: 3px; padding: 10px;
-  border: 1px solid #1a2226; display: flex; flex-direction: column; gap: 5px;
+.hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(6,12,15,1) 0%, rgba(6,12,15,0.0) 55%);
 }
-.hv-card-img { height: 36px; background: #141e22; border-radius: 2px; margin-bottom: 2px; }
-.hv-card-img-1 { background: linear-gradient(135deg,#1a2e30,#0d2225); }
-.hv-card-img-2 { background: linear-gradient(135deg,#1e1a2e,#14102a); }
-.hv-card-img-3 { background: linear-gradient(135deg,#2e1a1a,#1a0d0d); }
-.hv-line { height: 4px; background: #1e2a30; border-radius: 1px; }
-.hv-line.accent { background: rgba(0,194,212,0.25); width: 60%; }
-/* glow dot floating */
-.hero-glow {
-  position: absolute; width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(0,194,212,0.12) 0%, transparent 70%);
-  border-radius: 50%; top: 50%; right: -50px; transform: translateY(-50%);
-  pointer-events: none; z-index: 1;
-}
-.hero-tag {
-  font-family: var(--fm); font-size: 0.68rem; letter-spacing: 0.22em;
-  color: var(--accent); margin-bottom: 1.8rem;
-  display: flex; align-items: center; gap: 0.8rem;
-}
-.hero-tag::before { content:''; width:24px; height:1px; background:var(--accent); }
+.hero-content { position: relative; z-index: 2; max-width: 1400px; }
 .hero-h1 {
-  font-family: var(--fd); font-size: clamp(3rem, 6vw, 6.5rem);
-  line-height: 0.92; letter-spacing: 0.01em; margin-bottom: 2rem;
+  font-family: var(--fd); font-size: clamp(4rem,9vw,11rem);
+  line-height: 0.9; letter-spacing: 0.01em; margin-bottom: 2.5rem;
 }
 .hero-h1 .stroke { -webkit-text-stroke: 1.5px var(--white); color: transparent; }
-.hero-h1 .fill-accent { color: var(--accent); }
-.hero-sub { max-width: 400px; font-size: 1rem; line-height: 1.7; color: #6a8090; margin-bottom: 2.5rem; }
+.hero-h1 .fill-white { color: var(--white); }
+.hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; }
+.hero-sub { max-width: 380px; font-size: 1rem; line-height: 1.7; color: #8a9ea8; text-wrap: balance; }
 .hero-sub strong { color: var(--white); font-weight: 700; }
-.hero-cta-group { display: flex; align-items: center; gap: 1.5rem; }
+.hero-cta-group { display: flex; flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+/* pill button with arrow circle */
 .btn-big {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
-  background: var(--accent); color: var(--bg);
-  font-family: var(--fd); font-size: 1.4rem; letter-spacing: 0.05em;
-  padding: 0.9rem 2rem; text-decoration: none; line-height: 1;
-  transition: background 0.2s, transform 0.2s;
+  display: inline-flex; align-items: center; gap: 0;
+  background: #1a2226; color: var(--white);
+  font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.08em;
+  padding: 0.45rem 0.45rem 0.45rem 1.6rem;
+  border-radius: 999px; text-decoration: none; line-height: 1;
+  overflow: hidden; position: relative;
+  transition: color 0.35s;
 }
-.btn-big:hover { background: var(--accent2); transform: translate(-2px,-2px); }
+body.rtl .btn-big {
+  padding: 0.45rem 1.6rem 0.45rem 0.45rem;
+}
+.btn-big::before {
+  content: ''; position: absolute;
+  right: 0.45rem; top: 50%; transform: translate(0, -50%);
+  width: 2.4rem; height: 2.4rem; border-radius: 50%;
+  background: var(--white);
+  transition: width 0.4s cubic-bezier(0.4,0,0.2,1),
+              height 0.4s cubic-bezier(0.4,0,0.2,1),
+              right 0.4s cubic-bezier(0.4,0,0.2,1),
+              left 0.4s cubic-bezier(0.4,0,0.2,1),
+              border-radius 0.4s cubic-bezier(0.4,0,0.2,1);
+  z-index: 0;
+}
+body.rtl .btn-big::before {
+  right: auto; left: 0.45rem;
+}
+.btn-big:hover::before {
+  width: 200%; height: 600%;
+  right: -50%; border-radius: 0;
+}
+body.rtl .btn-big:hover::before {
+  right: auto; left: -50%;
+}
+.btn-big .btn-label { position: relative; z-index: 1; }
+.btn-big .btn-arrow {
+  width: 2.4rem; height: 2.4rem; border-radius: 50%;
+  background: var(--white); color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; margin-left: 1.2rem; flex-shrink: 0;
+  position: relative; z-index: 1;
+  transition: color 0.35s;
+}
+body.rtl .btn-big .btn-arrow {
+  margin-left: 0; margin-right: 1.2rem;
+}
+.btn-big:hover { color: var(--bg); }
+.btn-big:hover .btn-arrow { background: transparent; }
 .hero-scroll { font-family: var(--fm); font-size: 0.62rem; letter-spacing: 0.2em; color: #2a3a40; }
-@media(max-width:900px){
-  .hero { grid-template-columns: 1fr; padding-bottom: 4rem; align-items: flex-end; }
-  .hero-right { display: none; }
-  .hero-h1 { font-size: clamp(3rem,10vw,5rem); }
-}
+
 
 /* ── STRIP ── */
 .strip { background: var(--accent); padding: 0.85rem 0; overflow: hidden; white-space: nowrap; }
@@ -279,7 +251,7 @@ body.rtl .s-btn-back::before { content: none; }
   display: grid;
   grid-template-columns: 1fr 1.6fr;
   gap: 0;
-  min-height: 560px;
+  align-items: stretch;
 }
 
 .proj-info {
@@ -289,34 +261,20 @@ body.rtl .s-btn-back::before { content: none; }
   gap: 1rem;
 }
 .proj-name {
-  font-family: var(--fd); font-size: clamp(3rem,5vw,5.5rem);
-  letter-spacing: 0.02em; line-height: 0.88; margin-top: 0.5rem;
+  font-family: var(--fd); font-size: clamp(2rem,3.8vw,4.2rem);
+  letter-spacing: 0.02em; line-height: 0.9; margin-top: 0.5rem;
+  white-space: nowrap;
 }
-.proj-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.7; font-weight: 300; flex: 1; }
+.proj-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
 .proj-result {
   font-family: var(--fm); font-size: 0.62rem; letter-spacing: 0.12em;
   color: var(--accent); padding-top: 1.2rem; border-top: 1px solid var(--gray2);
 }
 
-.proj-mockup { background: #0d1215; position: relative; overflow: hidden; }
+.proj-mockup {
+  background: #070d10; overflow: hidden;
+}
 .pm { width: 100%; height: 100%; position: absolute; inset: 0; }
-
-/* ── Mockup 1: Interior ── */
-.pm-1 { background: #f2efe8; display: flex; flex-direction: column; }
-.pm1-nav { height: 36px; background: #141414; flex-shrink: 0; display: flex; align-items: center; padding: 0 14px; justify-content: space-between; }
-.pm1-logo { width: 60px; height: 8px; background: var(--accent); border-radius: 1px; }
-.pm1-links { display: flex; gap: 10px; }
-.pm1-links span { width: 32px; height: 5px; background: #333; border-radius: 1px; }
-.pm1-body { flex: 1; display: grid; grid-template-columns: 1fr 1fr; }
-.pm1-left { background: #141414; padding: 20px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
-.pm1-h { height: 16px; background: white; width: 90%; border-radius: 1px; }
-.pm1-h2 { height: 11px; background: var(--accent); width: 65%; border-radius: 1px; }
-.pm1-p { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
-.pm1-p span { height: 4px; background: #2a2a2a; border-radius: 1px; }
-.pm1-p .s { width: 60%; }
-.pm1-btn { width: 80px; height: 24px; background: var(--accent); margin-top: 10px; }
-.pm1-right { background: linear-gradient(160deg, #ddd8d0, #ccc5b8); position: relative; }
-.pm1-right::after { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(0,194,212,0.25); }
 
 /* ── Mockup 2: Fitness ── */
 .pm-2 { background: #060809; display: flex; flex-direction: column; }
@@ -332,131 +290,6 @@ body.rtl .s-btn-back::before { content: none; }
 .pm2-sl { height: 4px; background: #1e2a2e; width: 70%; border-radius: 1px; }
 .pm2-img { flex: 1; background: #0a0f11; margin-top: 6px; position: relative; }
 .pm2-img::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 40% 60%, rgba(0,194,212,0.14), transparent 55%); }
-
-/* ── Mockup 3: Fragrance E-commerce ── */
-.pm-3 {
-  background: #f9f5ef;
-  display: flex; flex-direction: column;
-  font-family: var(--fb);
-}
-
-/* nav */
-.pm3-nav {
-  height: 38px; flex-shrink: 0;
-  background: #1a1208;
-  display: flex; align-items: center; padding: 0 16px;
-  justify-content: space-between;
-}
-.pm3-logo-text {
-  font-family: var(--fd); font-size: 11px;
-  letter-spacing: 3px; color: #e8d5a0;
-}
-.pm3-nav-links { display: flex; gap: 10px; }
-.pm3-nav-links span { width: 26px; height: 4px; background: #3a2e18; border-radius: 1px; }
-.pm3-nav-icons { display: flex; gap: 6px; }
-.pm3-nav-icons span { width: 14px; height: 14px; border: 1px solid #3a2e18; border-radius: 50%; }
-
-/* hero banner */
-.pm3-hero {
-  height: 120px; flex-shrink: 0;
-  background: linear-gradient(135deg, #1a1208 0%, #2e1f0a 50%, #3d2a0f 100%);
-  position: relative; overflow: hidden;
-  display: flex; align-items: center; padding: 0 18px;
-  gap: 12px;
-}
-.pm3-hero::after {
-  content: '';
-  position: absolute; right: 0; top: 0; bottom: 0;
-  width: 45%;
-  background: radial-gradient(ellipse at right, rgba(232,213,160,0.18), transparent 70%);
-}
-.pm3-hero-candle {
-  width: 32px; height: 52px; flex-shrink: 0;
-  background: linear-gradient(to bottom, #e8d5a0, #c9a84c);
-  border-radius: 3px 3px 2px 2px;
-  position: relative;
-}
-.pm3-hero-candle::before {
-  content: '';
-  position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
-  width: 2px; height: 8px;
-  background: #888;
-  border-radius: 1px;
-}
-.pm3-hero-candle::after {
-  content: '';
-  position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
-  width: 6px; height: 10px;
-  background: radial-gradient(ellipse, #fff7a0, #f5a623 60%, transparent 100%);
-  border-radius: 50% 50% 30% 30%;
-  filter: blur(1px);
-}
-.pm3-hero-text { display: flex; flex-direction: column; gap: 5px; }
-.pm3-hero-h { height: 14px; background: #e8d5a0; width: 110px; border-radius: 1px; }
-.pm3-hero-sub { height: 7px; background: #3a2e18; width: 80px; border-radius: 1px; }
-.pm3-hero-btn { height: 18px; width: 52px; background: #c9a84c; border-radius: 1px; margin-top: 4px; }
-
-/* category pills */
-.pm3-cats {
-  display: flex; gap: 4px; padding: 10px 16px 8px; flex-shrink: 0;
-  background: #f9f5ef; border-bottom: 1px solid #e8e0d4;
-}
-.pm3-cat {
-  height: 18px; border-radius: 9px; padding: 0 10px;
-  display: flex; align-items: center;
-  font-size: 0; /* hide text */
-}
-.pm3-cat::after {
-  content: '';
-  display: block; width: 30px; height: 5px; background: #c9b48a; border-radius: 2px;
-}
-.pm3-cat.active { background: #1a1208; }
-.pm3-cat.active::after { background: #e8d5a0; width: 28px; }
-
-/* product grid */
-.pm3-grid {
-  flex: 1; padding: 10px 14px;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 8px; align-content: start;
-  overflow: hidden;
-}
-.pm3-product {
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(26,18,8,0.08);
-}
-.pm3-prod-img {
-  height: 62px;
-  position: relative; overflow: hidden;
-}
-.pm3-prod-img-1 { background: linear-gradient(135deg, #d4c5a0, #b8a070); }
-.pm3-prod-img-2 { background: linear-gradient(135deg, #1a1208, #2e1f0a); }
-.pm3-prod-img-3 { background: linear-gradient(135deg, #e8e0d4, #c9b48a); }
-.pm3-prod-img-4 { background: linear-gradient(135deg, #f0e8d8, #d4b896); }
-
-/* candle silhouette inside product cards */
-.pm3-prod-img::after {
-  content: '';
-  position: absolute;
-  bottom: 6px; left: 50%; transform: translateX(-50%);
-  width: 18px; height: 28px;
-  background: rgba(255,255,255,0.25);
-  border-radius: 2px 2px 1px 1px;
-}
-.pm3-prod-info { padding: 6px 8px 8px; display: flex; flex-direction: column; gap: 3px; }
-.pm3-prod-name { height: 5px; background: #1a1208; border-radius: 1px; width: 80%; }
-.pm3-prod-sub { height: 4px; background: #d4c5a0; border-radius: 1px; width: 55%; }
-.pm3-prod-price { height: 6px; background: #c9a84c; border-radius: 1px; width: 35%; margin-top: 2px; }
-.pm3-prod-btn {
-  height: 16px; background: #1a1208;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 8px 8px;
-  border-radius: 1px;
-}
-.pm3-prod-btn::after {
-  content: ''; width: 40px; height: 4px; background: #c9a84c; border-radius: 1px;
-}
 
 /* ── PAIN GRID ── */
 .pain-section { padding: 8rem 2.5rem; max-width: 1400px; margin: 0 auto; }
@@ -672,13 +505,12 @@ footer {
 @media(max-width:900px){
   .proj-body { grid-template-columns: 1fr; min-height: auto; }
   .proj-info { border-right: none; border-bottom: 1px solid var(--gray2); }
-  .proj-mockup { height: 200px; }
+  .proj-mockup { height: auto; }
+  .proj-mockup.pm-css { height: 200px; }
   .proj-name { font-size: clamp(2rem,6vw,3rem); }
   .about-section { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   .service-row { grid-template-columns: 40px 1fr; } .srv-tag { display: none; }
-  .hero-bottom { flex-direction: column; align-items: flex-start; }
-  .hero-cta-group { align-items: flex-start; }
   footer { flex-direction: column; gap: 1rem; text-align: center; }
   .projects-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .projects-sub { text-align: left; }
@@ -694,11 +526,16 @@ footer {
   .nav-cta { padding: 0.4rem 0.9rem !important; font-size: 0.6rem !important; letter-spacing: 0.12em !important; }
 
   /* hero: tighter on mobile */
-  .hero { padding: 0 1.5rem 3.5rem; justify-content: center; padding-top: calc(var(--nav-h) + 2rem); }
+  .hero { padding: 0 1.5rem 3.5rem; justify-content: flex-end; }
+  .hero-h1 { font-size: clamp(2.6rem, 10vw, 4rem); margin-bottom: 1.6rem; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.6rem; }
+  .hero-cta-group { align-items: flex-start; }
+  .hero-sub { font-size: 0.92rem; max-width: 100%; }
 
   /* smaller project cards */
   .proj-body { min-height: auto; }
-  .proj-mockup { height: 160px; }
+  .proj-mockup { height: auto; }
+  .proj-mockup.pm-css { height: 160px; }
   .proj-name { font-size: 2.2rem; }
   .proj-info { padding: 1.2rem 1.4rem 1.4rem; }
   .proj-header { padding: 1.2rem 1.4rem 0; }
@@ -893,9 +730,11 @@ footer {
 
 /* ── PROJECT MOCKUP IMAGE SUPPORT ── */
 .proj-mockup-img {
-  width: 100%; height: 100%; object-fit: cover;
-  display: block; position: absolute; inset: 0;
+  width: 100%; height: auto;
+  display: block;
 }
+/* CSS-drawn mockups (no image) need an explicit height */
+.proj-mockup.pm-css { height: 380px; position: relative; }
 
 </style>
 </head>
@@ -907,9 +746,9 @@ footer {
 <nav>
   <a href="#" class="nav-mark">UX ABDUL</a>
   <div class="nav-links">
-    <a href="#pain"     data-en="Why"      data-ar="لماذا">Why</a>
     <a href="#projects" data-en="Work"     data-ar="أعمالي">Work</a>
     <a href="#services" data-en="Services" data-ar="خدمات">Services</a>
+    <a href="#contact"  data-en="Contact"  data-ar="تواصل">Contact</a>
     <div class="lang-switch">
       <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
       <button class="lang-btn" id="btnAr" onclick="setLang('ar')">ع</button>
@@ -920,48 +759,18 @@ footer {
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true"></div>
 
-  <!-- LEFT: copy -->
-  <div class="hero-left">
-    <p class="hero-tag">Web Design · Based in Israel · Built to convert</p>
+  <div class="hero-content">
     <h1 class="hero-h1">
-      <span class="stroke">A WEBSITE</span><br>
-      <span>THAT WORKS</span><br>
-      <span class="fill-accent">WHILE YOU</span><br>
-      <span class="fill-accent">SLEEP.</span>
+      <span class="stroke">A WEBSITE THAT</span><br>
+      <span class="fill-white">WORKS WHILE YOU SLEEP.</span>
     </h1>
-    <p class="hero-sub">Most business websites lose the customer before they ever make contact. <strong>Unclear flow. No obvious next step.</strong> That's the gap.</p>
-    <div class="hero-cta-group">
-      <a href="#cta" class="btn-big">Start here ↗</a>
-      <p class="hero-scroll">↓ SCROLL TO SEE THE WORK</p>
-    </div>
-  </div>
-
-  <!-- RIGHT: visual -->
-  <div class="hero-right">
-    <div class="hero-visual">
-      <div class="hv-bar">
-        <div class="hv-dot hv-dot-r"></div>
-        <div class="hv-dot hv-dot-y"></div>
-        <div class="hv-dot hv-dot-g"></div>
-        <div class="hv-url"><span class="hv-url-text">yourwebsite.com</span></div>
-      </div>
-      <div class="hv-body">
-        <div class="hv-hero-block">
-          <div class="hv-hero-text">
-            <div class="hv-h"></div>
-            <div class="hv-h2"></div>
-            <div class="hv-p"><span></span><span></span><span class="s"></span></div>
-            <div class="hv-btn"></div>
-          </div>
-          <div class="hv-img-placeholder"></div>
-        </div>
-        <div class="hv-cards">
-          <div class="hv-card"><div class="hv-card-img hv-card-img-1"></div><div class="hv-line"></div><div class="hv-line accent"></div></div>
-          <div class="hv-card"><div class="hv-card-img hv-card-img-2"></div><div class="hv-line"></div><div class="hv-line accent"></div></div>
-          <div class="hv-card"><div class="hv-card-img hv-card-img-3"></div><div class="hv-line"></div><div class="hv-line accent"></div></div>
-        </div>
+    <div class="hero-bottom">
+      <p class="hero-sub">Most business websites lose the customer before they make contact. <strong>No clear path, no next step.</strong></p>
+      <div class="hero-cta-group">
+        <a href="#cta" class="btn-big"><span class="btn-label">Start here</span><span class="btn-arrow">↗</span></a>
+        <p class="hero-scroll">↓ SCROLL TO SEE THE WORK</p>
       </div>
     </div>
   </div>
@@ -990,33 +799,33 @@ footer {
   <div class="pain-grid">
     <div class="pain-card reveal">
       <span class="pain-emoji">🔍</span>
-      <h3>Someone searched for you.<br>Moved on.</h3>
-      <p>They had a name, a referral, or a recommendation. No website to land on. By the time they found someone else, you were already forgotten.</p>
+      <h3 data-en="Someone searched for you.<br>Moved on." data-ar="بحث عنك شخص ما.<br>ثم انصرف.">Someone searched for you.<br>Moved on.</h3>
+      <p data-en="They had a name, a referral, or a recommendation. No website to land on. By the time they found someone else, you were already forgotten." data-ar="كان عنده اسمك، أو توصية، أو إحالة. لم يجد موقعاً يصل إليه. وبحلول الوقت الذي وجد فيه شخصاً آخر، كنت قد نُسيت.">They had a name, a referral, or a recommendation. No website to land on. By the time they found someone else, you were already forgotten.</p>
     </div>
     <div class="pain-card reveal">
       <span class="pain-emoji">📱</span>
-      <h3>Every new client starts from zero.</h3>
-      <p>What you do, what it costs, how it works — you explain it fresh each time. A website answers all of that before the conversation even starts.</p>
+      <h3 data-en="Every new client starts from zero." data-ar="كل عميل جديد تبدأ معه من الصفر.">Every new client starts from zero.</h3>
+      <p data-en="What you do, what it costs, how it works — you explain it fresh each time. A website answers all of that before the conversation even starts." data-ar="ما تقدمه، ما هو سعره، كيف يعمل — تشرح كل شيء من جديد في كل مرة. الموقع يجيب على كل ذلك قبل أن تبدأ المحادثة.">What you do, what it costs, how it works — you explain it fresh each time. A website answers all of that before the conversation even starts.</p>
     </div>
     <div class="pain-card reveal">
       <span class="pain-emoji">🪞</span>
-      <h3>The online version of your business<br>doesn't match the real one.</h3>
-      <p>The quality of the work is there. What's online just hasn't caught up yet. That gap is what visitors judge you by.</p>
+      <h3 data-en="The online version of your business<br>doesn't match the real one." data-ar="صورة مشروعك على الإنترنت<br>لا تعكس حقيقته.">The online version of your business<br>doesn't match the real one.</h3>
+      <p data-en="The quality of the work is there. What's online just hasn't caught up yet. That gap is what visitors judge you by." data-ar="جودة العمل موجودة. لكن ما هو على الإنترنت لم يلحق بعد. وهذه الفجوة هي ما يحكم عليك الزوار من خلاله.">The quality of the work is there. What's online just hasn't caught up yet. That gap is what visitors judge you by.</p>
     </div>
     <div class="pain-card reveal">
       <span class="pain-emoji">📉</span>
-      <h3>A referral checked you out.<br>Went quiet.</h3>
-      <p>Someone vouched for you — that's the warmest lead there is. They looked you up. What they found didn't match what they were told.</p>
+      <h3 data-en="A referral checked you out.<br>Went quiet." data-ar="أحد أحالك لعميل.<br>وصمت العميل.">A referral checked you out.<br>Went quiet.</h3>
+      <p data-en="Someone vouched for you — that's the warmest lead there is. They looked you up. What they found didn't match what they were told." data-ar="شخص زكّاك — وهذا أدفأ نوع من العملاء المحتملين. بحثوا عنك. لكن ما وجدوه لم يتطابق مع ما قيل لهم.">Someone vouched for you — that's the warmest lead there is. They looked you up. What they found didn't match what they were told.</p>
     </div>
     <div class="pain-card reveal">
       <span class="pain-emoji">🤝</span>
-      <h3>Smaller competitors are winning<br>on presentation.</h3>
-      <p>Not because their work is better. Because their website makes it easier to say yes. Credibility is felt before it's earned.</p>
+      <h3 data-en="Smaller competitors are winning<br>on presentation." data-ar="منافسون أصغر منك يتفوقون<br>بسبب طريقة تقديمهم.">Smaller competitors are winning<br>on presentation.</h3>
+      <p data-en="Not because their work is better. Because their website makes it easier to say yes. Credibility is felt before it's earned." data-ar="ليس لأن عملهم أفضل. بل لأن موقعهم يجعل قول «نعم» أسهل. المصداقية تُشعر بها قبل أن تُكسب.">Not because their work is better. Because their website makes it easier to say yes. Credibility is felt before it's earned.</p>
     </div>
     <div class="pain-card reveal">
       <span class="pain-emoji">⚙️</span>
-      <h3>The website exists.<br>But it doesn't do anything.</h3>
-      <p>It loads. It has pages. But there's no clear next step, no reason to stay, nothing that turns a visitor into a contact.</p>
+      <h3 data-en="The website exists.<br>But it doesn't do anything." data-ar="الموقع موجود.<br>لكنه لا يفعل شيئاً.">The website exists.<br>But it doesn't do anything.</h3>
+      <p data-en="It loads. It has pages. But there's no clear next step, no reason to stay, nothing that turns a visitor into a contact." data-ar="يفتح. فيه صفحات. لكن لا توجد خطوة تالية واضحة، ولا سبب للبقاء، ولا شيء يحوّل الزائر إلى عميل.">It loads. It has pages. But there's no clear next step, no reason to stay, nothing that turns a visitor into a contact.</p>
     </div>
   </div>
 </section>
@@ -1040,32 +849,19 @@ footer {
   <div class="card-stack" id="cardStack">
 
     <!-- CARD 1 -->
-    <div class="proj-card" style="top:58px; z-index:1;">
+    <div class="proj-card" style="top:58px; z-index:1; cursor:none;" onclick="window.open('clinic.html','_blank')">
       <div class="proj-header">
-        <span class="proj-num">01 — INTERIOR DESIGN</span>
-        <span class="proj-industry">Redesign</span>
+        <span class="proj-num">01 — MEDICAL CLINIC</span>
+        <span class="proj-industry">Web Design</span>
       </div>
       <div class="proj-body">
         <div class="proj-info">
-          <div class="proj-name">CASA<br>NOVA</div>
-          <p class="proj-desc">A dated portfolio turned into a premium booking machine. UX audit → new architecture → visual design → live in 10 days.</p>
-          <div class="proj-result">↑ 3× MORE CONSULTATION BOOKINGS</div>
+          <div class="proj-name">VITALCORE</div>
+          <p class="proj-desc" data-en="Full website for a private Tel Aviv clinic — booking calendar, bilingual layout, and a conversion-focused structure built to replace a non-existent web presence." data-ar="موقع كامل لعيادة خاصة في تل أبيب — تقويم حجز، تصميم ثنائي اللغة، وبنية تحويل تُغني عن غياب الحضور الرقمي.">Full website for a private Tel Aviv clinic — booking calendar, bilingual layout, and a conversion-focused structure built to replace a non-existent web presence.</p>
+          <div class="proj-result" data-en="↑ ZERO TO LIVE IN 5 DAYS" data-ar="↑ من الصفر إلى الإطلاق في 5 أيام">↑ ZERO TO LIVE IN 5 DAYS</div>
         </div>
         <div class="proj-mockup">
-          <div class="pm pm-1">
-            <div class="pm1-nav">
-              <div class="pm1-logo"></div>
-              <div class="pm1-links"><span></span><span></span><span></span></div>
-            </div>
-            <div class="pm1-body">
-              <div class="pm1-left">
-                <div class="pm1-h"></div><div class="pm1-h2"></div>
-                <div class="pm1-p"><span></span><span></span><span class="s"></span></div>
-                <div class="pm1-btn"></div>
-              </div>
-              <div class="pm1-right"></div>
-            </div>
-          </div>
+          <img src="vitalcore-crd.webp" alt="VitalCore clinic website screenshot" class="proj-mockup-img" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -1078,11 +874,11 @@ footer {
       </div>
       <div class="proj-body">
         <div class="proj-info">
-          <div class="proj-name">FORM<br>FITNESS</div>
-          <p class="proj-desc">Built from scratch for a personal trainer done relying on Instagram DMs. Clean, fast, converts cold traffic.</p>
-          <div class="proj-result">↑ SOLD OUT FIRST MONTH AFTER LAUNCH</div>
+          <div class="proj-name">FORM FITNESS</div>
+          <p class="proj-desc" data-en="Built from scratch for a personal trainer done relying on Instagram DMs. Clean, fast, converts cold traffic." data-ar="بُني من الصفر لمدرب شخصي تعب من الاعتماد على رسائل إنستغرام. نظيف، سريع، يحوّل الزوار الجدد.">Built from scratch for a personal trainer done relying on Instagram DMs. Clean, fast, converts cold traffic.</p>
+          <div class="proj-result" data-en="↑ SOLD OUT FIRST MONTH AFTER LAUNCH" data-ar="↑ مكتمل الحجز في الشهر الأول بعد الإطلاق">↑ SOLD OUT FIRST MONTH AFTER LAUNCH</div>
         </div>
-        <div class="proj-mockup">
+        <div class="proj-mockup pm-css">
           <div class="pm pm-2">
             <div class="pm2-nav"><span class="pm2-logo">FORM</span><div class="pm2-pill"></div></div>
             <div class="pm2-body">
@@ -1100,81 +896,19 @@ footer {
     </div>
 
     <!-- CARD 3 -->
-    <div class="proj-card" style="top:170px; z-index:3; cursor:none;" onclick="window.location='lumiere-case-study.html'">
+    <div class="proj-card" style="top:170px; z-index:3; cursor:none;" onclick="window.open('aroma-mist-preview.html','_blank')">
       <div class="proj-header">
         <span class="proj-num">03 — E-COMMERCE</span>
         <span class="proj-industry">Candles & Home</span>
       </div>
       <div class="proj-body">
         <div class="proj-info">
-          <div class="proj-name">LUMIÈRE<br>CANDLES</div>
-          <p class="proj-desc">A candle shop redesigned from a generic template into a premium sensory experience. Product hierarchy, category browsing, and the full purchase flow rebuilt from scratch.</p>
-          <div class="proj-result">↑ CLEANER UX · HIGHER PRODUCT TRUST &nbsp;·&nbsp; <span style="color:var(--white);opacity:.5">VIEW CASE STUDY →</span></div>
+          <div class="proj-name">AROMA MIST</div>
+          <p class="proj-desc" data-en="A candle shop redesigned from a generic template into a premium sensory experience. Product hierarchy, category browsing, and the full purchase flow rebuilt from scratch." data-ar="متجر شموع أُعيد تصميمه من قالب عادي إلى تجربة حسية راقية. تسلسل المنتجات، تصفح الفئات، ومسار الشراء الكامل — كل شيء بُني من الصفر.">A candle shop redesigned from a generic template into a premium sensory experience. Product hierarchy, category browsing, and the full purchase flow rebuilt from scratch.</p>
+          <div class="proj-result" data-en="↑ CLEANER UX · HIGHER PRODUCT TRUST" data-ar="↑ تجربة أنظف · ثقة أعلى بالمنتج">&nbsp;·&nbsp; <span style="color:var(--white);opacity:.5" data-en="VIEW CASE STUDY →" data-ar="عرض دراسة الحالة →">VIEW CASE STUDY →</span></div>
         </div>
         <div class="proj-mockup">
-          <div class="pm pm-3">
-            <!-- Nav -->
-            <div class="pm3-nav">
-              <span class="pm3-logo-text">LUMIÈRE</span>
-              <div class="pm3-nav-links"><span></span><span></span><span></span></div>
-              <div class="pm3-nav-icons"><span></span><span></span></div>
-            </div>
-            <!-- Hero -->
-            <div class="pm3-hero">
-              <div class="pm3-hero-candle"></div>
-              <div class="pm3-hero-text">
-                <div class="pm3-hero-h"></div>
-                <div class="pm3-hero-sub"></div>
-                <div class="pm3-hero-btn"></div>
-              </div>
-            </div>
-            <!-- Category pills -->
-            <div class="pm3-cats">
-              <div class="pm3-cat active"></div>
-              <div class="pm3-cat"></div>
-              <div class="pm3-cat"></div>
-              <div class="pm3-cat"></div>
-            </div>
-            <!-- Product grid -->
-            <div class="pm3-grid">
-              <div class="pm3-product">
-                <div class="pm3-prod-img pm3-prod-img-1"></div>
-                <div class="pm3-prod-info">
-                  <div class="pm3-prod-name"></div>
-                  <div class="pm3-prod-sub"></div>
-                  <div class="pm3-prod-price"></div>
-                </div>
-                <div class="pm3-prod-btn"></div>
-              </div>
-              <div class="pm3-product">
-                <div class="pm3-prod-img pm3-prod-img-2"></div>
-                <div class="pm3-prod-info">
-                  <div class="pm3-prod-name"></div>
-                  <div class="pm3-prod-sub"></div>
-                  <div class="pm3-prod-price"></div>
-                </div>
-                <div class="pm3-prod-btn"></div>
-              </div>
-              <div class="pm3-product">
-                <div class="pm3-prod-img pm3-prod-img-3"></div>
-                <div class="pm3-prod-info">
-                  <div class="pm3-prod-name"></div>
-                  <div class="pm3-prod-sub"></div>
-                  <div class="pm3-prod-price"></div>
-                </div>
-                <div class="pm3-prod-btn"></div>
-              </div>
-              <div class="pm3-product">
-                <div class="pm3-prod-img pm3-prod-img-4"></div>
-                <div class="pm3-prod-info">
-                  <div class="pm3-prod-name"></div>
-                  <div class="pm3-prod-sub"></div>
-                  <div class="pm3-prod-price"></div>
-                </div>
-                <div class="pm3-prod-btn"></div>
-              </div>
-            </div>
-          </div>
+          <img src="aroma-mist-crd.webp" alt="Aroma Mist website screenshot" class="proj-mockup-img" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -1195,8 +929,8 @@ footer {
         <span class="srv-card-num">01</span>
         <span class="srv-card-tag">NEW BUILD</span>
       </div>
-      <h3 class="srv-card-name">WEBSITE<br>DEVELOPMENT</h3>
-      <p class="srv-card-desc">Built from zero. I design the path your visitor takes — from landing to contacting you. Every step is intentional.</p>
+      <h3 class="srv-card-name">SITES FOR<br>FREELANCERS &<br>LOCAL BUSINESSES</h3>
+      <p class="srv-card-desc">Coaches, contractors, clinics, restaurants, studios, consultants — if you need clients to find you and contact you, I build that. No templates, no guesswork. And if your business doesn't fit a category, I build that too.</p>
       <ul class="srv-card-list">
         <li>Custom design, no templates</li>
         <li>Clear flow from landing to contact</li>
@@ -1210,14 +944,14 @@ footer {
         <span class="srv-card-num">02</span>
         <span class="srv-card-tag">FIX WHAT'S BROKEN</span>
       </div>
-      <h3 class="srv-card-name">UX AUDIT &amp;<br>REDESIGN</h3>
-      <p class="srv-card-desc">Already have a website? I'll find where you're losing people. Most sites bleed leads silently — a few fixes can change that.</p>
+      <h3 class="srv-card-name">YOUR SITE<br>ISN'T WORKING.<br>LET'S FIX IT.</h3>
+      <p class="srv-card-desc">Already have a website? I'll look at it like a visitor would, find exactly where people get confused or leave, and fix what's costing you clients.</p>
       <ul class="srv-card-list">
-        <li>Full visitor journey audit</li>
-        <li>Identify exactly where people drop off</li>
-        <li>Redesign what's hurting conversions</li>
+        <li>Full review of how visitors move through your site</li>
+        <li>Find exactly where people drop off</li>
+        <li>Redesign the parts that are losing you clients</li>
       </ul>
-      <a href="#cta" class="srv-card-cta">Audit my site ↗</a>
+      <a href="#cta" class="srv-card-cta">Fix my site ↗</a>
     </div>
 
     <div class="srv-card srv-card-wide reveal">
@@ -1294,8 +1028,9 @@ footer {
           <div class="s-opt" data-q="2" data-val="Look more professional"><span class="s-opt-label">LOOK MORE PROFESSIONAL</span><span class="s-opt-check">✓ SELECTED</span></div>
           <div class="s-opt" data-q="2" data-val="Sell products online"><span class="s-opt-label">SELL PRODUCTS ONLINE</span><span class="s-opt-check">✓ SELECTED</span></div>
           <div class="s-opt" data-q="2" data-val="Automate bookings / info"><span class="s-opt-label">AUTOMATE BOOKINGS</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="2" data-val="All of the above"><span class="s-opt-label">ALL OF THE ABOVE</span><span class="s-opt-check">✓ SELECTED</span></div>
+          <div class="s-opt s-opt-other" data-q="2" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
         </div>
+        <input class="s-other-input" id="other2" placeholder="Tell me what you're after…" />
         <div class="survey-nav">
           <button class="s-btn-back" onclick="goBack()">← BACK</button>
           <button class="s-btn-next" id="next2" disabled>NEXT <span>→</span></button>
@@ -1345,7 +1080,9 @@ footer {
           <div class="s-opt" data-q="5" data-val="Evenings"><span class="s-opt-label">EVENINGS</span><span class="s-opt-check">✓ SELECTED</span></div>
           <div class="s-opt" data-q="5" data-val="Weekends"><span class="s-opt-label">WEEKENDS</span><span class="s-opt-check">✓ SELECTED</span></div>
           <div class="s-opt" data-q="5" data-val="Anytime, just message me"><span class="s-opt-label">ANYTIME</span><span class="s-opt-check">✓ SELECTED</span></div>
+          <div class="s-opt s-opt-other" data-q="5" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
         </div>
+        <input class="s-other-input" id="other5" placeholder="Let me know when works for you…" />
         <div class="survey-nav">
           <button class="s-btn-back" onclick="goBack()">← BACK</button>
           <button class="s-btn-next" id="next5" disabled>NEXT <span>→</span></button>
@@ -1455,10 +1192,10 @@ if (painGrid) {
 const translations = {
   en: {
     'hero-tag': 'Web Design · Based in Israel · Built to convert',
-    'hero-h1-1': 'A WEBSITE', 'hero-h1-2': 'THAT WORKS', 'hero-h1-3': 'WHILE YOU', 'hero-h1-4': 'SLEEP.',
-    'hero-sub': 'Most business websites lose the customer before they ever make contact. <strong>Unclear flow. No obvious next step.</strong> That\'s the gap.',
+    'hero-h1-1': 'A WEBSITE THAT', 'hero-h1-2': 'WORKS WHILE YOU SLEEP.', 'hero-h1-3': '', 'hero-h1-4': '',
+    'hero-sub': 'Most business websites lose the customer before they make contact. <strong>No clear path, no next step.</strong>',
     'hero-scroll': '↓ SCROLL TO SEE THE WORK',
-    'hero-cta': 'Start here ↗',
+    'hero-cta': 'Start here',
     'pain-label': '01 / THE PROBLEM',
     'pain-title': 'SOUND FAMILIAR?',
     'projects-label': '02 / PROJECTS',
@@ -1484,27 +1221,27 @@ const translations = {
     'thanks-p': 'I\'ll review your answers and reach out within 24 hours. No pressure, just a conversation.',
     'bridge-1': 'So what does a website that actually works look like?',
     'bridge-2': 'Ready to close the gap?',
-    'srv-name-1': 'WEBSITE\nDEVELOPMENT',
-    'srv-desc-1': 'Built from zero. I design the path your visitor takes — from landing to contacting you. Every step is intentional.',
+    'srv-name-1': 'SITES FOR\nFREELANCERS &\nLOCAL BUSINESSES',
+    'srv-desc-1': 'Coaches, contractors, clinics, restaurants, studios, consultants — if you need clients to find you and contact you, I build that. No templates, no guesswork. And if your business doesn\'t fit a category, I build that too.',
     'srv-list-1-a': 'Custom design, no templates',
     'srv-list-1-b': 'Clear flow from landing to contact',
     'srv-list-1-c': 'Fast, mobile-first, live in weeks',
     'srv-cta-1': 'Get a website ↗',
-    'srv-name-2': 'UX AUDIT &\nREDESIGN',
-    'srv-desc-2': 'Already have a website? I\'ll find where you\'re losing people. Most sites bleed leads silently — a few fixes can change that.',
-    'srv-list-2-a': 'Full visitor journey audit',
-    'srv-list-2-b': 'Identify exactly where people drop off',
-    'srv-list-2-c': 'Redesign what\'s hurting conversions',
-    'srv-cta-2': 'Audit my site ↗',
+    'srv-name-2': 'YOUR SITE\nISN\'T WORKING.\nLET\'S FIX IT.',
+    'srv-desc-2': 'Already have a website? I\'ll look at it like a visitor would, find exactly where people get confused or leave, and fix what\'s costing you clients.',
+    'srv-list-2-a': 'Full review of how visitors move through your site',
+    'srv-list-2-b': 'Find exactly where people drop off',
+    'srv-list-2-c': 'Redesign the parts that are losing you clients',
+    'srv-cta-2': 'Fix my site ↗',
     'srv-wide-name': 'WEBSITES THAT WORK —\nNOT JUST LOOK GOOD.',
     'srv-wide-desc': 'A good-looking website that confuses people is just an expensive brochure. Every site I build has one job: take the visitor from "I found you" to "I\'m calling you." I design the path, then I build it.',
   },
   ar: {
     'hero-tag': 'تصميم ويب · من إسرائيل · مصمَّم للتحويل',
-    'hero-h1-1': 'موقع', 'hero-h1-2': 'يعمل', 'hero-h1-3': 'وأنت', 'hero-h1-4': 'نائم.',
-    'hero-sub': 'معظم مواقع الأعمال تخسر العميل قبل أن يتواصل. <strong>مسار غير واضح. لا خطوة تالية.</strong> هذه هي الفجوة.',
+    'hero-h1-1': 'موقع يعمل', 'hero-h1-2': 'وأنت نائم.', 'hero-h1-3': '', 'hero-h1-4': '',
+    'hero-sub': 'معظم مواقع الأعمال تخسر العميل قبل أن يتواصل. <strong>لا مسار واضح، لا خطوة تالية.</strong>',
     'hero-scroll': '↓ مرر لترى الأعمال',
-    'hero-cta': 'ابدأ هنا ↗',
+    'hero-cta': 'ابدأ هنا',
     'pain-label': '٠١ / المشكلة',
     'pain-title': 'هل يبدو مألوفاً؟',
     'projects-label': '٠٢ / الأعمال',
@@ -1530,20 +1267,37 @@ const translations = {
     'thanks-p': 'سأراجع إجاباتك وأتواصل معك خلال 24 ساعة. بدون ضغط، فقط محادثة.',
     'bridge-1': 'كيف يبدو الموقع الذي يعمل فعلاً؟',
     'bridge-2': 'مستعد لإغلاق الفجوة؟',
-    'srv-name-1': 'تطوير\nالمواقع',
-    'srv-desc-1': 'من الصفر. أصمم المسار الذي يسلكه زائرك — من اللحظة التي يصل فيها حتى يتواصل معك. كل خطوة مقصودة.',
+    'srv-name-1': 'مواقع للمستقلين\nوالمشاريع المحلية',
+    'srv-desc-1': 'كوتش، مقاول، عيادة، مطعم، استوديو، مستشار — إذا كنت تحتاج عملاء يجدونك ويتواصلون معك، أنا أبني ذلك. بدون قوالب. وإذا كان مشروعك لا يشبه أي تصنيف، أبني ذلك أيضاً.',
     'srv-list-1-a': 'تصميم مخصص، بدون قوالب جاهزة',
     'srv-list-1-b': 'مسار واضح من الوصول إلى التواصل',
     'srv-list-1-c': 'سريع، مناسب للموبايل، يُطلَق في أسابيع',
     'srv-cta-1': 'احصل على موقع ↗',
-    'srv-name-2': 'تدقيق UX\nوإعادة التصميم',
-    'srv-desc-2': 'لديك موقع بالفعل؟ سأجد أين تخسر الزوار. معظم المواقع تتسرب منها العملاء بصمت — بعض التعديلات يمكن أن تغير ذلك.',
-    'srv-list-2-a': 'تدقيق كامل لرحلة الزائر',
-    'srv-list-2-b': 'تحديد نقاط المغادرة بدقة',
-    'srv-list-2-c': 'إعادة تصميم ما يضر بالتحويل',
-    'srv-cta-2': 'دقق موقعي ↗',
+    'srv-name-2': 'موقعك لا يشتغل.\nخلينا نصلحه.',
+    'srv-desc-2': 'عندك موقع بالفعل؟ سأنظر إليه كما ينظر إليه الزائر، وأجد بالضبط أين يتشتت الناس أو يغادرون، ثم أصلح ما يكلفك العملاء.',
+    'srv-list-2-a': 'مراجعة كاملة لكيفية تحرك الزوار في موقعك',
+    'srv-list-2-b': 'تحديد بالضبط أين يغادر الناس',
+    'srv-list-2-c': 'إعادة تصميم الأجزاء التي تخسّرك العملاء',
+    'srv-cta-2': 'اصلح موقعي ↗',
     'srv-wide-name': 'مواقع تعمل —\nلا مجرد مواقع تبدو جميلة.',
     'srv-wide-desc': 'الموقع الجميل الذي يحيّر الزوار ما هو إلا كتيّب مكلف. كل موقع أبنيه له مهمة واحدة: أخذ الزائر من "وجدتك" إلى "سأتصل بك". أصمم المسار، ثم أبنيه.',
+    // survey options — step 0
+    'opt-0-0': 'خدمة محلية', 'opt-0-1': 'مستقل / مستشار', 'opt-0-2': 'متجر / تجارة إلكترونية', 'opt-0-3': 'مطعم / كافيه', 'opt-0-4': 'أخرى',
+    // step 1
+    'opt-1-0': 'لا يوجد موقع بعد', 'opt-1-1': 'موجود لكن قديم', 'opt-1-2': 'موجود لكن لا يحوّل', 'opt-1-3': 'أستكشف فقط',
+    // step 2
+    'opt-2-0': 'المزيد من العملاء', 'opt-2-1': 'مظهر أكثر احترافية', 'opt-2-2': 'بيع منتجات أونلاين', 'opt-2-3': 'أتمتة الحجوزات', 'opt-2-4': 'أخرى',
+    // step 3
+    'opt-3-0': 'الناس لا يجدونني', 'opt-3-1': 'أبدو أقل مصداقية', 'opt-3-2': 'أشرح نفسي دائماً', 'opt-3-3': 'العملاء لا يتحولون', 'opt-3-4': 'أخرى',
+    // step 4
+    'opt-4-0': 'لا أعرف من أين أبدأ', 'opt-4-1': 'قلق بشأن التكلفة', 'opt-4-2': 'تجارب سيئة سابقاً', 'opt-4-3': 'لم أجد الوقت', 'opt-4-4': 'أخرى',
+    // step 5
+    'opt-5-0': 'صباح أيام الأسبوع', 'opt-5-1': 'مساء أيام الأسبوع', 'opt-5-2': 'المساء', 'opt-5-3': 'عطلة نهاية الأسبوع', 'opt-5-4': 'في أي وقت', 'opt-5-5': 'أخرى',
+    // other placeholders
+    'other-0': 'أخبرني عن نوع مشروعك…', 'other-2': 'أخبرني ما الذي تسعى إليه…',
+    'other-3': 'صِف ذلك بكلماتك…', 'other-4': 'أخبرني أكثر…', 'other-5': 'أخبرني متى يناسبك…',
+    // buttons
+    'btn-next': 'التالي', 'btn-back': 'رجوع', 'btn-send': 'أرسل',
   }
 };
 
@@ -1555,7 +1309,9 @@ function setLang(lang) {
   document.documentElement.dir  = isAr ? 'rtl' : 'ltr';
   document.getElementById('btnEn').classList.toggle('active', !isAr);
   document.getElementById('btnAr').classList.toggle('active',  isAr);
-  document.querySelectorAll('[data-en][data-ar]').forEach(el => { el.textContent = el.dataset[lang]; });
+  document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+    el.innerHTML = el.dataset[lang];
+  });
 
   const q  = (sel)      => document.querySelector(sel);
   const st = (sel, key) => { const e = q(sel); if (e && t[key]) e.innerHTML = (t[key]).replace(/\n/g,'<br>'); };
@@ -1566,7 +1322,7 @@ function setLang(lang) {
   ['hero-h1-1','hero-h1-2','hero-h1-3','hero-h1-4'].forEach((k,i) => { if (spans[i] && t[k]) spans[i].textContent = t[k]; });
   if (q('.hero-sub'))    q('.hero-sub').innerHTML = t['hero-sub'];
   if (q('.hero-scroll')) q('.hero-scroll').textContent = t['hero-scroll'];
-  if (q('.btn-big'))     q('.btn-big').textContent = t['hero-cta'];
+  if (q('.btn-big'))     { const lbl = q('.btn-big .btn-label'); if (lbl) lbl.textContent = t['hero-cta']; }
 
   // sections
   st('.pain-section .section-num',     'pain-label');
@@ -1611,6 +1367,60 @@ function setLang(lang) {
   // contact
   st('.contact-left h3', 'contact-title');
   const cs = q('.contact-left p'); if (cs) cs.textContent = t['contact-sub']||'';
+
+  // survey options
+  if (isAr) {
+    const optMap = {
+      0: ['opt-0-0','opt-0-1','opt-0-2','opt-0-3','opt-0-4'],
+      1: ['opt-1-0','opt-1-1','opt-1-2','opt-1-3'],
+      2: ['opt-2-0','opt-2-1','opt-2-2','opt-2-3','opt-2-4'],
+      3: ['opt-3-0','opt-3-1','opt-3-2','opt-3-3','opt-3-4'],
+      4: ['opt-4-0','opt-4-1','opt-4-2','opt-4-3','opt-4-4'],
+      5: ['opt-5-0','opt-5-1','opt-5-2','opt-5-3','opt-5-4','opt-5-5'],
+    };
+    Object.entries(optMap).forEach(([step, keys]) => {
+      const opts = document.querySelectorAll(`.s-opt[data-q="${step}"] .s-opt-label`);
+      keys.forEach((k, i) => { if (opts[i] && t[k]) opts[i].textContent = t[k]; });
+    });
+    // other placeholders
+    ['0','2','3','4','5'].forEach(n => {
+      const el = document.getElementById('other' + n);
+      if (el && t['other-' + n]) el.placeholder = t['other-' + n];
+    });
+    // buttons
+    document.querySelectorAll('.s-btn-next').forEach(btn => {
+      const arrow = btn.querySelector('span');
+      btn.childNodes[0].textContent = t['btn-next'] + ' ';
+      if (arrow) arrow.textContent = '←';
+    });
+    document.getElementById('next6').childNodes[0].textContent = t['btn-send'] + ' ';
+    document.querySelectorAll('.s-btn-back').forEach(btn => { btn.textContent = '→ ' + t['btn-back']; });
+  } else {
+    // restore EN option labels
+    const enOpts = [
+      ['LOCAL SERVICE','FREELANCER / CONSULTANT','SHOP / E-COMMERCE','RESTAURANT / CAFÉ','OTHER'],
+      ['NO WEBSITE YET','HAVE ONE, OUTDATED','HAVE ONE, DOESN\'T CONVERT','JUST LOOKING AROUND'],
+      ['GET MORE CLIENTS','LOOK MORE PROFESSIONAL','SELL PRODUCTS ONLINE','AUTOMATE BOOKINGS','OTHER'],
+      ['PEOPLE CAN\'T FIND ME','LOOK LESS CREDIBLE','ALWAYS EXPLAINING MYSELF','LEADS DON\'T CONVERT','OTHER'],
+      ['DON\'T KNOW WHERE TO START','WORRIED ABOUT COST','BAD EXPERIENCE BEFORE','NEVER GOT AROUND TO IT','OTHER'],
+      ['WEEKDAY MORNINGS','WEEKDAY AFTERNOONS','EVENINGS','WEEKENDS','ANYTIME','OTHER'],
+    ];
+    enOpts.forEach((labels, step) => {
+      const opts = document.querySelectorAll(`.s-opt[data-q="${step}"] .s-opt-label`);
+      labels.forEach((lbl, i) => { if (opts[i]) opts[i].textContent = lbl; });
+    });
+    // other placeholders EN
+    const enPlaceholders = {0:'Tell me what kind of business…',2:'Tell me what you\'re after…',3:'Describe it in your own words…',4:'Tell me more…',5:'Let me know when works for you…'};
+    Object.entries(enPlaceholders).forEach(([n, ph]) => { const el = document.getElementById('other'+n); if (el) el.placeholder = ph; });
+    // buttons EN
+    document.querySelectorAll('.s-btn-next').forEach(btn => {
+      const arrow = btn.querySelector('span');
+      btn.childNodes[0].textContent = 'NEXT ';
+      if (arrow) arrow.textContent = '→';
+    });
+    document.getElementById('next6').childNodes[0].textContent = 'SEND IT ';
+    document.querySelectorAll('.s-btn-back').forEach(btn => { if (btn.style.visibility !== 'hidden') btn.textContent = '← BACK'; });
+  }
 
   localStorage.setItem('uxabdul-lang', lang);
 }
@@ -1696,7 +1506,7 @@ function submitSurvey() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify({
-      access_key:      'YOUR_WEB3FORMS_KEY',
+      access_key:      'fd362674-23a1-4acc-9eb0-7b6f43c8cefa',
       subject:         'New lead from UX Abdul — ' + name,
       from_name:       'UX Abdul Website',
       name,
@@ -1712,5 +1522,6 @@ function submitSurvey() {
 }
 
 </script>
+
 </body>
 </html>
