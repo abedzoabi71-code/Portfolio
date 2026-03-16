@@ -71,6 +71,15 @@ nav::before {
   background: var(--accent) !important; color: var(--bg) !important;
   padding: 0.5rem 1.2rem; font-weight: 700 !important;
   transition: background 0.2s !important;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+}
+.nav-cta::after {
+  content: '';
+  display: inline-block;
+  width: 0.4rem; height: 0.4rem;
+  border-top: 2px solid var(--bg);
+  border-right: 2px solid var(--bg);
+  transform: rotate(45deg) translate(-1px, 1px);
 }
 .nav-cta:hover { background: var(--accent2) !important; }
 
@@ -188,9 +197,21 @@ body.rtl .btn-big:hover::before {
   width: 2.4rem; height: 2.4rem; border-radius: 50%;
   background: var(--white); color: var(--bg);
   display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; margin-left: 1.2rem; flex-shrink: 0;
+  margin-left: 1.2rem; flex-shrink: 0;
   position: relative; z-index: 1;
-  transition: color 0.35s;
+  transition: background 0.35s, color 0.35s;
+}
+.btn-big .btn-arrow::before {
+  content: '';
+  display: block;
+  width: 0.5rem; height: 0.5rem;
+  border-top: 2px solid var(--bg);
+  border-right: 2px solid var(--bg);
+  transform: rotate(45deg) translate(-1px, 1px);
+  transition: border-color 0.35s;
+}
+.btn-big:hover .btn-arrow::before {
+  border-color: var(--accent);
 }
 body.rtl .btn-big .btn-arrow {
   margin-left: 0; margin-right: 1.2rem;
@@ -553,13 +574,14 @@ footer {
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     cursor: grab;
-    touch-action: pan-x;
+    touch-action: pan-y;
   }
   .pain-grid::-webkit-scrollbar { display: none; }
   .pain-card {
     flex: 0 0 72vw;
     min-width: 260px;
     max-height: none;
+    touch-action: pan-y;
   }
 
   /* about: image below text */
@@ -753,7 +775,7 @@ footer {
       <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
       <button class="lang-btn" id="btnAr" onclick="setLang('ar')">ع</button>
     </div>
-    <a href="#cta" class="nav-cta" data-en="Start here ↗" data-ar="ابدأ هنا ↗">Start here ↗</a>
+    <a href="#cta" class="nav-cta" data-en="Start here" data-ar="ابدأ هنا">Start here</a>
   </div>
 </nav>
 
@@ -769,7 +791,7 @@ footer {
     <div class="hero-bottom">
       <p class="hero-sub">Most business websites lose the customer before they make contact. <strong>No clear path, no next step.</strong></p>
       <div class="hero-cta-group">
-        <a href="#cta" class="btn-big"><span class="btn-label">Start here</span><span class="btn-arrow">↗</span></a>
+        <a href="#cta" class="btn-big"><span class="btn-label">Start here</span><span class="btn-arrow"></span></a>
         <p class="hero-scroll">↓ SCROLL TO SEE THE WORK</p>
       </div>
     </div>
@@ -798,34 +820,34 @@ footer {
   </div>
   <div class="pain-grid">
     <div class="pain-card reveal">
-      <span class="pain-emoji">🔍</span>
-      <h3 data-en="Someone searched for you.<br>Moved on." data-ar="بحث عنك شخص ما.<br>ثم انصرف.">Someone searched for you.<br>Moved on.</h3>
-      <p data-en="They had a name, a referral, or a recommendation. No website to land on. By the time they found someone else, you were already forgotten." data-ar="كان عنده اسمك، أو توصية، أو إحالة. لم يجد موقعاً يصل إليه. وبحلول الوقت الذي وجد فيه شخصاً آخر، كنت قد نُسيت.">They had a name, a referral, or a recommendation. No website to land on. By the time they found someone else, you were already forgotten.</p>
+      <span class="pain-emoji">📲</span>
+      <h3 data-en="They found you on Instagram.<br>Then searched. Found nothing." data-ar="وجدوك على إنستغرام.<br>بحثوا عنك. لم يجدوا شيئاً.">They found you on Instagram.<br>Then searched. Found nothing.</h3>
+      <p data-en="Social gets attention. A website is where that attention turns into a decision. Without it, interested people hit a wall and move on." data-ar="السوشيال يجلب الانتباه. الموقع هو المكان الذي يتحول فيه هذا الانتباه إلى قرار. بدونه، المهتمون يصطدمون بجدار ويمضون.">Social gets attention. A website is where that attention turns into a decision. Without it, interested people hit a wall and move on.</p>
     </div>
     <div class="pain-card reveal">
-      <span class="pain-emoji">📱</span>
-      <h3 data-en="Every new client starts from zero." data-ar="كل عميل جديد تبدأ معه من الصفر.">Every new client starts from zero.</h3>
-      <p data-en="What you do, what it costs, how it works — you explain it fresh each time. A website answers all of that before the conversation even starts." data-ar="ما تقدمه، ما هو سعره، كيف يعمل — تشرح كل شيء من جديد في كل مرة. الموقع يجيب على كل ذلك قبل أن تبدأ المحادثة.">What you do, what it costs, how it works — you explain it fresh each time. A website answers all of that before the conversation even starts.</p>
+      <span class="pain-emoji">💬</span>
+      <h3 data-en="You're answering the same DMs<br>on repeat." data-ar="تجيب على نفس الرسائل<br>مراراً وتكراراً.">You're answering the same DMs<br>on repeat.</h3>
+      <p data-en="Pricing. Hours. How to book. What you offer. A website answers all of that automatically — so you only talk to people who are already ready." data-ar="الأسعار. أوقات العمل. كيفية الحجز. ما تقدمه. الموقع يجيب على كل ذلك تلقائياً — لتتحدث فقط مع من هو مستعد.">Pricing. Hours. How to book. What you offer. A website answers all of that automatically — so you only talk to people who are already ready.</p>
     </div>
     <div class="pain-card reveal">
       <span class="pain-emoji">🪞</span>
-      <h3 data-en="The online version of your business<br>doesn't match the real one." data-ar="صورة مشروعك على الإنترنت<br>لا تعكس حقيقته.">The online version of your business<br>doesn't match the real one.</h3>
-      <p data-en="The quality of the work is there. What's online just hasn't caught up yet. That gap is what visitors judge you by." data-ar="جودة العمل موجودة. لكن ما هو على الإنترنت لم يلحق بعد. وهذه الفجوة هي ما يحكم عليك الزوار من خلاله.">The quality of the work is there. What's online just hasn't caught up yet. That gap is what visitors judge you by.</p>
+      <h3 data-en="The work is serious.<br>The online presence isn't." data-ar="العمل جاد.<br>لكن الحضور الرقمي ليس كذلك.">The work is serious.<br>The online presence isn't.</h3>
+      <p data-en="Clients judge before they contact. A professional website signals that you're established, serious, and worth paying for — before you say a word." data-ar="العملاء يحكمون قبل أن يتواصلوا. موقع احترافي يُشير إلى أنك راسخ، جاد، ويستحق الدفع — قبل أن تقول كلمة واحدة.">Clients judge before they contact. A professional website signals that you're established, serious, and worth paying for — before you say a word.</p>
     </div>
     <div class="pain-card reveal">
       <span class="pain-emoji">📉</span>
       <h3 data-en="A referral checked you out.<br>Went quiet." data-ar="أحد أحالك لعميل.<br>وصمت العميل.">A referral checked you out.<br>Went quiet.</h3>
-      <p data-en="Someone vouched for you — that's the warmest lead there is. They looked you up. What they found didn't match what they were told." data-ar="شخص زكّاك — وهذا أدفأ نوع من العملاء المحتملين. بحثوا عنك. لكن ما وجدوه لم يتطابق مع ما قيل لهم.">Someone vouched for you — that's the warmest lead there is. They looked you up. What they found didn't match what they were told.</p>
+      <p data-en="Someone vouched for you — the warmest lead there is. They looked you up. No website meant no proof, no trust, no call." data-ar="شخص زكّاك — وهذا أدفأ أنواع العملاء. بحثوا عنك. لا موقع يعني لا دليل، لا ثقة، لا اتصال.">Someone vouched for you — the warmest lead there is. They looked you up. No website meant no proof, no trust, no call.</p>
     </div>
     <div class="pain-card reveal">
       <span class="pain-emoji">🤝</span>
-      <h3 data-en="Smaller competitors are winning<br>on presentation." data-ar="منافسون أصغر منك يتفوقون<br>بسبب طريقة تقديمهم.">Smaller competitors are winning<br>on presentation.</h3>
-      <p data-en="Not because their work is better. Because their website makes it easier to say yes. Credibility is felt before it's earned." data-ar="ليس لأن عملهم أفضل. بل لأن موقعهم يجعل قول «نعم» أسهل. المصداقية تُشعر بها قبل أن تُكسب.">Not because their work is better. Because their website makes it easier to say yes. Credibility is felt before it's earned.</p>
+      <h3 data-en="Smaller competitors look<br>more established than you." data-ar="منافسون أصغر منك<br>يبدون أكثر رسوخاً.">Smaller competitors look<br>more established than you.</h3>
+      <p data-en="Not because their work is better — because they have a website. That's the whole game. A website makes you look like a real business, because you are one." data-ar="ليس لأن عملهم أفضل — بل لأن عندهم موقعاً. هذه هي اللعبة كلها. الموقع يجعلك تبدو كمشروع حقيقي، لأنك كذلك بالفعل.">Not because their work is better — because they have a website. That's the whole game. A website makes you look like a real business, because you are one.</p>
     </div>
     <div class="pain-card reveal">
       <span class="pain-emoji">⚙️</span>
-      <h3 data-en="The website exists.<br>But it doesn't do anything." data-ar="الموقع موجود.<br>لكنه لا يفعل شيئاً.">The website exists.<br>But it doesn't do anything.</h3>
-      <p data-en="It loads. It has pages. But there's no clear next step, no reason to stay, nothing that turns a visitor into a contact." data-ar="يفتح. فيه صفحات. لكن لا توجد خطوة تالية واضحة، ولا سبب للبقاء، ولا شيء يحوّل الزائر إلى عميل.">It loads. It has pages. But there's no clear next step, no reason to stay, nothing that turns a visitor into a contact.</p>
+      <h3 data-en="No website means<br>no system." data-ar="لا موقع يعني<br>لا نظام.">No website means<br>no system.</h3>
+      <p data-en="No booking link. No clear pricing. No way to collect leads while you sleep. Every new client still starts from a cold DM — because there's nothing else." data-ar="لا رابط حجز. لا أسعار واضحة. لا طريقة لجمع العملاء المحتملين وأنت نائم. كل عميل جديد لا يزال يبدأ من رسالة باردة — لأنه لا يوجد شيء آخر.">No booking link. No clear pricing. No way to collect leads while you sleep. Every new client still starts from a cold DM — because there's nothing else.</p>
     </div>
   </div>
 </section>
@@ -1156,7 +1178,11 @@ if (painGrid) {
   painGrid.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - painGrid.offsetLeft; scrollLeft = painGrid.scrollLeft; });
   painGrid.addEventListener('mouseleave', () => { isDown = false; });
   painGrid.addEventListener('mouseup', () => { isDown = false; });
-  painGrid.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); painGrid.scrollLeft = scrollLeft - (e.pageX - painGrid.offsetLeft - startX) * 1.4; });
+  painGrid.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    const dx = e.pageX - painGrid.offsetLeft - startX;
+    if (Math.abs(dx) > 5) { e.preventDefault(); painGrid.scrollLeft = scrollLeft - dx * 1.4; }
+  });
 }
 
 // ── LANGUAGE SYSTEM ──
