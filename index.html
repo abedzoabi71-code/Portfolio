@@ -177,173 +177,140 @@ body.rtl .s-btn-back::before { content: none; }
 .hero-sub strong { color: #9ab8c4; font-weight: 600; }
 .hero-cta-group { display: flex; flex-direction: row; align-items: center; gap: 1.6rem; }
 
-/* ── DASHBOARD ── */
-.hero-dashboard {
-  position: relative;
-  background: #0a1418;
-  border: 1px solid #1a2a30;
-  border-radius: 16px;
-  padding: 1.2rem;
+/* ── NOTIFICATION STACK (hero widget) ── */
+.hero-notif-wrap {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  box-shadow: 0 0 0 1px rgba(0,194,212,0.06), 0 32px 64px rgba(0,0,0,0.5);
-  overflow: hidden;
+  align-items: center;
+  gap: 20px;
+  position: relative;
   z-index: 1;
 }
-.hero-dashboard::before {
+
+.notif-time-label {
+  font-family: var(--fm);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: #2a4a58;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.notif-time-label::before,
+.notif-time-label::after {
   content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 40% at 80% 20%, rgba(0,194,212,0.05) 0%, transparent 70%);
-  pointer-events: none;
-}
-/* dashboard titlebar */
-.db-bar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #1a2a30;
-}
-.db-title {
-  font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.18em;
-  color: var(--accent); text-transform: uppercase;
-}
-.db-dot-row { display: flex; gap: 5px; }
-.db-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-/* stat cards row */
-.db-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
-.db-stat {
-  background: #0d1c22; border: 1px solid #1a2a30; border-radius: 8px;
-  padding: 0.7rem 0.8rem;
-}
-.db-stat-label {
-  font-family: var(--fm); font-size: 0.52rem; letter-spacing: 0.14em;
-  color: #2a4a58; text-transform: uppercase; margin-bottom: 4px;
-}
-.db-stat-val {
-  font-family: var(--fd); font-size: 1.5rem; letter-spacing: 0.04em;
-  color: var(--white); line-height: 1;
-}
-.db-stat-val.cy { color: var(--accent); }
-.db-stat-delta {
-  font-family: var(--fm); font-size: 0.52rem; color: #1a6e50;
-  margin-top: 3px; letter-spacing: 0.1em;
+  width: 28px;
+  height: 1px;
+  background: #1a2a30;
 }
 
-/* chart + appointments row */
-.db-mid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 8px; }
+.notif-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-/* bar chart */
-.db-chart {
-  background: #0d1c22; border: 1px solid #1a2a30; border-radius: 8px;
-  padding: 0.9rem;
-}
-.db-chart-title {
-  font-family: var(--fm); font-size: 0.52rem; letter-spacing: 0.14em;
-  color: #2a4a58; text-transform: uppercase; margin-bottom: 0.7rem;
-}
-.db-bars { display: flex; align-items: flex-end; gap: 5px; height: 60px; }
-.db-bar-item {
-  flex: 1; background: #1a2a30; border-radius: 3px 3px 0 0;
-  position: relative; overflow: hidden;
-  transform-origin: bottom;
-}
-.db-bar-fill {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: var(--accent); border-radius: 3px 3px 0 0;
-  height: 0%;
-  transition: height 1.2s cubic-bezier(0.34,1.1,0.64,1);
-}
-.db-bar-item.today .db-bar-fill { background: #fff; }
-.db-bar-days {
-  display: flex; gap: 5px; margin-top: 4px;
-}
-.db-bar-day {
-  flex: 1; text-align: center;
-  font-family: var(--fm); font-size: 0.48rem; color: #2a4a58; letter-spacing: 0.08em;
-}
-.db-bar-item.today .db-bar-day { color: var(--accent); }
-
-/* appointments */
-.db-appts {
-  background: #0d1c22; border: 1px solid #1a2a30; border-radius: 8px;
-  padding: 0.9rem;
-  display: flex; flex-direction: column; gap: 0;
-}
-.db-appts-title {
-  font-family: var(--fm); font-size: 0.52rem; letter-spacing: 0.14em;
-  color: #2a4a58; text-transform: uppercase; margin-bottom: 0.6rem;
-}
-.db-appt {
-  display: flex; align-items: center; gap: 8px;
-  padding: 6px 0;
-  border-bottom: 1px solid #0f1e24;
-}
-.db-appt:last-child { border-bottom: none; }
-.db-appt-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.db-appt-dot.confirmed { background: var(--accent); }
-.db-appt-dot.pending { background: #2a4a58; }
-.db-appt-name {
-  font-family: var(--fb); font-size: 0.72rem; color: var(--white); flex: 1;
-  font-weight: 400;
-}
-.db-appt-time {
-  font-family: var(--fm); font-size: 0.55rem; color: #2a4a58; letter-spacing: 0.1em;
-}
-.db-appt-tag {
-  font-family: var(--fm); font-size: 0.48rem; letter-spacing: 0.1em;
-  padding: 2px 6px; border-radius: 3px;
-}
-.db-appt-tag.confirmed { background: rgba(0,194,212,0.1); color: var(--accent); }
-.db-appt-tag.pending { background: #111e24; color: #2a4a58; }
-
-/* notifications */
-.db-notifs { display: flex; flex-direction: column; gap: 6px; }
-.db-notif {
-  display: flex; align-items: center; gap: 10px;
-  background: #0d1c22; border: 1px solid #1a2a30; border-radius: 8px;
-  padding: 0.65rem 0.9rem;
+.hero-notif {
+  background: rgba(13, 28, 34, 0.9);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34,1.1,0.64,1);
+  transform: translateY(-12px) scale(0.97);
+  transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+              transform 0.5s cubic-bezier(0.22,1,0.36,1);
+  position: relative;
 }
-.db-notif.show { opacity: 1; transform: translateY(0); }
-.db-notif-icon {
-  width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px;
+.hero-notif.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
-.db-notif-icon.cal { background: rgba(0,194,212,0.12); }
-.db-notif-icon.form { background: rgba(0,194,212,0.08); }
-.db-notif-icon.book { background: rgba(255,59,48,0.1); }
-.db-notif-body { flex: 1; min-width: 0; }
-.db-notif-title {
-  font-family: var(--fb); font-size: 0.72rem; color: var(--white); font-weight: 600;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.db-notif-sub {
-  font-family: var(--fm); font-size: 0.52rem; color: #2a4a58; letter-spacing: 0.08em;
-  margin-top: 1px;
-}
-.db-notif-time {
-  font-family: var(--fm); font-size: 0.5rem; color: #1a3040; letter-spacing: 0.1em;
+
+.hn-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
   flex-shrink: 0;
+}
+.hn-icon.booking  { background: rgba(0,194,212,0.15); }
+.hn-icon.payment  { background: rgba(99,220,120,0.15); }
+.hn-icon.review   { background: rgba(255,196,66,0.15); }
+.hn-icon.contact  { background: rgba(120,160,255,0.15); }
+
+.hn-body { flex: 1; min-width: 0; }
+
+.hn-app {
+  font-family: var(--fm);
+  font-size: 0.5rem;
+  letter-spacing: 0.14em;
+  color: #2a4a58;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.hn-title {
+  font-family: var(--fb);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hn-sub {
+  font-family: var(--fm);
+  font-size: 0.52rem;
+  letter-spacing: 0.06em;
+  color: #2a4a58;
+  margin-top: 2px;
+}
+
+.hn-time {
+  font-family: var(--fm);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  color: #1a3040;
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding-top: 2px;
+}
+
+/* live pulse dot on first notif */
+.hero-notif.booking::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: notifPulse 2s ease-in-out infinite;
+}
+@keyframes notifPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 @media(max-width:900px) {
   .hero-content { grid-template-columns: 1fr; gap: 2rem; }
   .hero { justify-content: center; padding-bottom: 3rem; }
-  .hero-dashboard {
+  .hero-notif-wrap {
     order: -1;
-    margin-top: var(--nav-h); /* clear the fixed nav */
+    margin-top: var(--nav-h);
     width: 100%;
-    padding: 1rem;
-    gap: 0.7rem;
   }
-  .db-stat-val { font-size: 1.15rem; }
-  .db-stats { grid-template-columns: repeat(4,1fr); gap: 5px; }
-  .db-stat { padding: 0.5rem 0.55rem; }
-  .db-notifs { display: none; }
 }
 /* pill button with arrow circle */
 .btn-big {
@@ -984,81 +951,51 @@ footer {
       <p class="hero-scroll">↓ SCROLL TO SEE THE WORK</p>
     </div>
 
-    <!-- DASHBOARD -->
-    <div class="hero-dashboard" id="heroDashboard">
-      <!-- titlebar -->
-      <div class="db-bar">
-        <span class="db-title">Clinic Dashboard — March 2025</span>
-        <div class="db-dot-row">
-          <div class="db-dot" style="background:#ff5f57"></div>
-          <div class="db-dot" style="background:#febc2e"></div>
-          <div class="db-dot" style="background:#28c840"></div>
-        </div>
-      </div>
+    <!-- NOTIFICATION STACK -->
+    <div class="hero-notif-wrap" id="heroNotifWrap">
+      <div class="notif-time-label">2:47 AM</div>
+      <div class="notif-stack">
 
-      <!-- stats -->
-      <div class="db-stats">
-        <div class="db-stat">
-          <div class="db-stat-label">Bookings</div>
-          <div class="db-stat-val cy" data-count="48" data-suffix="">0</div>
-          <div class="db-stat-delta">↑ 12 this week</div>
-        </div>
-        <div class="db-stat">
-          <div class="db-stat-label">Patients</div>
-          <div class="db-stat-val" data-count="134" data-suffix="">0</div>
-          <div class="db-stat-delta">↑ 8 new</div>
-        </div>
-        <div class="db-stat">
-          <div class="db-stat-label">Revenue</div>
-          <div class="db-stat-val" data-count="8.3" data-suffix="K" data-prefix="₪" data-step="0.1" data-float="true">₪0</div>
-          <div class="db-stat-delta">↑ vs last month</div>
-        </div>
-        <div class="db-stat">
-          <div class="db-stat-label">Rating</div>
-          <div class="db-stat-val cy" data-count="4.9" data-suffix="" data-float="true">0</div>
-          <div class="db-stat-delta">★ 38 reviews</div>
-        </div>
-      </div>
-
-      <!-- appointments — full width, compact horizontal rows -->
-      <div class="db-appts">
-        <div class="db-appts-title">Today's appointments</div>
-        <div class="db-appt">
-          <div class="db-appt-dot confirmed"></div>
-          <div class="db-appt-name">Sara K.</div>
-          <div class="db-appt-time">09:00</div>
-          <div class="db-appt-tag confirmed">Confirmed</div>
-        </div>
-        <div class="db-appt">
-          <div class="db-appt-dot confirmed"></div>
-          <div class="db-appt-name">Youssef M.</div>
-          <div class="db-appt-time">11:30</div>
-          <div class="db-appt-tag confirmed">Confirmed</div>
-        </div>
-        <div class="db-appt">
-          <div class="db-appt-dot pending"></div>
-          <div class="db-appt-name">Lior B.</div>
-          <div class="db-appt-time">14:00</div>
-          <div class="db-appt-tag pending">Pending</div>
-        </div>
-        <div class="db-appt">
-          <div class="db-appt-dot pending"></div>
-          <div class="db-appt-name">Nour A.</div>
-          <div class="db-appt-time">16:30</div>
-          <div class="db-appt-tag pending">Pending</div>
-        </div>
-      </div>
-
-      <!-- notifications -->
-      <div class="db-notifs">
-        <div class="db-notif" id="dn0">
-          <div class="db-notif-icon cal">📅</div>
-          <div class="db-notif-body">
-            <div class="db-notif-title">Appointment tomorrow — Sara K. at 10:00</div>
-            <div class="db-notif-sub">REMINDER · AUTO-SENT</div>
+        <div class="hero-notif booking" id="hn1">
+          <div class="hn-icon booking">📅</div>
+          <div class="hn-body">
+            <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+            <div class="hn-title" data-en="New Booking — Sara K." data-ar="حجز جديد — سارة ك.">New Booking — Sara K.</div>
+            <div class="hn-sub" data-en="Tomorrow 09:00 · Confirmed" data-ar="غداً 09:00 · مؤكد">Tomorrow 09:00 · Confirmed</div>
           </div>
-          <div class="db-notif-time">NOW</div>
+          <div class="hn-time" data-en="now" data-ar="الآن">now</div>
         </div>
+
+        <div class="hero-notif payment" id="hn2">
+          <div class="hn-icon payment">💳</div>
+          <div class="hn-body">
+            <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+            <div class="hn-title" data-en="Payment Received — ₪480" data-ar="دفعة واردة — ₪480">Payment Received — ₪480</div>
+            <div class="hn-sub" data-en="Deposit · Youssef M." data-ar="عربون · يوسف م.">Deposit · Youssef M.</div>
+          </div>
+          <div class="hn-time" data-en="2m ago" data-ar="منذ 2د">2m ago</div>
+        </div>
+
+        <div class="hero-notif review" id="hn3">
+          <div class="hn-icon review">⭐</div>
+          <div class="hn-body">
+            <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+            <div class="hn-title" data-en="New 5-Star Review" data-ar="تقييم 5 نجوم جديد">New 5-Star Review</div>
+            <div class="hn-sub" data-en="&quot;Booked online at midnight, easy.&quot;" data-ar="&quot;حجزت أونلاين بمنتصف الليل، سهل جداً.&quot;">"Booked online at midnight, easy."</div>
+          </div>
+          <div class="hn-time" data-en="14m ago" data-ar="منذ 14د">14m ago</div>
+        </div>
+
+        <div class="hero-notif contact" id="hn4">
+          <div class="hn-icon contact">✉️</div>
+          <div class="hn-body">
+            <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+            <div class="hn-title" data-en="New Lead — Nour A." data-ar="عميل محتمل — نور أ.">New Lead — Nour A.</div>
+            <div class="hn-sub" data-en="Asked about pricing · Ready to book" data-ar="سأل عن الأسعار · مستعد للحجز">Asked about pricing · Ready to book</div>
+          </div>
+          <div class="hn-time" data-en="31m ago" data-ar="منذ 31د">31m ago</div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1784,69 +1721,30 @@ function submitSurvey() {
   }).catch(() => {});
 }
 
-// ── DASHBOARD ANIMATIONS ──
+// ── NOTIFICATION STACK ANIMATION ──
 (function() {
-  // Live-counter: starts at a base value, increments by 1 every interval
-  function startLiveCounter(el) {
-    const target = parseFloat(el.dataset.count);
-    const isFloat = el.dataset.float === 'true';
-    const suffix = el.dataset.suffix || '';
-    const prefix = el.dataset.prefix || '';
-    const step = el.dataset.step ? parseFloat(el.dataset.step) : (isFloat ? 0.1 : 1);
-    const stepIsFloat = step % 1 !== 0 || isFloat;
+  const notifs = ['hn1','hn2','hn3','hn4'];
+  const delays = [400, 1100, 2000, 2900];
+  let fired = false;
 
-    // Start close to target (~92%)
-    let current = stepIsFloat
-      ? Math.round(target * 0.92 * 10) / 10
-      : Math.round(target * 0.92);
-
-    function render(v) {
-      el.textContent = prefix + (stepIsFloat ? v.toFixed(1) : v) + suffix;
-    }
-    render(current);
-
-    const interval = 3000 + Math.random() * 4000;
-    setInterval(() => {
-      current = stepIsFloat
-        ? Math.round((current + step) * 10) / 10
-        : current + step;
-      render(current);
-    }, interval);
-  }
-
-  // animate bars
-  function animateBars() {
-    document.querySelectorAll('.db-bar-item').forEach((bar, i) => {
-      const h = bar.dataset.h;
-      setTimeout(() => {
-        bar.querySelector('.db-bar-fill').style.height = h + '%';
-      }, i * 80);
-    });
-  }
-
-  // animate notifications
   function animateNotifs() {
-    ['dn0','dn1','dn2'].forEach((id, i) => {
+    notifs.forEach((id, i) => {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) el.classList.add('show');
-      }, 800 + i * 400);
+      }, delays[i]);
     });
   }
 
-  // trigger when dashboard enters viewport
-  const db = document.getElementById('heroDashboard');
-  if (!db) return;
-  let fired = false;
-  const dbObs = new IntersectionObserver(entries => {
+  const wrap = document.getElementById('heroNotifWrap');
+  if (!wrap) return;
+  const obs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting && !fired) {
       fired = true;
-      document.querySelectorAll('.db-stat-val[data-count]').forEach(startLiveCounter);
-      animateBars();
       animateNotifs();
     }
   }, { threshold: 0.2 });
-  dbObs.observe(db);
+  obs.observe(wrap);
 })();
 
 </script>
