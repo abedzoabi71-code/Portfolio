@@ -116,14 +116,16 @@ body.rtl .hero-tag::before,
 body.rtl .hero-eyebrow::before { display: none; }
 body.rtl .strip-inner { animation-direction: reverse; }
 /* RTL nav lays out correctly via direction:rtl — no flex overrides needed */
+body.rtl .hero-notif-bg { align-items: flex-start; padding-left: 3.5rem; padding-right: 3rem; }
 body.rtl .about-section { direction: rtl; }
 body.rtl .s-btn-back::before { content: none; }
 
 /* ── HERO ── */
 .hero {
   min-height: 100svh; display: flex; flex-direction: column;
-  justify-content: center; padding: 0 2.5rem 4rem;
-  padding-top: calc(var(--nav-h) + 2rem);
+  justify-content: flex-end;
+  padding: 0 2.5rem 4rem;
+  padding-top: var(--nav-h);
   position: relative; overflow: hidden;
 }
 .hero-bg {
@@ -141,28 +143,59 @@ body.rtl .s-btn-back::before { content: none; }
     linear-gradient(90deg, rgba(0,194,212,0.07) 1px, transparent 1px);
   background-size: 52px 52px;
 }
-/* Fade grid out at edges + bottom */
+/* Fade grid at edges, protect bottom text, darken right side less */
 .hero-bg::after {
   content: ''; position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 110% 80% at 50% 50%, transparent 40%, rgba(6,12,15,0.92) 85%),
-    linear-gradient(to top, rgba(6,12,15,1) 0%, transparent 40%),
-    linear-gradient(to bottom, rgba(6,12,15,0.7) 0%, transparent 25%);
+    linear-gradient(to right, rgba(6,12,15,0.85) 0%, rgba(6,12,15,0.2) 45%, transparent 60%),
+    linear-gradient(to top, rgba(6,12,15,1) 0%, transparent 45%),
+    linear-gradient(to bottom, rgba(6,12,15,0.7) 0%, transparent 22%);
 }
-.hero-content {
-  position: relative; z-index: 2; width: 100%;
-  display: grid;
-  grid-template-columns: 1.25fr 1fr;
+
+/* ── NOTIFICATIONS IN BACKGROUND ── */
+.hero-notif-bg {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: flex-end; justify-content: center;
+  padding: calc(var(--nav-h) + 2rem) 3.5rem 12rem 3rem;
+  pointer-events: none;
+}
+.notif-time-label {
+  font-family: var(--fm);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: #2a4a58;
+  text-transform: uppercase;
+  display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.notif-time-label::before,
+.notif-time-label::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: #1a2a30;
+}
+.notif-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: clamp(280px, 32vw, 420px);
+}
+
+/* ── FOREGROUND TEXT ── */
+.hero-content {
+  position: relative; z-index: 4; width: 100%;
 }
 .hero-text {
-  display: flex; flex-direction: column; justify-content: flex-end;
-  position: relative; z-index: 3;
+  display: flex; flex-direction: column;
+  position: relative; z-index: 4;
 }
 .hero-h1 {
-  font-family: var(--fd); font-size: clamp(2.8rem,5.2vw,7rem);
-  line-height: 0.92; letter-spacing: 0.01em; margin-bottom: 1.8rem;
+  font-family: var(--fd); font-size: clamp(3.2rem, 7vw, 9rem);
+  line-height: 0.9; letter-spacing: 0.01em; margin-bottom: 2rem;
 }
 .hero-h1 .stroke { -webkit-text-stroke: 1.5px var(--white); color: transparent; }
 .hero-h1 .fill-white { color: var(--white); }
@@ -173,57 +206,28 @@ body.rtl .s-btn-back::before { content: none; }
   padding-top: 1.4rem;
   border-top: 1px solid rgba(0,194,212,0.1);
 }
-.hero-sub { max-width: 340px; font-size: 0.88rem; line-height: 1.75; color: #5a7a88; text-wrap: balance; }
+.hero-sub {
+  font-size: 0.88rem; line-height: 1.8; color: #5a7a88;
+  font-family: var(--fb); font-weight: 300;
+  max-width: 420px;
+}
 .hero-sub strong { color: #9ab8c4; font-weight: 600; }
-.hero-cta-group { display: flex; flex-direction: row; align-items: center; gap: 1.6rem; }
+.hero-cta-group { display: flex; flex-direction: row; align-items: center; gap: 1.6rem; flex-shrink: 0; margin-left: auto; }
 
-/* ── NOTIFICATION STACK (hero widget) ── */
-.hero-notif-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.notif-time-label {
-  font-family: var(--fm);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  color: #2a4a58;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.notif-time-label::before,
-.notif-time-label::after {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: #1a2a30;
-}
-
-.notif-stack {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
+/* ── NOTIFICATION CARDS ── */
 .hero-notif {
-  background: rgba(13, 28, 34, 0.9);
+  background: rgba(13, 28, 34, 0.75);
   border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
-  padding: 12px 16px;
+  border-radius: 14px;
+  padding: 11px 14px;
   display: flex;
   align-items: center;
   gap: 12px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
   opacity: 0;
-  transform: translateY(-12px) scale(0.97);
+  transform: translateY(-10px) scale(0.97);
   transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
               transform 0.5s cubic-bezier(0.22,1,0.36,1);
   position: relative;
@@ -233,14 +237,25 @@ body.rtl .s-btn-back::before { content: none; }
   transform: translateY(0) scale(1);
 }
 
+/* notif label badge */
+.notif-label-badge {
+  position: absolute;
+  top: -10px; left: 50%; transform: translateX(-50%);
+  font-family: var(--fm); font-size: 0.48rem; letter-spacing: 0.16em;
+  color: var(--accent); background: var(--bg);
+  border: 1px solid rgba(0,194,212,0.25);
+  padding: 2px 10px; border-radius: 100px;
+  white-space: nowrap;
+}
+
 .hn-icon {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 15px;
   flex-shrink: 0;
 }
 .hn-icon.booking  { background: rgba(0,194,212,0.15); }
@@ -252,7 +267,7 @@ body.rtl .s-btn-back::before { content: none; }
 
 .hn-app {
   font-family: var(--fm);
-  font-size: 0.5rem;
+  font-size: 0.48rem;
   letter-spacing: 0.14em;
   color: #2a4a58;
   text-transform: uppercase;
@@ -260,7 +275,7 @@ body.rtl .s-btn-back::before { content: none; }
 }
 .hn-title {
   font-family: var(--fb);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 600;
   color: var(--white);
   white-space: nowrap;
@@ -269,7 +284,7 @@ body.rtl .s-btn-back::before { content: none; }
 }
 .hn-sub {
   font-family: var(--fm);
-  font-size: 0.52rem;
+  font-size: 0.5rem;
   letter-spacing: 0.06em;
   color: #2a4a58;
   margin-top: 2px;
@@ -277,7 +292,7 @@ body.rtl .s-btn-back::before { content: none; }
 
 .hn-time {
   font-family: var(--fm);
-  font-size: 0.5rem;
+  font-size: 0.48rem;
   letter-spacing: 0.1em;
   color: #1a3040;
   flex-shrink: 0;
@@ -289,8 +304,8 @@ body.rtl .s-btn-back::before { content: none; }
 .hero-notif.booking::after {
   content: '';
   position: absolute;
-  top: 12px;
-  right: 14px;
+  top: 11px;
+  right: 12px;
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -303,14 +318,30 @@ body.rtl .s-btn-back::before { content: none; }
   50% { opacity: 0.4; transform: scale(0.8); }
 }
 
-@media(max-width:900px) {
-  .hero-content { grid-template-columns: 1fr; gap: 2rem; }
-  .hero { justify-content: center; padding-bottom: 3rem; }
-  .hero-notif-wrap {
-    order: -1;
-    margin-top: var(--nav-h);
-    width: 100%;
-  }
+/* mobile notif block - hidden on desktop */
+.hero-notif-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 2rem;
+  position: relative; z-index: 4;
+}
+.hero-notif-mobile .notif-stack {
+  width: 100%;
+}
+.hero-notif-mobile .hn-title {
+  white-space: normal;
+  font-size: 0.82rem;
+}
+.hero-notif-mobile .hn-sub {
+  white-space: normal;
+}
+.hero-notif-mobile .notif-time-label {
+  justify-content: center;
+}
+@media(max-width:600px) {
+  .hero-notif-mobile { display: flex; }
+  .hero-notif-bg { display: none !important; }
 }
 /* pill button with arrow circle */
 .btn-big {
@@ -704,9 +735,10 @@ footer {
   /* hero: tighter on mobile */
   .hero { padding: 0 1.5rem 3.5rem; justify-content: flex-end; }
   .hero-h1 { font-size: clamp(2.6rem, 10vw, 4rem); margin-bottom: 1.6rem; }
-  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.6rem; }
-  .hero-cta-group { align-items: flex-start; }
-  .hero-sub { font-size: 0.92rem; max-width: 100%; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+  .hero-cta-group { margin-left: 0; }
+  .hero-sub { font-size: 0.88rem; max-width: 100%; }
+  .hero-notif-bg { display: none; } /* hide bg notifs on mobile */
 
   /* smaller project cards */
   .proj-body { min-height: auto; }
@@ -938,25 +970,63 @@ footer {
 <section class="hero" id="hero">
   <div class="hero-bg" aria-hidden="true"></div>
 
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1 class="hero-h1">
-        <span class="stroke">A WEBSITE THAT</span><br>
-        <span class="fill-white">WORKS WHILE YOU SLEEP.</span>
-      </h1>
-      <div class="hero-bottom">
-        <p class="hero-sub">Most business websites lose the customer before they make contact. <strong>No clear path, no next step.</strong></p>
-        <a href="#cta" class="btn-big"><span class="btn-label">Start here</span><span class="btn-arrow"></span></a>
-      </div>
-      <p class="hero-scroll">↓ SCROLL TO SEE THE WORK</p>
-    </div>
+  <!-- NOTIFICATIONS: background layer (desktop) -->
+  <div class="hero-notif-bg" id="heroNotifWrap" aria-hidden="true">
+    <div class="notif-time-label">2:47 AM</div>
+    <div class="notif-stack">
 
-    <!-- NOTIFICATION STACK -->
-    <div class="hero-notif-wrap" id="heroNotifWrap">
+      <div class="hero-notif booking" id="hn1">
+        <span class="notif-label-badge" data-en="LIVE EXAMPLE" data-ar="مثال حقيقي">LIVE EXAMPLE</span>
+        <div class="hn-icon booking">📅</div>
+        <div class="hn-body">
+          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+          <div class="hn-title" data-en="New Booking — Sara K." data-ar="حجز جديد — سارة ك.">New Booking — Sara K.</div>
+          <div class="hn-sub" data-en="Tomorrow 09:00 · Confirmed" data-ar="غداً 09:00 · مؤكد">Tomorrow 09:00 · Confirmed</div>
+        </div>
+        <div class="hn-time" data-en="now" data-ar="الآن">now</div>
+      </div>
+
+      <div class="hero-notif payment" id="hn2">
+        <div class="hn-icon payment">💳</div>
+        <div class="hn-body">
+          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+          <div class="hn-title" data-en="Payment Received — ₪480" data-ar="دفعة واردة — ₪480">Payment Received — ₪480</div>
+          <div class="hn-sub" data-en="Deposit · Youssef M." data-ar="عربون · يوسف م.">Deposit · Youssef M.</div>
+        </div>
+        <div class="hn-time" data-en="2m ago" data-ar="منذ 2د">2m ago</div>
+      </div>
+
+      <div class="hero-notif review" id="hn3">
+        <div class="hn-icon review">⭐</div>
+        <div class="hn-body">
+          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+          <div class="hn-title" data-en="New 5-Star Review" data-ar="تقييم 5 نجوم جديد">New 5-Star Review</div>
+          <div class="hn-sub" data-en="&quot;Booked online at midnight, easy.&quot;" data-ar="&quot;حجزت أونلاين بمنتصف الليل، سهل جداً.&quot;">"Booked online at midnight, easy."</div>
+        </div>
+        <div class="hn-time" data-en="14m ago" data-ar="منذ 14د">14m ago</div>
+      </div>
+
+      <div class="hero-notif contact" id="hn4">
+        <div class="hn-icon contact">✉️</div>
+        <div class="hn-body">
+          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+          <div class="hn-title" data-en="New Lead — Nour A." data-ar="عميل محتمل — نور أ.">New Lead — Nour A.</div>
+          <div class="hn-sub" data-en="Asked about pricing · Ready to book" data-ar="سأل عن الأسعار · مستعد للحجز">Asked about pricing · Ready to book</div>
+        </div>
+        <div class="hn-time" data-en="31m ago" data-ar="منذ 31د">31m ago</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOREGROUND: full-width text anchored to bottom -->
+  <div class="hero-content">
+    <!-- NOTIFICATIONS: mobile only (inline flow) -->
+    <div class="hero-notif-mobile" aria-hidden="true">
       <div class="notif-time-label">2:47 AM</div>
       <div class="notif-stack">
-
-        <div class="hero-notif booking" id="hn1">
+        <div class="hero-notif booking" id="hn1m">
+          <span class="notif-label-badge" data-en="LIVE EXAMPLE" data-ar="مثال حقيقي">LIVE EXAMPLE</span>
           <div class="hn-icon booking">📅</div>
           <div class="hn-body">
             <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
@@ -965,8 +1035,7 @@ footer {
           </div>
           <div class="hn-time" data-en="now" data-ar="الآن">now</div>
         </div>
-
-        <div class="hero-notif payment" id="hn2">
+        <div class="hero-notif payment" id="hn2m">
           <div class="hn-icon payment">💳</div>
           <div class="hn-body">
             <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
@@ -975,8 +1044,7 @@ footer {
           </div>
           <div class="hn-time" data-en="2m ago" data-ar="منذ 2د">2m ago</div>
         </div>
-
-        <div class="hero-notif review" id="hn3">
+        <div class="hero-notif review" id="hn3m">
           <div class="hn-icon review">⭐</div>
           <div class="hn-body">
             <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
@@ -985,8 +1053,7 @@ footer {
           </div>
           <div class="hn-time" data-en="14m ago" data-ar="منذ 14د">14m ago</div>
         </div>
-
-        <div class="hero-notif contact" id="hn4">
+        <div class="hero-notif contact" id="hn4m">
           <div class="hn-icon contact">✉️</div>
           <div class="hn-body">
             <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
@@ -995,8 +1062,20 @@ footer {
           </div>
           <div class="hn-time" data-en="31m ago" data-ar="منذ 31د">31m ago</div>
         </div>
-
       </div>
+    </div>
+    <div class="hero-text">
+      <h1 class="hero-h1">
+        <span class="stroke">A WEBSITE THAT</span><br>
+        <span class="fill-white">WORKS WHILE YOU SLEEP.</span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-sub">Most business websites lose the customer<br><strong>before they even make contact.</strong></p>
+        <div class="hero-cta-group">
+          <a href="#cta" class="btn-big"><span class="btn-label">Start here</span><span class="btn-arrow"></span></a>
+        </div>
+      </div>
+      <p class="hero-scroll">↓ SCROLL TO SEE THE WORK</p>
     </div>
   </div>
 </section>
@@ -1393,7 +1472,7 @@ const translations = {
   en: {
     'hero-tag': 'Web Design · Based in Israel · Built to convert',
     'hero-h1-1': 'A WEBSITE THAT', 'hero-h1-2': 'WORKS WHILE YOU SLEEP.', 'hero-h1-3': '', 'hero-h1-4': '',
-    'hero-sub': 'Most business websites lose the customer before they make contact. <strong>No clear path, no next step.</strong>',
+    'hero-sub': 'Most business websites lose the customer<br><strong>before they even make contact.</strong>',
     'hero-scroll': '↓ SCROLL TO SEE THE WORK',
     'hero-cta': 'Start here',
     'pain-label': '01 / THE PROBLEM',
@@ -1439,7 +1518,7 @@ const translations = {
   ar: {
     'hero-tag': 'تصميم ويب · من إسرائيل · مصمَّم للتحويل',
     'hero-h1-1': 'موقع يعمل', 'hero-h1-2': 'وأنت نائم.', 'hero-h1-3': '', 'hero-h1-4': '',
-    'hero-sub': 'معظم مواقع الأعمال تخسر العميل قبل أن يتواصل. <strong>لا مسار واضح، لا خطوة تالية.</strong>',
+    'hero-sub': 'معظم مواقع الأعمال تخسر العميل<br><strong>قبل أن يتواصل أصلاً.</strong>',
     'hero-scroll': '↓ مرر لترى الأعمال',
     'hero-cta': 'ابدأ هنا',
     'pain-label': '٠١ / المشكلة',
@@ -1723,12 +1802,13 @@ function submitSurvey() {
 
 // ── NOTIFICATION STACK ANIMATION ──
 (function() {
-  const notifs = ['hn1','hn2','hn3','hn4'];
-  const delays = [400, 1100, 2000, 2900];
+  const ids     = ['hn1','hn2','hn3','hn4'];
+  const mobileIds = ['hn1m','hn2m','hn3m','hn4m'];
+  const delays  = [400, 1100, 2000, 2900];
   let fired = false;
 
-  function animateNotifs() {
-    notifs.forEach((id, i) => {
+  function animateSet(set) {
+    set.forEach((id, i) => {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) el.classList.add('show');
@@ -1736,15 +1816,27 @@ function submitSurvey() {
     });
   }
 
+  // desktop: trigger when bg wrap enters view
   const wrap = document.getElementById('heroNotifWrap');
-  if (!wrap) return;
-  const obs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting && !fired) {
+  if (wrap) {
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !fired) {
+        fired = true;
+        animateSet(ids);
+        animateSet(mobileIds);
+      }
+    }, { threshold: 0.1 });
+    obs.observe(wrap);
+  }
+
+  // mobile fallback: if bg is hidden, trigger on mobile block
+  setTimeout(() => {
+    if (!fired) {
       fired = true;
-      animateNotifs();
+      animateSet(ids);
+      animateSet(mobileIds);
     }
-  }, { threshold: 0.2 });
-  obs.observe(wrap);
+  }, 300);
 })();
 
 </script>
