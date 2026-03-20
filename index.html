@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -9,108 +10,109 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root {
-  --bg: #0a0d0f;
-  --white: #eef2f4;
-  --accent: #00c2d4;
-  --accent2: #33d4e3;
-  --gray: #141a1d;
-  --gray2: #1e262a;
-  --mid: #4a5a60;
-  --fd: 'Bebas Neue', sans-serif;
-  --fb: 'Syne', sans-serif;
-  --fm: 'Syne Mono', monospace;
-  --nav-h: 58px;
-  --peek: 56px; /* how much of each card shows beneath the next */
+–bg: #0a0d0f;
+–white: #eef2f4;
+–accent: #00c2d4;
+–accent2: #33d4e3;
+–gray: #141a1d;
+–gray2: #1e262a;
+–mid: #4a5a60;
+–fd: ‘Bebas Neue’, sans-serif;
+–fb: ‘Syne’, sans-serif;
+–fm: ‘Syne Mono’, monospace;
+–nav-h: 58px;
+–peek: 56px; /* how much of each card shows beneath the next */
 }
 
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--white); font-family: var(--fb); overflow-x: hidden; cursor: none; }
+body { background: var(–bg); color: var(–white); font-family: var(–fb); overflow-x: hidden; cursor: none; }
 @media (hover: none) {
-  body { cursor: auto; }
-  #cur { display: none !important; }
-  * { cursor: auto !important; }
-}
+body { cursor: auto; }
+#cur { display: none !important; }
+
+- { cursor: auto !important; }
+  }
 
 /* PROGRESS BAR */
 #progress {
-  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
-  background: var(--accent); z-index: 9998; pointer-events: none;
+position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+background: var(–accent); z-index: 9998; pointer-events: none;
 }
 
 /* CURSOR */
 #cur {
-  width: 10px; height: 10px; background: var(--accent); border-radius: 50%;
-  position: fixed; pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%); mix-blend-mode: difference;
-  transition: width 0.25s, height 0.25s;
+width: 10px; height: 10px; background: var(–accent); border-radius: 50%;
+position: fixed; pointer-events: none; z-index: 9999;
+transform: translate(-50%,-50%); mix-blend-mode: difference;
+transition: width 0.25s, height 0.25s;
 }
 body:has(a:hover,button:hover) #cur { width: 44px; height: 44px; }
 
 /* ── NAV ── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-  padding: 0 2.5rem; height: var(--nav-h);
-  display: flex; justify-content: space-between; align-items: center;
+position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+padding: 0 2.5rem; height: var(–nav-h);
+display: flex; justify-content: space-between; align-items: center;
 }
 nav::before {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(10,13,15,0.93); backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+content: ‘’; position: absolute; inset: 0;
+background: rgba(10,13,15,0.93); backdrop-filter: blur(12px);
+border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 .nav-mark {
-  font-family: var(--fd); font-size: 1.4rem; letter-spacing: 0.1em;
-  color: var(--white); text-decoration: none; position: relative;
+font-family: var(–fd); font-size: 1.4rem; letter-spacing: 0.1em;
+color: var(–white); text-decoration: none; position: relative;
 }
 .nav-links { display: flex; align-items: center; gap: 2rem; position: relative; }
 .nav-links a {
-  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--mid); text-decoration: none; transition: color 0.2s;
+font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+color: var(–mid); text-decoration: none; transition: color 0.2s;
 }
-.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover { color: var(–accent); }
 .nav-cta {
-  background: var(--accent) !important; color: var(--bg) !important;
-  padding: 0.5rem 1.2rem; font-weight: 700 !important;
-  transition: background 0.2s !important;
-  display: inline-flex; align-items: center; gap: 0.4rem;
+background: var(–accent) !important; color: var(–bg) !important;
+padding: 0.5rem 1.2rem; font-weight: 700 !important;
+transition: background 0.2s !important;
+display: inline-flex; align-items: center; gap: 0.4rem;
 }
 .nav-cta::after {
-  content: '';
-  display: inline-block;
-  width: 0.4rem; height: 0.4rem;
-  border-top: 2px solid var(--bg);
-  border-right: 2px solid var(--bg);
-  transform: rotate(45deg) translate(-1px, 1px);
+content: ‘’;
+display: inline-block;
+width: 0.4rem; height: 0.4rem;
+border-top: 2px solid var(–bg);
+border-right: 2px solid var(–bg);
+transform: rotate(45deg) translate(-1px, 1px);
 }
-.nav-cta:hover { background: var(--accent2) !important; }
+.nav-cta:hover { background: var(–accent2) !important; }
 
 /* ── LANGUAGE SWITCH ── */
 .lang-switch {
-  display: flex; align-items: center; gap: 0;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 2px; overflow: hidden; position: relative;
-  font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.15em;
+display: flex; align-items: center; gap: 0;
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 2px; overflow: hidden; position: relative;
+font-family: var(–fm); font-size: 0.58rem; letter-spacing: 0.15em;
 }
 .lang-btn {
-  background: none; border: none; cursor: none;
-  padding: 0.35rem 0.7rem; color: var(--mid);
-  transition: background 0.2s, color 0.2s;
-  text-transform: uppercase;
+background: none; border: none; cursor: none;
+padding: 0.35rem 0.7rem; color: var(–mid);
+transition: background 0.2s, color 0.2s;
+text-transform: uppercase;
 }
-.lang-btn.active { background: var(--accent); color: var(--bg); font-weight: 700; }
-.lang-btn:hover:not(.active) { color: var(--white); }
+.lang-btn.active { background: var(–accent); color: var(–bg); font-weight: 700; }
+.lang-btn:hover:not(.active) { color: var(–white); }
 
 /* ── RTL (Arabic) ── */
 body.rtl {
-  direction: rtl;
-  font-family: 'Noto Sans Arabic', 'Segoe UI', sans-serif;
+direction: rtl;
+font-family: ‘Noto Sans Arabic’, ‘Segoe UI’, sans-serif;
 }
 body.rtl .hero-h1,
 body.rtl .section-title,
 body.rtl .survey-h,
 body.rtl .about-text h2 {
-  font-family: 'Noto Sans Arabic', sans-serif;
-  letter-spacing: 0;
-  line-height: 1.2;
+font-family: ‘Noto Sans Arabic’, sans-serif;
+letter-spacing: 0;
+line-height: 1.2;
 }
 body.rtl .hero-tag::before,
 body.rtl .hero-eyebrow::before { display: none; }
@@ -122,141 +124,141 @@ body.rtl .s-btn-back::before { content: none; }
 
 /* ── HERO ── */
 .hero {
-  min-height: 100svh; display: flex; flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 2.5rem 4rem;
-  padding-top: var(--nav-h);
-  position: relative; overflow: hidden;
+min-height: 100svh; display: flex; flex-direction: column;
+justify-content: flex-end;
+padding: 0 2.5rem 4rem;
+padding-top: var(–nav-h);
+position: relative; overflow: hidden;
 }
 .hero-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 65% at 72% 42%, rgba(0,194,212,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 35% 40% at 18% 72%, rgba(0,80,90,0.05) 0%, transparent 55%),
-    #060c0f;
+position: absolute; inset: 0; z-index: 0;
+background:
+radial-gradient(ellipse 55% 65% at 72% 42%, rgba(0,194,212,0.07) 0%, transparent 60%),
+radial-gradient(ellipse 35% 40% at 18% 72%, rgba(0,80,90,0.05) 0%, transparent 55%),
+#060c0f;
 }
 /* Full cyan grid */
 .hero-bg::before {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(0,194,212,0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,194,212,0.07) 1px, transparent 1px);
-  background-size: 52px 52px;
+content: ‘’; position: absolute; inset: 0;
+background-image:
+linear-gradient(rgba(0,194,212,0.07) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,194,212,0.07) 1px, transparent 1px);
+background-size: 52px 52px;
 }
 /* Fade grid at edges, protect bottom text, darken right side less */
 .hero-bg::after {
-  content: ''; position: absolute; inset: 0;
-  background:
-    linear-gradient(to right, rgba(6,12,15,0.85) 0%, rgba(6,12,15,0.2) 45%, transparent 60%),
-    linear-gradient(to top, rgba(6,12,15,1) 0%, transparent 45%),
-    linear-gradient(to bottom, rgba(6,12,15,0.7) 0%, transparent 22%);
+content: ‘’; position: absolute; inset: 0;
+background:
+linear-gradient(to right, rgba(6,12,15,0.85) 0%, rgba(6,12,15,0.2) 45%, transparent 60%),
+linear-gradient(to top, rgba(6,12,15,1) 0%, transparent 45%),
+linear-gradient(to bottom, rgba(6,12,15,0.7) 0%, transparent 22%);
 }
 
 /* ── NOTIFICATIONS IN BACKGROUND ── */
 .hero-notif-bg {
-  position: absolute; inset: 0; z-index: 1;
-  display: flex; flex-direction: column;
-  align-items: flex-end; justify-content: center;
-  padding: calc(var(--nav-h) + 2rem) 3.5rem 12rem 3rem;
-  pointer-events: none;
+position: absolute; inset: 0; z-index: 1;
+display: flex; flex-direction: column;
+align-items: flex-end; justify-content: center;
+padding: calc(var(–nav-h) + 2rem) 3.5rem 12rem 3rem;
+pointer-events: none;
 }
 .notif-time-label {
-  font-family: var(--fm);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  color: #2a4a58;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
+font-family: var(–fm);
+font-size: 0.6rem;
+letter-spacing: 0.2em;
+color: #2a4a58;
+text-transform: uppercase;
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 14px;
 }
 .notif-time-label::before,
 .notif-time-label::after {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: #1a2a30;
+content: ‘’;
+width: 28px;
+height: 1px;
+background: #1a2a30;
 }
 .notif-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: clamp(280px, 32vw, 420px);
+display: flex;
+flex-direction: column;
+gap: 8px;
+width: clamp(280px, 32vw, 420px);
 }
 
 /* ── FOREGROUND TEXT ── */
 .hero-content {
-  position: relative; z-index: 4; width: 100%;
+position: relative; z-index: 4; width: 100%;
 }
 .hero-text {
-  display: flex; flex-direction: column;
-  position: relative; z-index: 4;
+display: flex; flex-direction: column;
+position: relative; z-index: 4;
 }
 .hero-h1 {
-  font-family: var(--fd); font-size: clamp(3.2rem, 7vw, 9rem);
-  line-height: 0.9; letter-spacing: 0.01em; margin-bottom: 2rem;
+font-family: var(–fd); font-size: clamp(3.2rem, 7vw, 9rem);
+line-height: 0.9; letter-spacing: 0.01em; margin-bottom: 1.2rem;
 }
-.hero-h1 .stroke { -webkit-text-stroke: 1.5px var(--white); color: transparent; }
-.hero-h1 .fill-white { color: var(--white); }
+.hero-h1 .stroke { -webkit-text-stroke: 1.5px var(–white); color: transparent; }
+.hero-h1 .fill-white { color: var(–white); }
 .hero-bottom {
-  display: flex; flex-direction: row;
-  align-items: center; justify-content: space-between;
-  gap: 2rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid rgba(0,194,212,0.1);
+display: flex; flex-direction: row;
+align-items: center; justify-content: space-between;
+gap: 2rem;
+padding-top: 1rem;
+border-top: 1px solid rgba(0,194,212,0.1);
 }
 .hero-sub {
-  font-size: 0.88rem; line-height: 1.8; color: #5a7a88;
-  font-family: var(--fb); font-weight: 300;
-  max-width: 420px;
+font-size: 0.88rem; line-height: 1.8; color: #5a7a88;
+font-family: var(–fb); font-weight: 300;
+max-width: 420px;
 }
 .hero-sub strong { color: #9ab8c4; font-weight: 600; }
 .hero-cta-group { display: flex; flex-direction: row; align-items: center; gap: 1.6rem; flex-shrink: 0; margin-left: auto; }
 
 /* ── NOTIFICATION CARDS ── */
 .hero-notif {
-  background: rgba(13, 28, 34, 0.75);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 14px;
-  padding: 11px 14px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
-  opacity: 0;
-  transform: translateY(-10px) scale(0.97);
-  transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
-              transform 0.5s cubic-bezier(0.22,1,0.36,1);
-  position: relative;
+background: rgba(13, 28, 34, 0.75);
+border: 1px solid rgba(255,255,255,0.06);
+border-radius: 14px;
+padding: 11px 14px;
+display: flex;
+align-items: center;
+gap: 12px;
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+opacity: 0;
+transform: translateY(-10px) scale(0.97);
+transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+transform 0.5s cubic-bezier(0.22,1,0.36,1);
+position: relative;
 }
 .hero-notif.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+opacity: 1;
+transform: translateY(0) scale(1);
 }
 
 /* notif label badge */
 .notif-label-badge {
-  position: absolute;
-  top: -10px; left: 50%; transform: translateX(-50%);
-  font-family: var(--fm); font-size: 0.48rem; letter-spacing: 0.16em;
-  color: var(--accent); background: var(--bg);
-  border: 1px solid rgba(0,194,212,0.25);
-  padding: 2px 10px; border-radius: 100px;
-  white-space: nowrap;
+position: absolute;
+top: -10px; left: 50%; transform: translateX(-50%);
+font-family: var(–fm); font-size: 0.48rem; letter-spacing: 0.16em;
+color: var(–accent); background: var(–bg);
+border: 1px solid rgba(0,194,212,0.25);
+padding: 2px 10px; border-radius: 100px;
+white-space: nowrap;
 }
 
 .hn-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  flex-shrink: 0;
+width: 36px;
+height: 36px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 15px;
+flex-shrink: 0;
 }
 .hn-icon.booking  { background: rgba(0,194,212,0.15); }
 .hn-icon.payment  { background: rgba(99,220,120,0.15); }
@@ -266,323 +268,323 @@ body.rtl .s-btn-back::before { content: none; }
 .hn-body { flex: 1; min-width: 0; }
 
 .hn-app {
-  font-family: var(--fm);
-  font-size: 0.48rem;
-  letter-spacing: 0.14em;
-  color: #2a4a58;
-  text-transform: uppercase;
-  margin-bottom: 2px;
+font-family: var(–fm);
+font-size: 0.48rem;
+letter-spacing: 0.14em;
+color: #2a4a58;
+text-transform: uppercase;
+margin-bottom: 2px;
 }
 .hn-title {
-  font-family: var(--fb);
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--white);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+font-family: var(–fb);
+font-size: 0.76rem;
+font-weight: 600;
+color: var(–white);
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 .hn-sub {
-  font-family: var(--fm);
-  font-size: 0.5rem;
-  letter-spacing: 0.06em;
-  color: #2a4a58;
-  margin-top: 2px;
+font-family: var(–fm);
+font-size: 0.5rem;
+letter-spacing: 0.06em;
+color: #2a4a58;
+margin-top: 2px;
 }
 
 .hn-time {
-  font-family: var(--fm);
-  font-size: 0.48rem;
-  letter-spacing: 0.1em;
-  color: #1a3040;
-  flex-shrink: 0;
-  align-self: flex-start;
-  padding-top: 2px;
+font-family: var(–fm);
+font-size: 0.48rem;
+letter-spacing: 0.1em;
+color: #1a3040;
+flex-shrink: 0;
+align-self: flex-start;
+padding-top: 2px;
 }
 
 /* live pulse dot on first notif */
 .hero-notif.booking::after {
-  content: '';
-  position: absolute;
-  top: 11px;
-  right: 12px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent);
-  animation: notifPulse 2s ease-in-out infinite;
+content: ‘’;
+position: absolute;
+top: 11px;
+right: 12px;
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: var(–accent);
+box-shadow: 0 0 8px var(–accent);
+animation: notifPulse 2s ease-in-out infinite;
 }
 @keyframes notifPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 /* mobile notif block - hidden on desktop */
 .hero-notif-mobile {
-  display: none;
-  flex-direction: column;
-  gap: 0;
-  margin-bottom: 2rem;
-  position: relative; z-index: 4;
+display: none;
+flex-direction: column;
+gap: 0;
+padding-top: calc(var(–nav-h) + 1.2rem);
+margin-bottom: 1.6rem;
+position: relative; z-index: 4;
 }
 .hero-notif-mobile .notif-stack {
-  width: 100%;
+width: 100%;
 }
 .hero-notif-mobile .hn-title {
-  white-space: normal;
-  font-size: 0.82rem;
+white-space: normal;
+font-size: 0.82rem;
 }
 .hero-notif-mobile .hn-sub {
-  white-space: normal;
+white-space: normal;
 }
 .hero-notif-mobile .notif-time-label {
-  justify-content: center;
+justify-content: center;
 }
 @media(max-width:600px) {
-  .hero-notif-mobile { display: flex; }
-  .hero-notif-bg { display: none !important; }
+.hero-notif-mobile { display: flex; }
+.hero-notif-bg { display: none !important; }
 }
 /* pill button with arrow circle */
 .btn-big {
-  display: inline-flex; align-items: center; gap: 0;
-  background: #1a2226; color: var(--white);
-  font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.08em;
-  padding: 0.45rem 0.45rem 0.45rem 1.6rem;
-  border-radius: 999px; text-decoration: none; line-height: 1;
-  overflow: hidden; position: relative;
-  transition: color 0.35s;
+display: inline-flex; align-items: center; gap: 0;
+background: #1a2226; color: var(–white);
+font-family: var(–fd); font-size: 1.1rem; letter-spacing: 0.08em;
+padding: 0.45rem 0.45rem 0.45rem 1.6rem;
+border-radius: 999px; text-decoration: none; line-height: 1;
+overflow: hidden; position: relative;
+transition: color 0.35s;
 }
 body.rtl .btn-big {
-  padding: 0.45rem 1.6rem 0.45rem 0.45rem;
+padding: 0.45rem 1.6rem 0.45rem 0.45rem;
 }
 .btn-big::before {
-  content: ''; position: absolute;
-  right: 0.45rem; top: 50%; transform: translate(0, -50%);
-  width: 2.4rem; height: 2.4rem; border-radius: 50%;
-  background: var(--white);
-  transition: width 0.4s cubic-bezier(0.4,0,0.2,1),
-              height 0.4s cubic-bezier(0.4,0,0.2,1),
-              right 0.4s cubic-bezier(0.4,0,0.2,1),
-              left 0.4s cubic-bezier(0.4,0,0.2,1),
-              border-radius 0.4s cubic-bezier(0.4,0,0.2,1);
-  z-index: 0;
+content: ‘’; position: absolute;
+right: 0.45rem; top: 50%; transform: translate(0, -50%);
+width: 2.4rem; height: 2.4rem; border-radius: 50%;
+background: var(–white);
+transition: width 0.4s cubic-bezier(0.4,0,0.2,1),
+height 0.4s cubic-bezier(0.4,0,0.2,1),
+right 0.4s cubic-bezier(0.4,0,0.2,1),
+left 0.4s cubic-bezier(0.4,0,0.2,1),
+border-radius 0.4s cubic-bezier(0.4,0,0.2,1);
+z-index: 0;
 }
 body.rtl .btn-big::before {
-  right: auto; left: 0.45rem;
+right: auto; left: 0.45rem;
 }
 .btn-big:hover::before {
-  width: 200%; height: 600%;
-  right: -50%; border-radius: 0;
+width: 200%; height: 600%;
+right: -50%; border-radius: 0;
 }
 body.rtl .btn-big:hover::before {
-  right: auto; left: -50%;
+right: auto; left: -50%;
 }
 .btn-big .btn-label { position: relative; z-index: 1; }
 .btn-big .btn-arrow {
-  width: 2.4rem; height: 2.4rem; border-radius: 50%;
-  background: var(--white); color: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  margin-left: 1.2rem; flex-shrink: 0;
-  position: relative; z-index: 1;
-  transition: background 0.35s, color 0.35s;
+width: 2.4rem; height: 2.4rem; border-radius: 50%;
+background: var(–white); color: var(–bg);
+display: flex; align-items: center; justify-content: center;
+margin-left: 1.2rem; flex-shrink: 0;
+position: relative; z-index: 1;
+transition: background 0.35s, color 0.35s;
 }
 .btn-big .btn-arrow::before {
-  content: '';
-  display: block;
-  width: 0.5rem; height: 0.5rem;
-  border-top: 2px solid var(--bg);
-  border-right: 2px solid var(--bg);
-  transform: rotate(45deg) translate(-1px, 1px);
-  transition: border-color 0.35s;
+content: ‘’;
+display: block;
+width: 0.5rem; height: 0.5rem;
+border-top: 2px solid var(–bg);
+border-right: 2px solid var(–bg);
+transform: rotate(45deg) translate(-1px, 1px);
+transition: border-color 0.35s;
 }
 .btn-big:hover .btn-arrow::before {
-  border-color: var(--accent);
+border-color: var(–accent);
 }
 body.rtl .btn-big .btn-arrow {
-  margin-left: 0; margin-right: 1.2rem;
+margin-left: 0; margin-right: 1.2rem;
 }
-.btn-big:hover { color: var(--bg); }
+.btn-big:hover { color: var(–bg); }
 .btn-big:hover .btn-arrow { background: transparent; }
-.hero-scroll { font-family: var(--fm); font-size: 0.62rem; letter-spacing: 0.2em; color: #2a3a40; margin-top: 1rem; }
-
+.hero-scroll { font-family: var(–fm); font-size: 0.62rem; letter-spacing: 0.2em; color: #2a3a40; margin-top: 1rem; }
 
 /* ── STRIP ── */
-.strip { background: var(--accent); padding: 0.85rem 0; overflow: hidden; white-space: nowrap; }
+.strip { background: var(–accent); padding: 0.85rem 0; overflow: hidden; white-space: nowrap; }
 .strip-inner { display: inline-flex; animation: marquee 22s linear infinite; }
-.strip-item { font-family: var(--fd); font-size: 1.05rem; letter-spacing: 0.12em; color: var(--bg); padding: 0 2.5rem; }
+.strip-item { font-family: var(–fd); font-size: 1.05rem; letter-spacing: 0.12em; color: var(–bg); padding: 0 2.5rem; }
 .strip-dot { color: rgba(10,13,15,0.35); }
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-.section-num { font-family: var(--fm); font-size: 0.62rem; color: var(--accent); letter-spacing: 0.22em; margin-bottom: 0.8rem; display: block; }
-.section-title { font-family: var(--fd); font-size: clamp(3rem,6vw,6rem); line-height: 0.92; letter-spacing: 0.02em; }
+.section-num { font-family: var(–fm); font-size: 0.62rem; color: var(–accent); letter-spacing: 0.22em; margin-bottom: 0.8rem; display: block; }
+.section-title { font-family: var(–fd); font-size: clamp(3rem,6vw,6rem); line-height: 0.92; letter-spacing: 0.02em; }
 
 /* ══════════════════════════════════════════
-   STACKING CARDS — one column, full width
-   Each card is sticky. Card N stacks on top
-   of card N-1, leaving --peek px visible.
-   top = nav-h + (N * peek)
+STACKING CARDS — one column, full width
+Each card is sticky. Card N stacks on top
+of card N-1, leaving –peek px visible.
+top = nav-h + (N * peek)
 ══════════════════════════════════════════ */
 .projects-section { padding: 8rem 2.5rem 0; }
 .projects-header {
-  display: flex; justify-content: space-between; align-items: flex-end;
-  margin-bottom: 5rem;
+display: flex; justify-content: space-between; align-items: flex-end;
+margin-bottom: 5rem;
 }
-.projects-sub { max-width: 280px; font-size: 0.82rem; color: var(--mid); line-height: 1.7; text-align: right; }
+.projects-sub { max-width: 280px; font-size: 0.82rem; color: var(–mid); line-height: 1.7; text-align: right; }
 
 /* wrapper just needs to be tall enough so last card scrolls into final position */
 .card-stack { position: relative; }
 
 .proj-card {
-  position: sticky;
-  /* top is set per-card via inline style in HTML */
-  width: 100%;
-  background: var(--gray);
-  border: 1px solid var(--gray2);
-  overflow: hidden;
-  /* push each card above the previous with z-index */
+position: sticky;
+/* top is set per-card via inline style in HTML */
+width: 100%;
+background: var(–gray);
+border: 1px solid var(–gray2);
+overflow: hidden;
+/* push each card above the previous with z-index */
 }
 
 /* ── Card internals ── */
 .proj-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1.8rem 2.2rem 0;
+display: flex; justify-content: space-between; align-items: center;
+padding: 1.8rem 2.2rem 0;
 }
-.proj-num { font-family: var(--fm); font-size: 0.62rem; color: var(--accent); letter-spacing: 0.2em; }
+.proj-num { font-family: var(–fm); font-size: 0.62rem; color: var(–accent); letter-spacing: 0.2em; }
 .proj-industry {
-  font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.12em;
-  color: var(--mid); border: 1px solid var(--gray2); padding: 0.25rem 0.7rem;
+font-family: var(–fm); font-size: 0.6rem; letter-spacing: 0.12em;
+color: var(–mid); border: 1px solid var(–gray2); padding: 0.25rem 0.7rem;
 }
 
 .proj-body {
-  display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 0;
-  align-items: stretch;
+display: grid;
+grid-template-columns: 1fr 1.6fr;
+gap: 0;
+align-items: stretch;
 }
 
 .proj-info {
-  padding: 2rem 2.2rem 2.2rem;
-  display: flex; flex-direction: column;
-  border-right: 1px solid var(--gray2);
-  gap: 1rem;
+padding: 2rem 2.2rem 2.2rem;
+display: flex; flex-direction: column;
+border-right: 1px solid var(–gray2);
+gap: 1rem;
 }
 .proj-name {
-  font-family: var(--fd); font-size: clamp(2rem,3.8vw,4.2rem);
-  letter-spacing: 0.02em; line-height: 0.9; margin-top: 0.5rem;
-  white-space: nowrap;
+font-family: var(–fd); font-size: clamp(2rem,3.8vw,4.2rem);
+letter-spacing: 0.02em; line-height: 0.9; margin-top: 0.5rem;
+white-space: nowrap;
 }
-.proj-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
+.proj-desc { font-size: 0.82rem; color: var(–mid); line-height: 1.7; font-weight: 300; }
 .proj-result {
-  font-family: var(--fm); font-size: 0.62rem; letter-spacing: 0.12em;
-  color: var(--accent); padding-top: 1.2rem; border-top: 1px solid var(--gray2);
+font-family: var(–fm); font-size: 0.62rem; letter-spacing: 0.12em;
+color: var(–accent); padding-top: 1.2rem; border-top: 1px solid var(–gray2);
 }
 
 .proj-mockup {
-  background: #070d10; overflow: hidden;
+background: #070d10; overflow: hidden;
 }
 .pm { width: 100%; height: 100%; position: absolute; inset: 0; }
 
 /* ── Mockup 2: Fitness ── */
 .pm-2 { background: #060809; display: flex; flex-direction: column; }
 .pm2-nav { height: 34px; flex-shrink: 0; display: flex; align-items: center; padding: 0 14px; justify-content: space-between; border-bottom: 1px solid #1a2226; }
-.pm2-logo { font-family: var(--fd); font-size: 13px; color: var(--accent); letter-spacing: 2px; }
-.pm2-pill { width: 44px; height: 14px; background: var(--accent); border-radius: 7px; }
+.pm2-logo { font-family: var(–fd); font-size: 13px; color: var(–accent); letter-spacing: 2px; }
+.pm2-pill { width: 44px; height: 14px; background: var(–accent); border-radius: 7px; }
 .pm2-body { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 8px; justify-content: center; }
 .pm2-big { height: 28px; background: white; width: 100%; border-radius: 2px; }
-.pm2-big2 { height: 20px; background: var(--accent); width: 70%; border-radius: 2px; }
+.pm2-big2 { height: 20px; background: var(–accent); width: 70%; border-radius: 2px; }
 .pm2-stats { display: flex; gap: 4px; margin-top: 6px; }
 .pm2-stat { flex: 1; background: #111618; padding: 8px; }
-.pm2-sn { height: 11px; background: var(--accent); width: 55%; border-radius: 1px; margin-bottom: 4px; }
+.pm2-sn { height: 11px; background: var(–accent); width: 55%; border-radius: 1px; margin-bottom: 4px; }
 .pm2-sl { height: 4px; background: #1e2a2e; width: 70%; border-radius: 1px; }
 .pm2-img { flex: 1; background: #0a0f11; margin-top: 6px; position: relative; }
-.pm2-img::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 40% 60%, rgba(0,194,212,0.14), transparent 55%); }
+.pm2-img::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(circle at 40% 60%, rgba(0,194,212,0.14), transparent 55%); }
 
 /* ── PAIN GRID ── */
 .pain-section { padding: 8rem 2.5rem; max-width: 1400px; margin: 0 auto; }
 .pain-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 4rem; }
 .pain-card {
-  background: var(--gray); padding: 2.5rem;
-  border-top: 3px solid transparent;
-  transition: border-color 0.3s, background 0.3s;
+background: var(–gray); padding: 2.5rem;
+border-top: 3px solid transparent;
+transition: border-color 0.3s, background 0.3s;
 }
-.pain-card:hover { border-color: var(--accent); background: var(--gray2); }
+.pain-card:hover { border-color: var(–accent); background: var(–gray2); }
 .pain-emoji { font-size: 1.8rem; margin-bottom: 1.5rem; display: block; filter: grayscale(1); transition: filter 0.3s; }
 .pain-card:hover .pain-emoji { filter: grayscale(0); }
-.pain-card h3 { font-family: var(--fd); font-size: 1.6rem; letter-spacing: 0.02em; line-height: 1.1; margin-bottom: 0.8rem; }
-.pain-card p { font-size: 0.8rem; color: var(--mid); line-height: 1.7; }
+.pain-card h3 { font-family: var(–fd); font-size: 1.6rem; letter-spacing: 0.02em; line-height: 1.1; margin-bottom: 0.8rem; }
+.pain-card p { font-size: 0.8rem; color: var(–mid); line-height: 1.7; }
 
 /* ── SERVICES ── */
 .services { padding: 8rem 2.5rem; max-width: 1400px; margin: 0 auto; }
 .services-list { display: flex; flex-direction: column; border-top: 1px solid #1a2226; }
 .service-row {
-  display: grid; grid-template-columns: 70px 1fr auto;
-  align-items: center; gap: 2rem;
-  padding: 2rem 0; border-bottom: 1px solid #1a2226;
-  cursor: none; transition: background 0.2s; position: relative;
+display: grid; grid-template-columns: 70px 1fr auto;
+align-items: center; gap: 2rem;
+padding: 2rem 0; border-bottom: 1px solid #1a2226;
+cursor: none; transition: background 0.2s; position: relative;
 }
 .service-row:hover { background: rgba(0,194,212,0.03); }
-.service-row:hover .srv-num { color: var(--accent); }
-.service-row:hover .srv-arrow { opacity: 1; color: var(--accent); transform: translateX(4px); }
-.srv-num { font-family: var(--fm); font-size: 0.65rem; color: #1e2e34; letter-spacing: 0.15em; transition: color 0.2s; }
-.srv-name { font-family: var(--fd); font-size: clamp(2rem,4vw,3.5rem); letter-spacing: 0.02em; }
-.srv-tag { font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.12em; color: #2e4048; border: 1px solid #1a2226; padding: 0.3rem 0.7rem; }
+.service-row:hover .srv-num { color: var(–accent); }
+.service-row:hover .srv-arrow { opacity: 1; color: var(–accent); transform: translateX(4px); }
+.srv-num { font-family: var(–fm); font-size: 0.65rem; color: #1e2e34; letter-spacing: 0.15em; transition: color 0.2s; }
+.srv-name { font-family: var(–fd); font-size: clamp(2rem,4vw,3.5rem); letter-spacing: 0.02em; }
+.srv-tag { font-family: var(–fm); font-size: 0.6rem; letter-spacing: 0.12em; color: #2e4048; border: 1px solid #1a2226; padding: 0.3rem 0.7rem; }
 .srv-arrow { position: absolute; right: 0; font-size: 1.2rem; opacity: 0; transition: opacity 0.2s, transform 0.2s, color 0.2s; }
 
 /* ── ABOUT ── */
 .about-section {
-  padding: 8rem 2.5rem; max-width: 1400px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+padding: 8rem 2.5rem; max-width: 1400px; margin: 0 auto;
+display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
 }
-.about-visual { position: relative; aspect-ratio: 4/5; background: var(--gray); overflow: hidden; max-width: 420px; }
+.about-visual { position: relative; aspect-ratio: 4/5; background: var(–gray); overflow: hidden; max-width: 420px; }
 .about-img-placeholder {
-  width: 100%; height: 100%;
-  background: linear-gradient(160deg, #141e22, #0d1518);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 1rem;
+width: 100%; height: 100%;
+background: linear-gradient(160deg, #141e22, #0d1518);
+display: flex; align-items: center; justify-content: center;
+flex-direction: column; gap: 1rem;
 }
 .about-avatar { font-size: 3rem; }
-.about-img-label { font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.15em; color: #1e3038; }
-.about-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--accent); }
+.about-img-label { font-family: var(–fm); font-size: 0.6rem; letter-spacing: 0.15em; color: #1e3038; }
+.about-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(–accent); }
 .about-tag-float {
-  position: absolute; top: 1.5rem; right: -1rem;
-  background: var(--accent); color: var(--bg);
-  font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.12em; padding: 0.5rem 1rem;
+position: absolute; top: 1.5rem; right: -1rem;
+background: var(–accent); color: var(–bg);
+font-family: var(–fm); font-size: 0.6rem; letter-spacing: 0.12em; padding: 0.5rem 1rem;
 }
 .about-text { display: flex; flex-direction: column; gap: 1.5rem; }
-.about-text h2 { font-family: var(--fd); font-size: clamp(2.5rem,5vw,5rem); line-height: 0.9; letter-spacing: 0.02em; }
-.about-text h2 em { font-style: normal; color: var(--accent); }
+.about-text h2 { font-family: var(–fd); font-size: clamp(2.5rem,5vw,5rem); line-height: 0.9; letter-spacing: 0.02em; }
+.about-text h2 em { font-style: normal; color: var(–accent); }
 .about-text p { font-size: 0.9rem; color: #4a6070; line-height: 1.8; font-weight: 300; }
-.about-text p strong { color: var(--white); font-weight: 700; }
+.about-text p strong { color: var(–white); font-weight: 700; }
 .about-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
-.chip { font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.12em; border: 1px solid #1a2a30; padding: 0.4rem 0.9rem; color: #3a5060; }
+.chip { font-family: var(–fm); font-size: 0.6rem; letter-spacing: 0.12em; border: 1px solid #1a2a30; padding: 0.4rem 0.9rem; color: #3a5060; }
 
 /* ── SURVEY / CTA ── */
 .survey-section {
-  background: var(--accent); padding: 8rem 2.5rem;
-  position: relative; overflow: hidden;
+background: var(–accent); padding: 8rem 2.5rem;
+position: relative; overflow: hidden;
 }
 .survey-bg-text {
-  position: absolute; font-family: var(--fd); font-size: 38vw;
-  line-height: 0.8; color: rgba(0,0,0,0.06);
-  top: 50%; left: 50%; transform: translate(-50%,-50%);
-  white-space: nowrap; pointer-events: none;
+position: absolute; font-family: var(–fd); font-size: 38vw;
+line-height: 0.8; color: rgba(0,0,0,0.06);
+top: 50%; left: 50%; transform: translate(-50%,-50%);
+white-space: nowrap; pointer-events: none;
 }
 .survey-inner { position: relative; max-width: 1000px; margin: 0 auto; }
-.survey-eyebrow { font-family: var(--fm); font-size: 0.68rem; letter-spacing: 0.2em; color: rgba(10,13,15,0.45); margin-bottom: 1.5rem; }
+.survey-eyebrow { font-family: var(–fm); font-size: 0.68rem; letter-spacing: 0.2em; color: rgba(10,13,15,0.45); margin-bottom: 1.5rem; }
 .survey-h {
-  font-family: var(--fd); font-size: clamp(3.5rem,8vw,9rem);
-  line-height: 0.88; color: var(--bg); margin-bottom: 0.5rem;
+font-family: var(–fd); font-size: clamp(3.5rem,8vw,9rem);
+line-height: 0.88; color: var(–bg); margin-bottom: 0.5rem;
 }
 .survey-sub { font-size: 0.9rem; color: rgba(10,13,15,0.5); margin-bottom: 3.5rem; font-weight: 300; }
 
 /* progress dots */
 .survey-dots { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; align-items: center; }
 .s-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(10,13,15,0.2); transition: all 0.3s;
+width: 6px; height: 6px; border-radius: 50%;
+background: rgba(10,13,15,0.2); transition: all 0.3s;
 }
-.s-dot.active { background: var(--bg); width: 24px; border-radius: 3px; }
+.s-dot.active { background: var(–bg); width: 24px; border-radius: 3px; }
 .s-dot.done { background: rgba(10,13,15,0.5); }
 
 /* steps */
@@ -592,40 +594,40 @@ body.rtl .btn-big .btn-arrow {
 @keyframes stepIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 
 .step-q {
-  font-family: var(--fd); font-size: clamp(1.6rem,3vw,2.6rem);
-  color: var(--bg); margin-bottom: 2rem; letter-spacing: 0.02em; line-height: 1.1;
+font-family: var(–fd); font-size: clamp(1.6rem,3vw,2.6rem);
+color: var(–bg); margin-bottom: 2rem; letter-spacing: 0.02em; line-height: 1.1;
 }
 
 /* option tiles */
 .s-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 2px; }
 .s-opt {
-  background: rgba(0,0,0,0.1); padding: 1.4rem 1.6rem;
-  cursor: none; border: 2px solid transparent;
-  transition: background 0.2s, border-color 0.2s;
-  display: flex; flex-direction: column; gap: 0.5rem;
-  user-select: none;
+background: rgba(0,0,0,0.1); padding: 1.4rem 1.6rem;
+cursor: none; border: 2px solid transparent;
+transition: background 0.2s, border-color 0.2s;
+display: flex; flex-direction: column; gap: 0.5rem;
+user-select: none;
 }
 .s-opt:hover { background: rgba(0,0,0,0.16); }
-.s-opt.selected { background: var(--bg); border-color: var(--bg); }
-.s-opt.selected .s-opt-label { color: var(--accent); }
+.s-opt.selected { background: var(–bg); border-color: var(–bg); }
+.s-opt.selected .s-opt-label { color: var(–accent); }
 .s-opt.selected .s-opt-check { opacity: 1; }
 .s-opt-label {
-  font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.02em;
-  color: var(--bg); line-height: 1.1; transition: color 0.2s;
+font-family: var(–fd); font-size: 1.3rem; letter-spacing: 0.02em;
+color: var(–bg); line-height: 1.1; transition: color 0.2s;
 }
 .s-opt-check {
-  font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.15em;
-  color: var(--accent); opacity: 0; transition: opacity 0.2s;
+font-family: var(–fm); font-size: 0.6rem; letter-spacing: 0.15em;
+color: var(–accent); opacity: 0; transition: opacity 0.2s;
 }
 
 /* name input step */
 .s-name-wrap { display: flex; flex-direction: column; gap: 1rem; }
 .s-input {
-  background: rgba(0,0,0,0.12); border: 2px solid rgba(0,0,0,0.15);
-  color: var(--bg); font-family: var(--fb); font-size: 1.1rem;
-  padding: 1.2rem 1.4rem; outline: none; width: 100%;
-  transition: border-color 0.2s;
-  font-weight: 600;
+background: rgba(0,0,0,0.12); border: 2px solid rgba(0,0,0,0.15);
+color: var(–bg); font-family: var(–fb); font-size: 1.1rem;
+padding: 1.2rem 1.4rem; outline: none; width: 100%;
+transition: border-color 0.2s;
+font-weight: 600;
 }
 .s-input::placeholder { color: rgba(10,13,15,0.35); font-weight: 300; }
 .s-input:focus { border-color: rgba(0,0,0,0.5); }
@@ -633,60 +635,60 @@ body.rtl .btn-big .btn-arrow {
 /* nav buttons */
 .survey-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
 .s-btn-next {
-  font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.05em;
-  background: var(--bg); color: var(--accent);
-  border: none; padding: 0.9rem 2.2rem; cursor: none;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
-  display: flex; align-items: center; gap: 0.8rem;
+font-family: var(–fd); font-size: 1.3rem; letter-spacing: 0.05em;
+background: var(–bg); color: var(–accent);
+border: none; padding: 0.9rem 2.2rem; cursor: none;
+transition: background 0.2s, color 0.2s, transform 0.2s;
+display: flex; align-items: center; gap: 0.8rem;
 }
 .s-btn-next:hover { transform: translate(-2px,-2px); }
 .s-btn-next:disabled { opacity: 0.3; transform: none; }
 .s-btn-back {
-  font-family: var(--fm); font-size: 0.65rem; letter-spacing: 0.15em;
-  background: none; border: none; color: rgba(10,13,15,0.45);
-  cursor: none; transition: color 0.2s; text-transform: uppercase;
+font-family: var(–fm); font-size: 0.65rem; letter-spacing: 0.15em;
+background: none; border: none; color: rgba(10,13,15,0.45);
+cursor: none; transition: color 0.2s; text-transform: uppercase;
 }
-.s-btn-back:hover { color: var(--bg); }
+.s-btn-back:hover { color: var(–bg); }
 
 /* thank you state */
 .survey-thanks {
-  display: none; text-align: center; padding: 4rem 0;
-  animation: stepIn 0.5s ease both;
+display: none; text-align: center; padding: 4rem 0;
+animation: stepIn 0.5s ease both;
 }
 .survey-thanks.show { display: block; }
 .thanks-icon { font-size: 3rem; margin-bottom: 1.5rem; display: block; }
-.thanks-h { font-family: var(--fd); font-size: clamp(2.5rem,5vw,5rem); color: var(--bg); line-height: 0.9; margin-bottom: 1rem; }
+.thanks-h { font-family: var(–fd); font-size: clamp(2.5rem,5vw,5rem); color: var(–bg); line-height: 0.9; margin-bottom: 1rem; }
 .thanks-p { font-size: 0.9rem; color: rgba(10,13,15,0.5); max-width: 400px; margin: 0 auto; line-height: 1.7; }
 
 /* ── CONTACT — tighter ── */
 .contact-section { padding: 4rem 2.5rem; max-width: 1400px; margin: 0 auto; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 2.5rem; }
-.contact-left h3 { font-family: var(--fd); font-size: clamp(2rem,4vw,3.5rem); line-height: 0.92; margin-bottom: 1rem; }
-.contact-left h3 em { font-style: normal; color: var(--accent); }
-.contact-left p { font-size: 0.82rem; color: var(--mid); line-height: 1.8; }
+.contact-left h3 { font-family: var(–fd); font-size: clamp(2rem,4vw,3.5rem); line-height: 0.92; margin-bottom: 1rem; }
+.contact-left h3 em { font-style: normal; color: var(–accent); }
+.contact-left p { font-size: 0.82rem; color: var(–mid); line-height: 1.8; }
 .contact-channels { display: flex; flex-direction: column; gap: 2px; }
 .channel {
-  display: flex; align-items: center; gap: 1.5rem;
-  padding: 1.2rem 1.6rem; background: var(--gray);
-  text-decoration: none; color: var(--white);
-  border-left: 3px solid transparent;
-  transition: border-color 0.2s, background 0.2s;
+display: flex; align-items: center; gap: 1.5rem;
+padding: 1.2rem 1.6rem; background: var(–gray);
+text-decoration: none; color: var(–white);
+border-left: 3px solid transparent;
+transition: border-color 0.2s, background 0.2s;
 }
-.channel:hover { border-color: var(--accent); background: var(--gray2); }
+.channel:hover { border-color: var(–accent); background: var(–gray2); }
 .ch-icon { font-size: 1.2rem; width: 22px; text-align: center; }
 .ch-info { flex: 1; }
-.ch-label { font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.15em; color: #2a4050; margin-bottom: 0.25rem; }
+.ch-label { font-family: var(–fm); font-size: 0.58rem; letter-spacing: 0.15em; color: #2a4050; margin-bottom: 0.25rem; }
 .ch-val { font-size: 0.88rem; font-weight: 600; }
 .ch-arrow { font-size: 0.8rem; color: #1e3040; transition: color 0.2s, transform 0.2s; }
-.channel:hover .ch-arrow { color: var(--accent); transform: translateX(4px); }
+.channel:hover .ch-arrow { color: var(–accent); transform: translateX(4px); }
 
 /* ── FOOTER ── */
 footer {
-  padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center;
-  border-top: 1px solid #141e22;
+padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center;
+border-top: 1px solid #141e22;
 }
-.f-logo { font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
-.f-note { font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.15em; color: #1e3038; }
+.f-logo { font-family: var(–fd); font-size: 1.3rem; letter-spacing: 0.08em; color: var(–white); text-decoration: none; }
+.f-note { font-family: var(–fm); font-size: 0.6rem; letter-spacing: 0.15em; color: #1e3038; }
 
 /* REVEAL */
 .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.8s ease; }
@@ -694,15 +696,15 @@ footer {
 
 /* ── PAIN — horizontal scroll on mobile ── */
 .pain-scroll-outer {
-  display: contents; /* desktop: just shows the grid normally */
+display: contents; /* desktop: just shows the grid normally */
 }
 /* ── SURVEY — other input ── */
 .s-other-input {
-  display: none; margin-top: 2px;
-  background: rgba(0,0,0,0.12); border: 2px solid rgba(0,0,0,0.15);
-  color: var(--bg); font-family: var(--fb); font-size: 0.95rem;
-  padding: 0.9rem 1.2rem; outline: none; width: 100%;
-  transition: border-color 0.2s; font-weight: 500;
+display: none; margin-top: 2px;
+background: rgba(0,0,0,0.12); border: 2px solid rgba(0,0,0,0.15);
+color: var(–bg); font-family: var(–fb); font-size: 0.95rem;
+padding: 0.9rem 1.2rem; outline: none; width: 100%;
+transition: border-color 0.2s; font-weight: 500;
 }
 .s-other-input::placeholder { color: rgba(10,13,15,0.35); font-weight: 300; }
 .s-other-input:focus { border-color: rgba(0,0,0,0.5); }
@@ -710,186 +712,185 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .proj-body { grid-template-columns: 1fr; min-height: auto; }
-  .proj-info { border-right: none; border-bottom: 1px solid var(--gray2); }
-  .proj-mockup { height: auto; }
-  .proj-mockup.pm-css { height: 200px; }
-  .proj-name { font-size: clamp(2rem,6vw,3rem); }
-  .about-section { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .service-row { grid-template-columns: 40px 1fr; } .srv-tag { display: none; }
-  footer { flex-direction: column; gap: 1rem; text-align: center; }
-  .projects-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .projects-sub { text-align: left; }
+.proj-body { grid-template-columns: 1fr; min-height: auto; }
+.proj-info { border-right: none; border-bottom: 1px solid var(–gray2); }
+.proj-mockup { height: auto; }
+.proj-mockup.pm-css { height: 200px; }
+.proj-name { font-size: clamp(2rem,6vw,3rem); }
+.about-section { grid-template-columns: 1fr; }
+.contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+.service-row { grid-template-columns: 40px 1fr; } .srv-tag { display: none; }
+footer { flex-direction: column; gap: 1rem; text-align: center; }
+.projects-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+.projects-sub { text-align: left; }
 }
 
 @media(max-width:600px){
-  .nav-links a:not(.nav-cta) { display: none; }
-  nav { padding: 0 1.2rem; }
-  .nav-mark { font-size: 1.1rem; }
-  .nav-links { gap: 0.6rem; }
-  .lang-switch { font-size: 0.55rem; }
-  .lang-btn { padding: 0.3rem 0.55rem; }
-  .nav-cta { padding: 0.4rem 0.9rem !important; font-size: 0.6rem !important; letter-spacing: 0.12em !important; }
+.nav-links a:not(.nav-cta) { display: none; }
+nav { padding: 0 1.2rem; }
+.nav-mark { font-size: 1.1rem; }
+.nav-links { gap: 0.6rem; }
+.lang-switch { font-size: 0.55rem; }
+.lang-btn { padding: 0.3rem 0.55rem; }
+.nav-cta { padding: 0.4rem 0.9rem !important; font-size: 0.6rem !important; letter-spacing: 0.12em !important; }
 
-  /* hero: tighter on mobile */
-  .hero { padding: 0 1.5rem 3.5rem; justify-content: flex-end; }
-  .hero-h1 { font-size: clamp(2.6rem, 10vw, 4rem); margin-bottom: 1.6rem; }
-  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
-  .hero-cta-group { margin-left: 0; }
-  .hero-sub { font-size: 0.88rem; max-width: 100%; }
-  .hero-notif-bg { display: none; } /* hide bg notifs on mobile */
+/* hero: tighter on mobile */
+.hero { padding: 0 1.5rem 3.5rem; justify-content: flex-end; }
+.hero-h1 { font-size: clamp(2.6rem, 10vw, 4rem); margin-bottom: 0.9rem; }
+.hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.2rem; padding-top: 0.9rem; }
+.hero-cta-group { margin-left: 0; }
+.hero-sub { font-size: 0.88rem; max-width: 100%; }
+.hero-notif-bg { display: none; } /* hide bg notifs on mobile */
 
-  /* smaller project cards */
-  .proj-body { min-height: auto; }
-  .proj-mockup { height: auto; }
-  .proj-mockup.pm-css { height: 160px; }
-  .proj-name { font-size: 2.2rem; }
-  .proj-info { padding: 1.2rem 1.4rem 1.4rem; }
-  .proj-header { padding: 1.2rem 1.4rem 0; }
+/* smaller project cards */
+.proj-body { min-height: auto; }
+.proj-mockup { height: auto; }
+.proj-mockup.pm-css { height: 160px; }
+.proj-name { font-size: 2.2rem; }
+.proj-info { padding: 1.2rem 1.4rem 1.4rem; }
+.proj-header { padding: 1.2rem 1.4rem 0; }
 
-  /* pain: horizontal scroll only */
-  .pain-section { padding: 6rem 0 6rem 1.5rem; overflow: visible; }
-  .pain-section > .reveal { padding-right: 1.5rem; }
-  .pain-grid {
-    display: flex !important;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 2px;
-    padding-right: 1.5rem;
-    padding-bottom: 1rem;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    cursor: grab;
-    touch-action: pan-x pan-y;
-  }
-  .pain-grid::-webkit-scrollbar { display: none; }
-  .pain-card {
-    flex: 0 0 72vw;
-    min-width: 260px;
-    max-height: none;
-    touch-action: pan-x pan-y;
-  }
+/* pain: horizontal scroll only */
+.pain-section { padding: 6rem 0 6rem 1.5rem; overflow: visible; }
+.pain-section > .reveal { padding-right: 1.5rem; }
+.pain-grid {
+display: flex !important;
+overflow-x: auto;
+overflow-y: hidden;
+gap: 2px;
+padding-right: 1.5rem;
+padding-bottom: 1rem;
+scrollbar-width: none;
+-webkit-overflow-scrolling: touch;
+cursor: grab;
+touch-action: pan-x pan-y;
+}
+.pain-grid::-webkit-scrollbar { display: none; }
+.pain-card {
+flex: 0 0 72vw;
+min-width: 260px;
+max-height: none;
+touch-action: pan-x pan-y;
+}
 
-  /* about: image below text */
-  .about-section {
-    display: flex !important;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 5rem 1.5rem;
-  }
-  .about-visual { order: 2; aspect-ratio: 1/1; max-width: 100%; width: 100%; }
-  .about-visual img { object-position: center top !important; }
-  .about-text { order: 1; }
-  .about-tag-float { right: 0; }
+/* about: image below text */
+.about-section {
+display: flex !important;
+flex-direction: column;
+gap: 2rem;
+padding: 5rem 1.5rem;
+}
+.about-visual { order: 2; aspect-ratio: 1/1; max-width: 100%; width: 100%; }
+.about-visual img { object-position: center top !important; }
+.about-text { order: 1; }
+.about-tag-float { right: 0; }
 
-  /* survey: fit on screen */
-  .survey-section { padding: 4rem 1.5rem; min-height: 100svh; display: flex; align-items: center; }
-  .survey-inner { width: 100%; }
-  .survey-h { font-size: clamp(2.4rem,11vw,4rem); margin-bottom: 0.3rem; }
-  .survey-sub { font-size: 0.78rem; margin-bottom: 2rem; }
-  .survey-dots { margin-bottom: 1.5rem; }
-  .step-q { font-size: 1.15rem; margin-bottom: 1rem; }
-  .s-options { grid-template-columns: 1fr 1fr !important; gap: 2px; }
-  .s-opt { padding: 0.9rem 0.8rem; }
-  .s-opt-label { font-size: 0.85rem; }
-  .survey-nav { margin-top: 1.2rem; }
-  .s-btn-next { font-size: 1rem; padding: 0.75rem 1.5rem; }
+/* survey: fit on screen */
+.survey-section { padding: 4rem 1.5rem; min-height: 100svh; display: flex; align-items: center; }
+.survey-inner { width: 100%; }
+.survey-h { font-size: clamp(2.4rem,11vw,4rem); margin-bottom: 0.3rem; }
+.survey-sub { font-size: 0.78rem; margin-bottom: 2rem; }
+.survey-dots { margin-bottom: 1.5rem; }
+.step-q { font-size: 1.15rem; margin-bottom: 1rem; }
+.s-options { grid-template-columns: 1fr 1fr !important; gap: 2px; }
+.s-opt { padding: 0.9rem 0.8rem; }
+.s-opt-label { font-size: 0.85rem; }
+.survey-nav { margin-top: 1.2rem; }
+.s-btn-next { font-size: 1rem; padding: 0.75rem 1.5rem; }
 }
 
 /* ── BRIDGE LINE ── */
 .bridge-line {
-  display: flex; align-items: center; gap: 2rem;
-  padding: 4rem 2.5rem; max-width: 1400px; margin: 0 auto;
+display: flex; align-items: center; gap: 2rem;
+padding: 4rem 2.5rem; max-width: 1400px; margin: 0 auto;
 }
 .bridge-rule { flex: 1; height: 1px; background: #1a2226; }
 .bridge-text {
-  font-family: var(--fd); font-size: clamp(1.2rem, 2.5vw, 2rem);
-  color: var(--mid); letter-spacing: 0.04em; text-align: center;
-  white-space: nowrap;
+font-family: var(–fd); font-size: clamp(1.2rem, 2.5vw, 2rem);
+color: var(–mid); letter-spacing: 0.04em; text-align: center;
+white-space: nowrap;
 }
-.bridge-cta .bridge-text { color: var(--accent); }
+.bridge-cta .bridge-text { color: var(–accent); }
 
 /* ── SERVICES GRID ── */
 .services { padding: 8rem 2.5rem; max-width: 1400px; margin: 0 auto; }
 .services-header { margin-bottom: 4rem; }
 .services-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 2px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-rows: auto auto;
+gap: 2px;
 }
 .srv-card {
-  background: var(--gray); padding: 2.8rem;
-  display: flex; flex-direction: column; gap: 1.2rem;
-  border: 1px solid var(--gray2);
-  transition: border-color 0.2s;
+background: var(–gray); padding: 2.8rem;
+display: flex; flex-direction: column; gap: 1.2rem;
+border: 1px solid var(–gray2);
+transition: border-color 0.2s;
 }
 .srv-card:hover { border-color: rgba(0,194,212,0.2); }
 .srv-card-wide {
-  grid-column: 1 / -1;
-  background: rgba(0,194,212,0.04);
-  border-color: rgba(0,194,212,0.15) !important;
-  flex-direction: row; gap: 4rem; align-items: center;
+grid-column: 1 / -1;
+background: rgba(0,194,212,0.04);
+border-color: rgba(0,194,212,0.15) !important;
+flex-direction: row; gap: 4rem; align-items: center;
 }
 .srv-card-top {
-  display: flex; align-items: center; gap: 1rem;
+display: flex; align-items: center; gap: 1rem;
 }
 .srv-card-num {
-  font-family: var(--fm); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.2em;
+font-family: var(–fm); font-size: 0.6rem; color: var(–accent); letter-spacing: 0.2em;
 }
 .srv-card-tag {
-  font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.14em;
-  color: var(--mid); border: 1px solid #1a2226; padding: 0.2rem 0.6rem;
+font-family: var(–fm); font-size: 0.58rem; letter-spacing: 0.14em;
+color: var(–mid); border: 1px solid #1a2226; padding: 0.2rem 0.6rem;
 }
 .srv-card-name {
-  font-family: var(--fd); font-size: clamp(1.8rem, 3vw, 2.8rem);
-  letter-spacing: 0.02em; line-height: 0.95; color: var(--white);
+font-family: var(–fd); font-size: clamp(1.8rem, 3vw, 2.8rem);
+letter-spacing: 0.02em; line-height: 0.95; color: var(–white);
 }
 .srv-card-desc {
-  font-size: 0.82rem; color: var(--mid); line-height: 1.75; font-weight: 300; flex: 1;
+font-size: 0.82rem; color: var(–mid); line-height: 1.75; font-weight: 300; flex: 1;
 }
 .srv-card-list {
-  list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
+list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
 }
 .srv-card-list li {
-  font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.1em;
-  color: #2a4050; padding-left: 1rem; position: relative;
+font-family: var(–fm); font-size: 0.6rem; letter-spacing: 0.1em;
+color: #2a4050; padding-left: 1rem; position: relative;
 }
 .srv-card-list li::before {
-  content: '—'; position: absolute; left: 0; color: var(--accent);
+content: ‘—’; position: absolute; left: 0; color: var(–accent);
 }
 .srv-card-cta {
-  font-family: var(--fd); font-size: 1rem; letter-spacing: 0.06em;
-  color: var(--accent); text-decoration: none;
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  margin-top: auto; padding-top: 0.5rem;
-  border-top: 1px solid #1a2226;
-  transition: gap 0.2s;
+font-family: var(–fd); font-size: 1rem; letter-spacing: 0.06em;
+color: var(–accent); text-decoration: none;
+display: inline-flex; align-items: center; gap: 0.5rem;
+margin-top: auto; padding-top: 0.5rem;
+border-top: 1px solid #1a2226;
+transition: gap 0.2s;
 }
 .srv-card-cta:hover { gap: 0.8rem; }
 .srv-card-wide .srv-card-name { font-size: clamp(1.6rem, 2.5vw, 2.4rem); flex: 0 0 auto; max-width: 340px; }
 .srv-card-wide .srv-card-desc { font-size: 0.88rem; }
 
 @media(max-width:700px){
-  .services-grid { grid-template-columns: 1fr; }
-  .srv-card-wide { flex-direction: column; gap: 1.5rem; }
-  .srv-card-wide .srv-card-name { max-width: 100%; }
-  .bridge-text { white-space: normal; text-align: center; }
+.services-grid { grid-template-columns: 1fr; }
+.srv-card-wide { flex-direction: column; gap: 1.5rem; }
+.srv-card-wide .srv-card-name { max-width: 100%; }
+.bridge-text { white-space: normal; text-align: center; }
 }
-
 
 /* ── BRIDGE LINE ── */
 .bridge-line {
-  display: flex; align-items: center; gap: 2rem;
-  padding: 3rem 2.5rem; max-width: 1400px; margin: 0 auto;
+display: flex; align-items: center; gap: 2rem;
+padding: 3rem 2.5rem; max-width: 1400px; margin: 0 auto;
 }
 .bridge-rule { flex: 1; height: 1px; background: #1a2226; }
 .bridge-text {
-  font-family: var(--fd); font-size: clamp(1.1rem,2vw,1.8rem);
-  color: var(--mid); letter-spacing: 0.04em; text-align: center; white-space: nowrap;
+font-family: var(–fd); font-size: clamp(1.1rem,2vw,1.8rem);
+color: var(–mid); letter-spacing: 0.04em; text-align: center; white-space: nowrap;
 }
-.bridge-cta .bridge-text { color: var(--accent); }
+.bridge-cta .bridge-text { color: var(–accent); }
 @media(max-width:700px){ .bridge-text { white-space: normal; } }
 
 /* ── SERVICES GRID ── */
@@ -897,50 +898,50 @@ footer {
 .services-header { margin-bottom: 4rem; }
 .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
 .srv-card {
-  background: var(--gray); padding: 2.8rem;
-  display: flex; flex-direction: column; gap: 1.2rem;
-  border: 1px solid var(--gray2); transition: border-color 0.2s;
+background: var(–gray); padding: 2.8rem;
+display: flex; flex-direction: column; gap: 1.2rem;
+border: 1px solid var(–gray2); transition: border-color 0.2s;
 }
 .srv-card:hover { border-color: rgba(0,194,212,0.2); }
 .srv-card-wide {
-  grid-column: 1 / -1; flex-direction: row; gap: 4rem; align-items: center;
-  background: rgba(0,194,212,0.04); border-color: rgba(0,194,212,0.12) !important;
+grid-column: 1 / -1; flex-direction: row; gap: 4rem; align-items: center;
+background: rgba(0,194,212,0.04); border-color: rgba(0,194,212,0.12) !important;
 }
 .srv-card-top { display: flex; align-items: center; gap: 1rem; }
-.srv-card-num { font-family: var(--fm); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.2em; }
+.srv-card-num { font-family: var(–fm); font-size: 0.6rem; color: var(–accent); letter-spacing: 0.2em; }
 .srv-card-tag {
-  font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.14em;
-  color: var(--mid); border: 1px solid #1a2226; padding: 0.2rem 0.6rem;
+font-family: var(–fm); font-size: 0.58rem; letter-spacing: 0.14em;
+color: var(–mid); border: 1px solid #1a2226; padding: 0.2rem 0.6rem;
 }
 .srv-card-name {
-  font-family: var(--fd); font-size: clamp(1.8rem,3vw,2.8rem);
-  letter-spacing: 0.02em; line-height: 0.95;
+font-family: var(–fd); font-size: clamp(1.8rem,3vw,2.8rem);
+letter-spacing: 0.02em; line-height: 0.95;
 }
-.srv-card-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.75; font-weight: 300; flex: 1; }
+.srv-card-desc { font-size: 0.82rem; color: var(–mid); line-height: 1.75; font-weight: 300; flex: 1; }
 .srv-card-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
 .srv-card-list li {
-  font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.1em;
-  color: #2a4050; padding-left: 1.2rem; position: relative;
+font-family: var(–fm); font-size: 0.6rem; letter-spacing: 0.1em;
+color: #2a4050; padding-left: 1.2rem; position: relative;
 }
-.srv-card-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+.srv-card-list li::before { content: ‘—’; position: absolute; left: 0; color: var(–accent); }
 .srv-card-cta {
-  font-family: var(--fd); font-size: 1rem; letter-spacing: 0.06em; color: var(--accent);
-  text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
-  margin-top: auto; padding-top: 1rem; border-top: 1px solid #1a2226;
-  transition: gap 0.2s;
+font-family: var(–fd); font-size: 1rem; letter-spacing: 0.06em; color: var(–accent);
+text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+margin-top: auto; padding-top: 1rem; border-top: 1px solid #1a2226;
+transition: gap 0.2s;
 }
 .srv-card-cta:hover { gap: 0.9rem; }
 .srv-card-wide .srv-card-name { flex: 0 0 auto; max-width: 360px; font-size: clamp(1.5rem,2.5vw,2.4rem); }
 @media(max-width:900px){
-  .services-grid { grid-template-columns: 1fr; }
-  .srv-card-wide { flex-direction: column; gap: 1.5rem; }
-  .srv-card-wide .srv-card-name { max-width: 100%; }
+.services-grid { grid-template-columns: 1fr; }
+.srv-card-wide { flex-direction: column; gap: 1.5rem; }
+.srv-card-wide .srv-card-name { max-width: 100%; }
 }
 
 /* ── PROJECT MOCKUP IMAGE SUPPORT ── */
 .proj-mockup-img {
-  width: 100%; height: auto;
-  display: block;
+width: 100%; height: auto;
+display: block;
 }
 /* CSS-drawn mockups (no image) need an explicit height */
 .proj-mockup.pm-css { height: 380px; position: relative; }
@@ -967,59 +968,65 @@ footer {
 </nav>
 
 <!-- HERO -->
+
 <section class="hero" id="hero">
   <div class="hero-bg" aria-hidden="true"></div>
 
   <!-- NOTIFICATIONS: background layer (desktop) -->
+
   <div class="hero-notif-bg" id="heroNotifWrap" aria-hidden="true">
     <div class="notif-time-label">2:47 AM</div>
     <div class="notif-stack">
 
-      <div class="hero-notif booking" id="hn1">
-        <span class="notif-label-badge" data-en="LIVE EXAMPLE" data-ar="مثال حقيقي">LIVE EXAMPLE</span>
-        <div class="hn-icon booking">📅</div>
-        <div class="hn-body">
-          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-          <div class="hn-title" data-en="New Booking — Sara K." data-ar="حجز جديد — سارة ك.">New Booking — Sara K.</div>
-          <div class="hn-sub" data-en="Tomorrow 09:00 · Confirmed" data-ar="غداً 09:00 · مؤكد">Tomorrow 09:00 · Confirmed</div>
-        </div>
-        <div class="hn-time" data-en="now" data-ar="الآن">now</div>
-      </div>
-
-      <div class="hero-notif payment" id="hn2">
-        <div class="hn-icon payment">💳</div>
-        <div class="hn-body">
-          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-          <div class="hn-title" data-en="Payment Received — ₪480" data-ar="دفعة واردة — ₪480">Payment Received — ₪480</div>
-          <div class="hn-sub" data-en="Deposit · Youssef M." data-ar="عربون · يوسف م.">Deposit · Youssef M.</div>
-        </div>
-        <div class="hn-time" data-en="2m ago" data-ar="منذ 2د">2m ago</div>
-      </div>
-
-      <div class="hero-notif review" id="hn3">
-        <div class="hn-icon review">⭐</div>
-        <div class="hn-body">
-          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-          <div class="hn-title" data-en="New 5-Star Review" data-ar="تقييم 5 نجوم جديد">New 5-Star Review</div>
-          <div class="hn-sub" data-en="&quot;Booked online at midnight, easy.&quot;" data-ar="&quot;حجزت أونلاين بمنتصف الليل، سهل جداً.&quot;">"Booked online at midnight, easy."</div>
-        </div>
-        <div class="hn-time" data-en="14m ago" data-ar="منذ 14د">14m ago</div>
-      </div>
-
-      <div class="hero-notif contact" id="hn4">
-        <div class="hn-icon contact">✉️</div>
-        <div class="hn-body">
-          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-          <div class="hn-title" data-en="New Lead — Nour A." data-ar="عميل محتمل — نور أ.">New Lead — Nour A.</div>
-          <div class="hn-sub" data-en="Asked about pricing · Ready to book" data-ar="سأل عن الأسعار · مستعد للحجز">Asked about pricing · Ready to book</div>
-        </div>
-        <div class="hn-time" data-en="31m ago" data-ar="منذ 31د">31m ago</div>
-      </div>
-
+```
+  <div class="hero-notif booking" id="hn1">
+    <span class="notif-label-badge" data-en="LIVE EXAMPLE" data-ar="مثال حقيقي">LIVE EXAMPLE</span>
+    <div class="hn-icon booking">📅</div>
+    <div class="hn-body">
+      <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+      <div class="hn-title" data-en="New Booking — Sara K." data-ar="حجز جديد — سارة ك.">New Booking — Sara K.</div>
+      <div class="hn-sub" data-en="Tomorrow 09:00 · Confirmed" data-ar="غداً 09:00 · مؤكد">Tomorrow 09:00 · Confirmed</div>
     </div>
+    <div class="hn-time" data-en="now" data-ar="الآن">now</div>
+  </div>
+
+  <div class="hero-notif payment" id="hn2">
+    <div class="hn-icon payment">💳</div>
+    <div class="hn-body">
+      <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+      <div class="hn-title" data-en="Payment Received — ₪480" data-ar="دفعة واردة — ₪480">Payment Received — ₪480</div>
+      <div class="hn-sub" data-en="Deposit · Youssef M." data-ar="عربون · يوسف م.">Deposit · Youssef M.</div>
+    </div>
+    <div class="hn-time" data-en="2m ago" data-ar="منذ 2د">2m ago</div>
+  </div>
+
+  <div class="hero-notif review" id="hn3">
+    <div class="hn-icon review">⭐</div>
+    <div class="hn-body">
+      <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+      <div class="hn-title" data-en="New 5-Star Review" data-ar="تقييم 5 نجوم جديد">New 5-Star Review</div>
+      <div class="hn-sub" data-en="&quot;Booked online at midnight, easy.&quot;" data-ar="&quot;حجزت أونلاين بمنتصف الليل، سهل جداً.&quot;">"Booked online at midnight, easy."</div>
+    </div>
+    <div class="hn-time" data-en="14m ago" data-ar="منذ 14د">14m ago</div>
+  </div>
+
+  <div class="hero-notif contact" id="hn4">
+    <div class="hn-icon contact">✉️</div>
+    <div class="hn-body">
+      <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
+      <div class="hn-title" data-en="New Lead — Nour A." data-ar="عميل محتمل — نور أ.">New Lead — Nour A.</div>
+      <div class="hn-sub" data-en="Asked about pricing · Ready to book" data-ar="سأل عن الأسعار · مستعد للحجز">Asked about pricing · Ready to book</div>
+    </div>
+    <div class="hn-time" data-en="31m ago" data-ar="منذ 31د">31m ago</div>
+  </div>
+
+</div>
+```
+
   </div>
 
   <!-- FOREGROUND: full-width text anchored to bottom -->
+
   <div class="hero-content">
     <!-- NOTIFICATIONS: mobile only (inline flow) -->
     <div class="hero-notif-mobile" aria-hidden="true">
@@ -1081,6 +1088,7 @@ footer {
 </section>
 
 <!-- STRIP -->
+
 <div class="strip" aria-hidden="true">
   <div class="strip-inner">
     <span class="strip-item">GOOD WORK DESERVES A GOOD FIRST IMPRESSION</span><span class="strip-item strip-dot">◆</span>
@@ -1095,6 +1103,7 @@ footer {
 </div>
 
 <!-- ══ PAIN ══ -->
+
 <section class="pain-section" id="pain">
   <div class="reveal">
     <span class="section-num">01 / THE PROBLEM</span>
@@ -1135,6 +1144,7 @@ footer {
 </section>
 
 <!-- BRIDGE 1 -->
+
 <div class="bridge-line reveal">
   <span class="bridge-rule"></span>
   <p class="bridge-text">So what does a website that actually works look like?</p>
@@ -1142,6 +1152,7 @@ footer {
 </div>
 
 <!-- ══ PROJECTS ══ -->
+
 <section class="projects-section" id="projects">
   <div class="projects-header reveal">
     <div>
@@ -1152,46 +1163,49 @@ footer {
   </div>
   <div class="card-stack" id="cardStack">
 
-    <!-- CARD 1 -->
-    <div class="proj-card" style="top:58px; z-index:1; cursor:none;" onclick="window.open('clinic.html','_blank')">
-      <div class="proj-header">
-        <span class="proj-num">01 — MEDICAL CLINIC</span>
-        <span class="proj-industry">Web Design</span>
-      </div>
-      <div class="proj-body">
-        <div class="proj-info">
-          <div class="proj-name">VITALCORE</div>
-          <p class="proj-desc" data-en="Full website for a private Tel Aviv clinic — booking calendar, bilingual layout, and a conversion-focused structure built to replace a non-existent web presence." data-ar="موقع كامل لعيادة خاصة في تل أبيب — تقويم حجز، تصميم ثنائي اللغة، وبنية تحويل تُغني عن غياب الحضور الرقمي.">Full website for a private Tel Aviv clinic — booking calendar, bilingual layout, and a conversion-focused structure built to replace a non-existent web presence.</p>
-          <div class="proj-result" data-en="↑ ZERO TO LIVE IN 5 DAYS" data-ar="↑ من الصفر إلى الإطلاق في 5 أيام">↑ ZERO TO LIVE IN 5 DAYS</div>
-        </div>
-        <div class="proj-mockup">
-          <img src="vitalcore-crd.webp" alt="VitalCore clinic website screenshot" class="proj-mockup-img" loading="lazy" decoding="async">
-        </div>
-      </div>
+```
+<!-- CARD 1 -->
+<div class="proj-card" style="top:58px; z-index:1; cursor:none;" onclick="window.open('clinic.html','_blank')">
+  <div class="proj-header">
+    <span class="proj-num">01 — MEDICAL CLINIC</span>
+    <span class="proj-industry">Web Design</span>
+  </div>
+  <div class="proj-body">
+    <div class="proj-info">
+      <div class="proj-name">VITALCORE</div>
+      <p class="proj-desc" data-en="Full website for a private Tel Aviv clinic — booking calendar, bilingual layout, and a conversion-focused structure built to replace a non-existent web presence." data-ar="موقع كامل لعيادة خاصة في تل أبيب — تقويم حجز، تصميم ثنائي اللغة، وبنية تحويل تُغني عن غياب الحضور الرقمي.">Full website for a private Tel Aviv clinic — booking calendar, bilingual layout, and a conversion-focused structure built to replace a non-existent web presence.</p>
+      <div class="proj-result" data-en="↑ ZERO TO LIVE IN 5 DAYS" data-ar="↑ من الصفر إلى الإطلاق في 5 أيام">↑ ZERO TO LIVE IN 5 DAYS</div>
     </div>
+    <div class="proj-mockup">
+      <img src="vitalcore-crd.webp" alt="VitalCore clinic website screenshot" class="proj-mockup-img" loading="lazy" decoding="async">
+    </div>
+  </div>
+</div>
 
-    <!-- CARD 2 -->
-    <div class="proj-card" style="top:114px; z-index:2; cursor:none;" onclick="window.open('aroma-mist-preview.html','_blank')">
-      <div class="proj-header">
-        <span class="proj-num">02 — E-COMMERCE</span>
-        <span class="proj-industry">Candles & Home</span>
-      </div>
-      <div class="proj-body">
-        <div class="proj-info">
-          <div class="proj-name">AROMA MIST</div>
-          <p class="proj-desc" data-en="A candle shop redesigned from a generic template into a premium sensory experience. Product hierarchy, category browsing, and the full purchase flow rebuilt from scratch." data-ar="متجر شموع أُعيد تصميمه من قالب عادي إلى تجربة حسية راقية. تسلسل المنتجات، تصفح الفئات، ومسار الشراء الكامل — كل شيء بُني من الصفر.">A candle shop redesigned from a generic template into a premium sensory experience. Product hierarchy, category browsing, and the full purchase flow rebuilt from scratch.</p>
-          <div class="proj-result" data-en="↑ CLEANER UX · HIGHER PRODUCT TRUST" data-ar="↑ تجربة أنظف · ثقة أعلى بالمنتج">&nbsp;·&nbsp; <span style="color:var(--white);opacity:.5" data-en="VIEW CASE STUDY →" data-ar="عرض دراسة الحالة →">VIEW CASE STUDY →</span></div>
-        </div>
-        <div class="proj-mockup">
-          <img src="aroma-mist-crd.webp" alt="Aroma Mist website screenshot" class="proj-mockup-img" loading="lazy" decoding="async">
-        </div>
-      </div>
+<!-- CARD 2 -->
+<div class="proj-card" style="top:114px; z-index:2; cursor:none;" onclick="window.open('aroma-mist-preview.html','_blank')">
+  <div class="proj-header">
+    <span class="proj-num">02 — E-COMMERCE</span>
+    <span class="proj-industry">Candles & Home</span>
+  </div>
+  <div class="proj-body">
+    <div class="proj-info">
+      <div class="proj-name">AROMA MIST</div>
+      <p class="proj-desc" data-en="A candle shop redesigned from a generic template into a premium sensory experience. Product hierarchy, category browsing, and the full purchase flow rebuilt from scratch." data-ar="متجر شموع أُعيد تصميمه من قالب عادي إلى تجربة حسية راقية. تسلسل المنتجات، تصفح الفئات، ومسار الشراء الكامل — كل شيء بُني من الصفر.">A candle shop redesigned from a generic template into a premium sensory experience. Product hierarchy, category browsing, and the full purchase flow rebuilt from scratch.</p>
+      <div class="proj-result" data-en="↑ CLEANER UX · HIGHER PRODUCT TRUST" data-ar="↑ تجربة أنظف · ثقة أعلى بالمنتج">&nbsp;·&nbsp; <span style="color:var(--white);opacity:.5" data-en="VIEW CASE STUDY →" data-ar="عرض دراسة الحالة →">VIEW CASE STUDY →</span></div>
     </div>
+    <div class="proj-mockup">
+      <img src="aroma-mist-crd.webp" alt="Aroma Mist website screenshot" class="proj-mockup-img" loading="lazy" decoding="async">
+    </div>
+  </div>
+</div>
+```
 
   </div><!-- /card-stack -->
 </section>
 
 <!-- ══ SERVICES ══ -->
+
 <section class="services" id="services">
   <div class="services-header reveal">
     <span class="section-num">03 / SERVICES</span>
@@ -1199,49 +1213,52 @@ footer {
   </div>
   <div class="services-grid">
 
-    <div class="srv-card reveal">
-      <div class="srv-card-top">
-        <span class="srv-card-num">01</span>
-        <span class="srv-card-tag">NEW BUILD</span>
-      </div>
-      <h3 class="srv-card-name">SITES FOR<br>FREELANCERS &<br>LOCAL BUSINESSES</h3>
-      <p class="srv-card-desc">Coaches, contractors, clinics, restaurants, studios, consultants — if you need clients to find you and contact you, I build that. No templates, no guesswork. And if your business doesn't fit a category, I build that too.</p>
-      <ul class="srv-card-list">
-        <li>Custom design, no templates</li>
-        <li>Clear flow from landing to contact</li>
-        <li>Fast, mobile-first, live in weeks</li>
-      </ul>
-      <a href="#cta" class="srv-card-cta">Get a website ↗</a>
-    </div>
+```
+<div class="srv-card reveal">
+  <div class="srv-card-top">
+    <span class="srv-card-num">01</span>
+    <span class="srv-card-tag">NEW BUILD</span>
+  </div>
+  <h3 class="srv-card-name">SITES FOR<br>FREELANCERS &<br>LOCAL BUSINESSES</h3>
+  <p class="srv-card-desc">Coaches, contractors, clinics, restaurants, studios, consultants — if you need clients to find you and contact you, I build that. No templates, no guesswork. And if your business doesn't fit a category, I build that too.</p>
+  <ul class="srv-card-list">
+    <li>Custom design, no templates</li>
+    <li>Clear flow from landing to contact</li>
+    <li>Fast, mobile-first, live in weeks</li>
+  </ul>
+  <a href="#cta" class="srv-card-cta">Get a website ↗</a>
+</div>
 
-    <div class="srv-card reveal">
-      <div class="srv-card-top">
-        <span class="srv-card-num">02</span>
-        <span class="srv-card-tag">FIX WHAT'S BROKEN</span>
-      </div>
-      <h3 class="srv-card-name">YOUR SITE<br>ISN'T WORKING.<br>LET'S FIX IT.</h3>
-      <p class="srv-card-desc">Already have a website? I'll look at it like a visitor would, find exactly where people get confused or leave, and fix what's costing you clients.</p>
-      <ul class="srv-card-list">
-        <li>Full review of how visitors move through your site</li>
-        <li>Find exactly where people drop off</li>
-        <li>Redesign the parts that are losing you clients</li>
-      </ul>
-      <a href="#cta" class="srv-card-cta">Fix my site ↗</a>
-    </div>
+<div class="srv-card reveal">
+  <div class="srv-card-top">
+    <span class="srv-card-num">02</span>
+    <span class="srv-card-tag">FIX WHAT'S BROKEN</span>
+  </div>
+  <h3 class="srv-card-name">YOUR SITE<br>ISN'T WORKING.<br>LET'S FIX IT.</h3>
+  <p class="srv-card-desc">Already have a website? I'll look at it like a visitor would, find exactly where people get confused or leave, and fix what's costing you clients.</p>
+  <ul class="srv-card-list">
+    <li>Full review of how visitors move through your site</li>
+    <li>Find exactly where people drop off</li>
+    <li>Redesign the parts that are losing you clients</li>
+  </ul>
+  <a href="#cta" class="srv-card-cta">Fix my site ↗</a>
+</div>
 
-    <div class="srv-card srv-card-wide reveal">
-      <div class="srv-card-top">
-        <span class="srv-card-num">03</span>
-        <span class="srv-card-tag">THE DIFFERENCE</span>
-      </div>
-      <h3 class="srv-card-name">WEBSITES THAT WORK —<br>NOT JUST LOOK GOOD.</h3>
-      <p class="srv-card-desc">A good-looking website that confuses people is just an expensive brochure. Every site I build has one job: take the visitor from "I found you" to "I'm calling you." I design the path, then I build it.</p>
-    </div>
+<div class="srv-card srv-card-wide reveal">
+  <div class="srv-card-top">
+    <span class="srv-card-num">03</span>
+    <span class="srv-card-tag">THE DIFFERENCE</span>
+  </div>
+  <h3 class="srv-card-name">WEBSITES THAT WORK —<br>NOT JUST LOOK GOOD.</h3>
+  <p class="srv-card-desc">A good-looking website that confuses people is just an expensive brochure. Every site I build has one job: take the visitor from "I found you" to "I'm calling you." I design the path, then I build it.</p>
+</div>
+```
 
   </div>
 </section>
 
 <!-- BRIDGE 2 -->
+
 <div class="bridge-line bridge-cta reveal">
   <span class="bridge-rule"></span>
   <p class="bridge-text">Ready to close the gap?</p>
@@ -1249,6 +1266,7 @@ footer {
 </div>
 
 <!-- ══ SURVEY / CTA ══ -->
+
 <section class="survey-section" id="cta">
   <div class="survey-bg-text" aria-hidden="true">GO</div>
   <div class="survey-inner">
@@ -1263,130 +1281,134 @@ footer {
     </div>
     <div class="survey-steps" id="surveySteps">
 
-      <!-- Step 0: business type -->
-      <div class="survey-step active" data-step="0">
-        <p class="step-q">What type of business do you have?</p>
-        <div class="s-options">
-          <div class="s-opt" data-q="0" data-val="Local service business"><span class="s-opt-label">LOCAL SERVICE</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="0" data-val="Freelancer / consultant"><span class="s-opt-label">FREELANCER / CONSULTANT</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="0" data-val="Shop / e-commerce"><span class="s-opt-label">SHOP / E-COMMERCE</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="0" data-val="Restaurant / café"><span class="s-opt-label">RESTAURANT / CAFÉ</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt s-opt-other" data-q="0" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
-        </div>
-        <input class="s-other-input" id="other0" placeholder="Tell me what kind of business…" />
-        <div class="survey-nav">
-          <button class="s-btn-back" style="visibility:hidden">← BACK</button>
-          <button class="s-btn-next" id="next0" disabled>NEXT <span>→</span></button>
-        </div>
-      </div>
-
-      <!-- Step 1: current website -->
-      <div class="survey-step" data-step="1">
-        <p class="step-q">Do you currently have a website?</p>
-        <div class="s-options">
-          <div class="s-opt" data-q="1" data-val="No website yet"><span class="s-opt-label">NO WEBSITE YET</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="1" data-val="Have one, it's outdated"><span class="s-opt-label">HAVE ONE, OUTDATED</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="1" data-val="Have one, doesn't convert"><span class="s-opt-label">HAVE ONE, DOESN'T CONVERT</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="1" data-val="Just looking for now"><span class="s-opt-label">JUST LOOKING AROUND</span><span class="s-opt-check">✓ SELECTED</span></div>
-        </div>
-        <div class="survey-nav">
-          <button class="s-btn-back" onclick="goBack()">← BACK</button>
-          <button class="s-btn-next" id="next1" disabled>NEXT <span>→</span></button>
-        </div>
-      </div>
-
-      <!-- Step 2: main goal -->
-      <div class="survey-step" data-step="2">
-        <p class="step-q">What's your main goal?</p>
-        <div class="s-options">
-          <div class="s-opt" data-q="2" data-val="Get more clients / leads"><span class="s-opt-label">GET MORE CLIENTS</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="2" data-val="Look more professional"><span class="s-opt-label">LOOK MORE PROFESSIONAL</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="2" data-val="Sell products online"><span class="s-opt-label">SELL PRODUCTS ONLINE</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="2" data-val="Automate bookings / info"><span class="s-opt-label">AUTOMATE BOOKINGS</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt s-opt-other" data-q="2" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
-        </div>
-        <input class="s-other-input" id="other2" placeholder="Tell me what you're after…" />
-        <div class="survey-nav">
-          <button class="s-btn-back" onclick="goBack()">← BACK</button>
-          <button class="s-btn-next" id="next2" disabled>NEXT <span>→</span></button>
-        </div>
-      </div>
-
-      <!-- Step 3: pain points -->
-      <div class="survey-step" data-step="3">
-        <p class="step-q">What's your biggest problem right now?</p>
-        <div class="s-options">
-          <div class="s-opt" data-q="3" data-val="People can't find me online"><span class="s-opt-label">PEOPLE CAN'T FIND ME</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="3" data-val="I look less credible than competitors"><span class="s-opt-label">LOOK LESS CREDIBLE</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="3" data-val="I waste time explaining myself repeatedly"><span class="s-opt-label">ALWAYS EXPLAINING MYSELF</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="3" data-val="Leads come in but don't convert"><span class="s-opt-label">LEADS DON'T CONVERT</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt s-opt-other" data-q="3" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
-        </div>
-        <input class="s-other-input" id="other3" placeholder="Describe it in your own words…" />
-        <div class="survey-nav">
-          <button class="s-btn-back" onclick="goBack()">← BACK</button>
-          <button class="s-btn-next" id="next3" disabled>NEXT <span>→</span></button>
-        </div>
-      </div>
-
-      <!-- Step 4: what's stopping you -->
-      <div class="survey-step" data-step="4">
-        <p class="step-q">What's been stopping you from getting a website?</p>
-        <div class="s-options">
-          <div class="s-opt" data-q="4" data-val="Don't know where to start"><span class="s-opt-label">DON'T KNOW WHERE TO START</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="4" data-val="Worried about the cost"><span class="s-opt-label">WORRIED ABOUT COST</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="4" data-val="Had bad experiences before"><span class="s-opt-label">BAD EXPERIENCE BEFORE</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="4" data-val="Just never got around to it"><span class="s-opt-label">NEVER GOT AROUND TO IT</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt s-opt-other" data-q="4" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
-        </div>
-        <input class="s-other-input" id="other4" placeholder="Tell me more…" />
-        <div class="survey-nav">
-          <button class="s-btn-back" onclick="goBack()">← BACK</button>
-          <button class="s-btn-next" id="next4" disabled>NEXT <span>→</span></button>
-        </div>
-      </div>
-
-      <!-- Step 5: availability -->
-      <div class="survey-step" data-step="5">
-        <p class="step-q">When are you usually free to chat?</p>
-        <div class="s-options">
-          <div class="s-opt" data-q="5" data-val="Weekday mornings"><span class="s-opt-label">WEEKDAY MORNINGS</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="5" data-val="Weekday afternoons"><span class="s-opt-label">WEEKDAY AFTERNOONS</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="5" data-val="Evenings"><span class="s-opt-label">EVENINGS</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="5" data-val="Weekends"><span class="s-opt-label">WEEKENDS</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt" data-q="5" data-val="Anytime, just message me"><span class="s-opt-label">ANYTIME</span><span class="s-opt-check">✓ SELECTED</span></div>
-          <div class="s-opt s-opt-other" data-q="5" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
-        </div>
-        <input class="s-other-input" id="other5" placeholder="Let me know when works for you…" />
-        <div class="survey-nav">
-          <button class="s-btn-back" onclick="goBack()">← BACK</button>
-          <button class="s-btn-next" id="next5" disabled>NEXT <span>→</span></button>
-        </div>
-      </div>
-
-      <!-- Step 6: contact -->
-      <div class="survey-step" data-step="6">
-        <p class="step-q">Last thing — where should I reach you?</p>
-        <div class="s-name-wrap">
-          <input class="s-input" id="inputName" type="text" placeholder="Your name" autocomplete="off" />
-          <input class="s-input" id="inputEmail" type="text" placeholder="Email or WhatsApp number" autocomplete="off" />
-        </div>
-        <div class="survey-nav">
-          <button class="s-btn-back" onclick="goBack()">← BACK</button>
-          <button class="s-btn-next" id="next6" disabled>SEND IT <span>→</span></button>
-        </div>
-      </div>
-
-    </div><!-- /survey-steps -->
-    <div class="survey-thanks" id="surveyThanks">
-      <span class="thanks-icon">✦</span>
-      <h3 class="thanks-h">GOT IT.<br>I'LL BE IN<br>TOUCH.</h3>
-      <p class="thanks-p">I'll review your answers and reach out within 24 hours. No pressure, just a conversation.</p>
+```
+  <!-- Step 0: business type -->
+  <div class="survey-step active" data-step="0">
+    <p class="step-q">What type of business do you have?</p>
+    <div class="s-options">
+      <div class="s-opt" data-q="0" data-val="Local service business"><span class="s-opt-label">LOCAL SERVICE</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="0" data-val="Freelancer / consultant"><span class="s-opt-label">FREELANCER / CONSULTANT</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="0" data-val="Shop / e-commerce"><span class="s-opt-label">SHOP / E-COMMERCE</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="0" data-val="Restaurant / café"><span class="s-opt-label">RESTAURANT / CAFÉ</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt s-opt-other" data-q="0" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
     </div>
+    <input class="s-other-input" id="other0" placeholder="Tell me what kind of business…" />
+    <div class="survey-nav">
+      <button class="s-btn-back" style="visibility:hidden">← BACK</button>
+      <button class="s-btn-next" id="next0" disabled>NEXT <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- Step 1: current website -->
+  <div class="survey-step" data-step="1">
+    <p class="step-q">Do you currently have a website?</p>
+    <div class="s-options">
+      <div class="s-opt" data-q="1" data-val="No website yet"><span class="s-opt-label">NO WEBSITE YET</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="1" data-val="Have one, it's outdated"><span class="s-opt-label">HAVE ONE, OUTDATED</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="1" data-val="Have one, doesn't convert"><span class="s-opt-label">HAVE ONE, DOESN'T CONVERT</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="1" data-val="Just looking for now"><span class="s-opt-label">JUST LOOKING AROUND</span><span class="s-opt-check">✓ SELECTED</span></div>
+    </div>
+    <div class="survey-nav">
+      <button class="s-btn-back" onclick="goBack()">← BACK</button>
+      <button class="s-btn-next" id="next1" disabled>NEXT <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- Step 2: main goal -->
+  <div class="survey-step" data-step="2">
+    <p class="step-q">What's your main goal?</p>
+    <div class="s-options">
+      <div class="s-opt" data-q="2" data-val="Get more clients / leads"><span class="s-opt-label">GET MORE CLIENTS</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="2" data-val="Look more professional"><span class="s-opt-label">LOOK MORE PROFESSIONAL</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="2" data-val="Sell products online"><span class="s-opt-label">SELL PRODUCTS ONLINE</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="2" data-val="Automate bookings / info"><span class="s-opt-label">AUTOMATE BOOKINGS</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt s-opt-other" data-q="2" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
+    </div>
+    <input class="s-other-input" id="other2" placeholder="Tell me what you're after…" />
+    <div class="survey-nav">
+      <button class="s-btn-back" onclick="goBack()">← BACK</button>
+      <button class="s-btn-next" id="next2" disabled>NEXT <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- Step 3: pain points -->
+  <div class="survey-step" data-step="3">
+    <p class="step-q">What's your biggest problem right now?</p>
+    <div class="s-options">
+      <div class="s-opt" data-q="3" data-val="People can't find me online"><span class="s-opt-label">PEOPLE CAN'T FIND ME</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="3" data-val="I look less credible than competitors"><span class="s-opt-label">LOOK LESS CREDIBLE</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="3" data-val="I waste time explaining myself repeatedly"><span class="s-opt-label">ALWAYS EXPLAINING MYSELF</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="3" data-val="Leads come in but don't convert"><span class="s-opt-label">LEADS DON'T CONVERT</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt s-opt-other" data-q="3" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
+    </div>
+    <input class="s-other-input" id="other3" placeholder="Describe it in your own words…" />
+    <div class="survey-nav">
+      <button class="s-btn-back" onclick="goBack()">← BACK</button>
+      <button class="s-btn-next" id="next3" disabled>NEXT <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- Step 4: what's stopping you -->
+  <div class="survey-step" data-step="4">
+    <p class="step-q">What's been stopping you from getting a website?</p>
+    <div class="s-options">
+      <div class="s-opt" data-q="4" data-val="Don't know where to start"><span class="s-opt-label">DON'T KNOW WHERE TO START</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="4" data-val="Worried about the cost"><span class="s-opt-label">WORRIED ABOUT COST</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="4" data-val="Had bad experiences before"><span class="s-opt-label">BAD EXPERIENCE BEFORE</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="4" data-val="Just never got around to it"><span class="s-opt-label">NEVER GOT AROUND TO IT</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt s-opt-other" data-q="4" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
+    </div>
+    <input class="s-other-input" id="other4" placeholder="Tell me more…" />
+    <div class="survey-nav">
+      <button class="s-btn-back" onclick="goBack()">← BACK</button>
+      <button class="s-btn-next" id="next4" disabled>NEXT <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- Step 5: availability -->
+  <div class="survey-step" data-step="5">
+    <p class="step-q">When are you usually free to chat?</p>
+    <div class="s-options">
+      <div class="s-opt" data-q="5" data-val="Weekday mornings"><span class="s-opt-label">WEEKDAY MORNINGS</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="5" data-val="Weekday afternoons"><span class="s-opt-label">WEEKDAY AFTERNOONS</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="5" data-val="Evenings"><span class="s-opt-label">EVENINGS</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="5" data-val="Weekends"><span class="s-opt-label">WEEKENDS</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt" data-q="5" data-val="Anytime, just message me"><span class="s-opt-label">ANYTIME</span><span class="s-opt-check">✓ SELECTED</span></div>
+      <div class="s-opt s-opt-other" data-q="5" data-val="Other"><span class="s-opt-label">OTHER</span><span class="s-opt-check">✓ SELECTED</span></div>
+    </div>
+    <input class="s-other-input" id="other5" placeholder="Let me know when works for you…" />
+    <div class="survey-nav">
+      <button class="s-btn-back" onclick="goBack()">← BACK</button>
+      <button class="s-btn-next" id="next5" disabled>NEXT <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- Step 6: contact -->
+  <div class="survey-step" data-step="6">
+    <p class="step-q">Last thing — where should I reach you?</p>
+    <div class="s-name-wrap">
+      <input class="s-input" id="inputName" type="text" placeholder="Your name" autocomplete="off" />
+      <input class="s-input" id="inputEmail" type="text" placeholder="Email or WhatsApp number" autocomplete="off" />
+    </div>
+    <div class="survey-nav">
+      <button class="s-btn-back" onclick="goBack()">← BACK</button>
+      <button class="s-btn-next" id="next6" disabled>SEND IT <span>→</span></button>
+    </div>
+  </div>
+
+</div><!-- /survey-steps -->
+<div class="survey-thanks" id="surveyThanks">
+  <span class="thanks-icon">✦</span>
+  <h3 class="thanks-h">GOT IT.<br>I'LL BE IN<br>TOUCH.</h3>
+  <p class="thanks-p">I'll review your answers and reach out within 24 hours. No pressure, just a conversation.</p>
+</div>
+```
+
   </div>
 </section>
 
 <!-- CONTACT -->
+
 <section class="contact-section" id="contact">
   <div class="reveal">
     <span class="section-num">04 / CONTACT</span>
@@ -1424,419 +1446,422 @@ footer {
 <script>
 
 // CURSOR
-const cur = document.getElementById('cur');
-document.addEventListener('mousemove', e => {
-  cur.style.left = e.clientX + 'px';
-  cur.style.top  = e.clientY + 'px';
+const cur = document.getElementById(‘cur’);
+document.addEventListener(‘mousemove’, e => {
+cur.style.left = e.clientX + ‘px’;
+cur.style.top  = e.clientY + ‘px’;
 });
 
 // PROGRESS BAR
-const bar = document.getElementById('progress');
-window.addEventListener('scroll', () => {
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  bar.style.width = (window.scrollY / max * 100) + '%';
+const bar = document.getElementById(‘progress’);
+window.addEventListener(‘scroll’, () => {
+const max = document.documentElement.scrollHeight - window.innerHeight;
+bar.style.width = (window.scrollY / max * 100) + ‘%’;
 }, { passive: true });
 
 // SCROLL REVEAL
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+entries.forEach(e => { if (e.isIntersecting) e.target.classList.add(‘in’); });
 }, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+document.querySelectorAll(’.reveal’).forEach(el => obs.observe(el));
 
 // CARD STACK
 function setCardTops() {
-  const cards = document.querySelectorAll('.proj-card');
-  const NAV_H = 58;
-  const PEEK = window.innerWidth <= 600 ? 42 : 56;
-  cards.forEach((card, i) => { card.style.top = (NAV_H + i * PEEK) + 'px'; });
+const cards = document.querySelectorAll(’.proj-card’);
+const NAV_H = 58;
+const PEEK = window.innerWidth <= 600 ? 42 : 56;
+cards.forEach((card, i) => { card.style.top = (NAV_H + i * PEEK) + ‘px’; });
 }
 setCardTops();
-window.addEventListener('resize', setCardTops);
+window.addEventListener(‘resize’, setCardTops);
 
 // PAIN GRID drag scroll on mobile
-const painGrid = document.querySelector('.pain-grid');
+const painGrid = document.querySelector(’.pain-grid’);
 if (painGrid) {
-  let isDown = false, startX, scrollLeft;
-  painGrid.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - painGrid.offsetLeft; scrollLeft = painGrid.scrollLeft; });
-  painGrid.addEventListener('mouseleave', () => { isDown = false; });
-  painGrid.addEventListener('mouseup', () => { isDown = false; });
-  painGrid.addEventListener('mousemove', e => {
-    if (!isDown) return;
-    const dx = e.pageX - painGrid.offsetLeft - startX;
-    if (Math.abs(dx) > 5) { e.preventDefault(); painGrid.scrollLeft = scrollLeft - dx * 1.4; }
-  });
+let isDown = false, startX, scrollLeft;
+painGrid.addEventListener(‘mousedown’, e => { isDown = true; startX = e.pageX - painGrid.offsetLeft; scrollLeft = painGrid.scrollLeft; });
+painGrid.addEventListener(‘mouseleave’, () => { isDown = false; });
+painGrid.addEventListener(‘mouseup’, () => { isDown = false; });
+painGrid.addEventListener(‘mousemove’, e => {
+if (!isDown) return;
+const dx = e.pageX - painGrid.offsetLeft - startX;
+if (Math.abs(dx) > 5) { e.preventDefault(); painGrid.scrollLeft = scrollLeft - dx * 1.4; }
+});
 }
 
 // ── LANGUAGE SYSTEM ──
 const translations = {
-  en: {
-    'hero-tag': 'Web Design · Based in Israel · Built to convert',
-    'hero-h1-1': 'A WEBSITE THAT', 'hero-h1-2': 'WORKS WHILE YOU SLEEP.', 'hero-h1-3': '', 'hero-h1-4': '',
-    'hero-sub': 'Most business websites lose the customer<br><strong>before they even make contact.</strong>',
-    'hero-scroll': '↓ SCROLL TO SEE THE WORK',
-    'hero-cta': 'Start here',
-    'pain-label': '01 / THE PROBLEM',
-    'pain-title': 'SOUND FAMILIAR?',
-    'projects-label': '02 / PROJECTS',
-    'projects-title': 'RECENT\nWORK.',
-    'projects-sub': 'Two recent projects — different industries, same standard. Every site built to convert, not just to look good.',
-    'services-label': '03 / SERVICES',
-    'services-title': 'WHAT I DO.',
-    'cta-eyebrow': 'TAKES 60 SECONDS · NO COMMITMENT',
-    'cta-title': 'TELL ME\nABOUT YOUR\nBUSINESS.',
-    'cta-sub': 'A few quick questions so I can reach out with something actually useful.',
-    'contact-title': 'READY WHEN\n<em>YOU ARE.</em>',
-    'contact-sub': 'No forms, no waiting. Pick your channel.',
-    'step-q-0': 'What type of business do you have?',
-    'step-q-1': 'Do you currently have a website?',
-    'step-q-2': 'What\'s your main goal?',
-    'step-q-3': 'What\'s your biggest challenge right now?',
-    'step-q-4': 'What\'s held you back from sorting this?',
-    'step-q-5': 'When are you usually free to chat?',
-    'step-q-6': 'Last thing — where should I reach you?',
-    'input-name': 'Your name',
-    'input-contact': 'Email or WhatsApp number',
-    'thanks-h': 'GOT IT.\nI\'LL BE IN\nTOUCH.',
-    'thanks-p': 'I\'ll review your answers and reach out within 24 hours. No pressure, just a conversation.',
-    'bridge-1': 'So what does a website that actually works look like?',
-    'bridge-2': 'Ready to close the gap?',
-    'srv-name-1': 'SITES FOR\nFREELANCERS &\nLOCAL BUSINESSES',
-    'srv-desc-1': 'Coaches, contractors, clinics, restaurants, studios, consultants — if you need clients to find you and contact you, I build that. No templates, no guesswork. And if your business doesn\'t fit a category, I build that too.',
-    'srv-list-1-a': 'Custom design, no templates',
-    'srv-list-1-b': 'Clear flow from landing to contact',
-    'srv-list-1-c': 'Fast, mobile-first, live in weeks',
-    'srv-cta-1': 'Get a website ↗',
-    'srv-name-2': 'YOUR SITE\nISN\'T WORKING.\nLET\'S FIX IT.',
-    'srv-desc-2': 'Already have a website? I\'ll look at it like a visitor would, find exactly where people get confused or leave, and fix what\'s costing you clients.',
-    'srv-list-2-a': 'Full review of how visitors move through your site',
-    'srv-list-2-b': 'Find exactly where people drop off',
-    'srv-list-2-c': 'Redesign the parts that are losing you clients',
-    'srv-cta-2': 'Fix my site ↗',
-    'srv-wide-name': 'WEBSITES THAT WORK —\nNOT JUST LOOK GOOD.',
-    'srv-wide-desc': 'A good-looking website that confuses people is just an expensive brochure. Every site I build has one job: take the visitor from "I found you" to "I\'m calling you." I design the path, then I build it.',
-  },
-  ar: {
-    'hero-tag': 'تصميم ويب · من إسرائيل · مصمَّم للتحويل',
-    'hero-h1-1': 'موقع يعمل', 'hero-h1-2': 'وأنت نائم.', 'hero-h1-3': '', 'hero-h1-4': '',
-    'hero-sub': 'معظم مواقع الأعمال تخسر العميل<br><strong>قبل أن يتواصل أصلاً.</strong>',
-    'hero-scroll': '↓ مرر لترى الأعمال',
-    'hero-cta': 'ابدأ هنا',
-    'pain-label': '٠١ / المشكلة',
-    'pain-title': 'هل يبدو مألوفاً؟',
-    'projects-label': '٠٢ / الأعمال',
-    'projects-title': 'أحدث\nالأعمال.',
-    'projects-sub': 'مشروعان حقيقيان — صناعتان مختلفتان، نفس المعيار. كل موقع مصمَّم للتحويل، لا لمجرد الإبهار.',
-    'services-label': '٠٣ / الخدمات',
-    'services-title': 'ما الذي أقدمه.',
-    'cta-eyebrow': 'دقيقة واحدة فقط · بدون أي التزام',
-    'cta-title': 'أخبرني\nعن\nمشروعك.',
-    'cta-sub': 'أسئلة سريعة حتى أتواصل معك بما يفيدك فعلاً.',
-    'contact-title': 'جاهز\n<em>متى تريد.</em>',
-    'contact-sub': 'بدون نماذج، بدون انتظار. اختر القناة.',
-    'step-q-0': 'ما نوع مشروعك؟',
-    'step-q-1': 'هل لديك موقع حالياً؟',
-    'step-q-2': 'ما هدفك الأساسي؟',
-    'step-q-3': 'ما أكبر تحدٍّ تواجهه الآن؟',
-    'step-q-4': 'ما الذي أخّرك عن معالجة هذا؟',
-    'step-q-5': 'متى تكون متاحاً عادةً للحديث؟',
-    'step-q-6': 'آخر شيء — كيف أتواصل معك؟',
-    'input-name': 'اسمك',
-    'input-contact': 'البريد الإلكتروني أو واتساب',
-    'thanks-h': 'وصلت.\nسأتواصل\nمعك قريباً.',
-    'thanks-p': 'سأراجع إجاباتك وأتواصل معك خلال 24 ساعة. بدون ضغط، فقط محادثة.',
-    'bridge-1': 'كيف يبدو الموقع الذي يعمل فعلاً؟',
-    'bridge-2': 'مستعد لإغلاق الفجوة؟',
-    'srv-name-1': 'مواقع للمستقلين\nوالمشاريع المحلية',
-    'srv-desc-1': 'كوتش، مقاول، عيادة، مطعم، استوديو، مستشار — إذا كنت تحتاج عملاء يجدونك ويتواصلون معك، أنا أبني ذلك. بدون قوالب. وإذا كان مشروعك لا يشبه أي تصنيف، أبني ذلك أيضاً.',
-    'srv-list-1-a': 'تصميم مخصص، بدون قوالب جاهزة',
-    'srv-list-1-b': 'مسار واضح من الوصول إلى التواصل',
-    'srv-list-1-c': 'سريع، مناسب للموبايل، يُطلَق في أسابيع',
-    'srv-cta-1': 'احصل على موقع ↗',
-    'srv-name-2': 'موقعك لا يشتغل.\nخلينا نصلحه.',
-    'srv-desc-2': 'عندك موقع بالفعل؟ سأنظر إليه كما ينظر إليه الزائر، وأجد بالضبط أين يتشتت الناس أو يغادرون، ثم أصلح ما يكلفك العملاء.',
-    'srv-list-2-a': 'مراجعة كاملة لكيفية تحرك الزوار في موقعك',
-    'srv-list-2-b': 'تحديد بالضبط أين يغادر الناس',
-    'srv-list-2-c': 'إعادة تصميم الأجزاء التي تخسّرك العملاء',
-    'srv-cta-2': 'اصلح موقعي ↗',
-    'srv-wide-name': 'مواقع تعمل —\nلا مجرد مواقع تبدو جميلة.',
-    'srv-wide-desc': 'الموقع الجميل الذي يحيّر الزوار ما هو إلا كتيّب مكلف. كل موقع أبنيه له مهمة واحدة: أخذ الزائر من "وجدتك" إلى "سأتصل بك". أصمم المسار، ثم أبنيه.',
-    // survey options — step 0
-    'opt-0-0': 'خدمة محلية', 'opt-0-1': 'مستقل / مستشار', 'opt-0-2': 'متجر / تجارة إلكترونية', 'opt-0-3': 'مطعم / كافيه', 'opt-0-4': 'أخرى',
-    // step 1
-    'opt-1-0': 'لا يوجد موقع بعد', 'opt-1-1': 'موجود لكن قديم', 'opt-1-2': 'موجود لكن لا يحوّل', 'opt-1-3': 'أستكشف فقط',
-    // step 2
-    'opt-2-0': 'المزيد من العملاء', 'opt-2-1': 'مظهر أكثر احترافية', 'opt-2-2': 'بيع منتجات أونلاين', 'opt-2-3': 'أتمتة الحجوزات', 'opt-2-4': 'أخرى',
-    // step 3
-    'opt-3-0': 'الناس لا يجدونني', 'opt-3-1': 'أبدو أقل مصداقية', 'opt-3-2': 'أشرح نفسي دائماً', 'opt-3-3': 'العملاء لا يتحولون', 'opt-3-4': 'أخرى',
-    // step 4
-    'opt-4-0': 'لا أعرف من أين أبدأ', 'opt-4-1': 'قلق بشأن التكلفة', 'opt-4-2': 'تجارب سيئة سابقاً', 'opt-4-3': 'لم أجد الوقت', 'opt-4-4': 'أخرى',
-    // step 5
-    'opt-5-0': 'صباح أيام الأسبوع', 'opt-5-1': 'مساء أيام الأسبوع', 'opt-5-2': 'المساء', 'opt-5-3': 'عطلة نهاية الأسبوع', 'opt-5-4': 'في أي وقت', 'opt-5-5': 'أخرى',
-    // other placeholders
-    'other-0': 'أخبرني عن نوع مشروعك…', 'other-2': 'أخبرني ما الذي تسعى إليه…',
-    'other-3': 'صِف ذلك بكلماتك…', 'other-4': 'أخبرني أكثر…', 'other-5': 'أخبرني متى يناسبك…',
-    // buttons
-    'btn-next': 'التالي', 'btn-back': 'رجوع', 'btn-send': 'أرسل',
-  }
+en: {
+‘hero-tag’: ‘Web Design · Based in Israel · Built to convert’,
+‘hero-h1-1’: ‘A WEBSITE THAT’, ‘hero-h1-2’: ‘WORKS WHILE YOU SLEEP.’, ‘hero-h1-3’: ‘’, ‘hero-h1-4’: ‘’,
+‘hero-sub’: ‘Most business websites lose the customer<br><strong>before they even make contact.</strong>’,
+‘hero-scroll’: ‘↓ SCROLL TO SEE THE WORK’,
+‘hero-cta’: ‘Start here’,
+‘pain-label’: ‘01 / THE PROBLEM’,
+‘pain-title’: ‘SOUND FAMILIAR?’,
+‘projects-label’: ‘02 / PROJECTS’,
+‘projects-title’: ‘RECENT\nWORK.’,
+‘projects-sub’: ‘Two recent projects — different industries, same standard. Every site built to convert, not just to look good.’,
+‘services-label’: ‘03 / SERVICES’,
+‘services-title’: ‘WHAT I DO.’,
+‘cta-eyebrow’: ‘TAKES 60 SECONDS · NO COMMITMENT’,
+‘cta-title’: ‘TELL ME\nABOUT YOUR\nBUSINESS.’,
+‘cta-sub’: ‘A few quick questions so I can reach out with something actually useful.’,
+‘contact-title’: ‘READY WHEN\n<em>YOU ARE.</em>’,
+‘contact-sub’: ‘No forms, no waiting. Pick your channel.’,
+‘step-q-0’: ‘What type of business do you have?’,
+‘step-q-1’: ‘Do you currently have a website?’,
+‘step-q-2’: ‘What's your main goal?’,
+‘step-q-3’: ‘What's your biggest challenge right now?’,
+‘step-q-4’: ‘What's held you back from sorting this?’,
+‘step-q-5’: ‘When are you usually free to chat?’,
+‘step-q-6’: ‘Last thing — where should I reach you?’,
+‘input-name’: ‘Your name’,
+‘input-contact’: ‘Email or WhatsApp number’,
+‘thanks-h’: ‘GOT IT.\nI'LL BE IN\nTOUCH.’,
+‘thanks-p’: ‘I'll review your answers and reach out within 24 hours. No pressure, just a conversation.’,
+‘bridge-1’: ‘So what does a website that actually works look like?’,
+‘bridge-2’: ‘Ready to close the gap?’,
+‘srv-name-1’: ‘SITES FOR\nFREELANCERS &\nLOCAL BUSINESSES’,
+‘srv-desc-1’: ‘Coaches, contractors, clinics, restaurants, studios, consultants — if you need clients to find you and contact you, I build that. No templates, no guesswork. And if your business doesn't fit a category, I build that too.’,
+‘srv-list-1-a’: ‘Custom design, no templates’,
+‘srv-list-1-b’: ‘Clear flow from landing to contact’,
+‘srv-list-1-c’: ‘Fast, mobile-first, live in weeks’,
+‘srv-cta-1’: ‘Get a website ↗’,
+‘srv-name-2’: ‘YOUR SITE\nISN'T WORKING.\nLET'S FIX IT.’,
+‘srv-desc-2’: ‘Already have a website? I'll look at it like a visitor would, find exactly where people get confused or leave, and fix what's costing you clients.’,
+‘srv-list-2-a’: ‘Full review of how visitors move through your site’,
+‘srv-list-2-b’: ‘Find exactly where people drop off’,
+‘srv-list-2-c’: ‘Redesign the parts that are losing you clients’,
+‘srv-cta-2’: ‘Fix my site ↗’,
+‘srv-wide-name’: ‘WEBSITES THAT WORK —\nNOT JUST LOOK GOOD.’,
+‘srv-wide-desc’: ‘A good-looking website that confuses people is just an expensive brochure. Every site I build has one job: take the visitor from “I found you” to “I'm calling you.” I design the path, then I build it.’,
+},
+ar: {
+‘hero-tag’: ‘تصميم ويب · من إسرائيل · مصمَّم للتحويل’,
+‘hero-h1-1’: ‘موقع يعمل’, ‘hero-h1-2’: ‘وأنت نائم.’, ‘hero-h1-3’: ‘’, ‘hero-h1-4’: ‘’,
+‘hero-sub’: ‘معظم مواقع الأعمال تخسر العميل<br><strong>قبل أن يتواصل أصلاً.</strong>’,
+‘hero-scroll’: ‘↓ مرر لترى الأعمال’,
+‘hero-cta’: ‘ابدأ هنا’,
+‘pain-label’: ‘٠١ / المشكلة’,
+‘pain-title’: ‘هل يبدو مألوفاً؟’,
+‘projects-label’: ‘٠٢ / الأعمال’,
+‘projects-title’: ‘أحدث\nالأعمال.’,
+‘projects-sub’: ‘مشروعان حقيقيان — صناعتان مختلفتان، نفس المعيار. كل موقع مصمَّم للتحويل، لا لمجرد الإبهار.’,
+‘services-label’: ‘٠٣ / الخدمات’,
+‘services-title’: ‘ما الذي أقدمه.’,
+‘cta-eyebrow’: ‘دقيقة واحدة فقط · بدون أي التزام’,
+‘cta-title’: ‘أخبرني\nعن\nمشروعك.’,
+‘cta-sub’: ‘أسئلة سريعة حتى أتواصل معك بما يفيدك فعلاً.’,
+‘contact-title’: ‘جاهز\n<em>متى تريد.</em>’,
+‘contact-sub’: ‘بدون نماذج، بدون انتظار. اختر القناة.’,
+‘step-q-0’: ‘ما نوع مشروعك؟’,
+‘step-q-1’: ‘هل لديك موقع حالياً؟’,
+‘step-q-2’: ‘ما هدفك الأساسي؟’,
+‘step-q-3’: ‘ما أكبر تحدٍّ تواجهه الآن؟’,
+‘step-q-4’: ‘ما الذي أخّرك عن معالجة هذا؟’,
+‘step-q-5’: ‘متى تكون متاحاً عادةً للحديث؟’,
+‘step-q-6’: ‘آخر شيء — كيف أتواصل معك؟’,
+‘input-name’: ‘اسمك’,
+‘input-contact’: ‘البريد الإلكتروني أو واتساب’,
+‘thanks-h’: ‘وصلت.\nسأتواصل\nمعك قريباً.’,
+‘thanks-p’: ‘سأراجع إجاباتك وأتواصل معك خلال 24 ساعة. بدون ضغط، فقط محادثة.’,
+‘bridge-1’: ‘كيف يبدو الموقع الذي يعمل فعلاً؟’,
+‘bridge-2’: ‘مستعد لإغلاق الفجوة؟’,
+‘srv-name-1’: ‘مواقع للمستقلين\nوالمشاريع المحلية’,
+‘srv-desc-1’: ‘كوتش، مقاول، عيادة، مطعم، استوديو، مستشار — إذا كنت تحتاج عملاء يجدونك ويتواصلون معك، أنا أبني ذلك. بدون قوالب. وإذا كان مشروعك لا يشبه أي تصنيف، أبني ذلك أيضاً.’,
+‘srv-list-1-a’: ‘تصميم مخصص، بدون قوالب جاهزة’,
+‘srv-list-1-b’: ‘مسار واضح من الوصول إلى التواصل’,
+‘srv-list-1-c’: ‘سريع، مناسب للموبايل، يُطلَق في أسابيع’,
+‘srv-cta-1’: ‘احصل على موقع ↗’,
+‘srv-name-2’: ‘موقعك لا يشتغل.\nخلينا نصلحه.’,
+‘srv-desc-2’: ‘عندك موقع بالفعل؟ سأنظر إليه كما ينظر إليه الزائر، وأجد بالضبط أين يتشتت الناس أو يغادرون، ثم أصلح ما يكلفك العملاء.’,
+‘srv-list-2-a’: ‘مراجعة كاملة لكيفية تحرك الزوار في موقعك’,
+‘srv-list-2-b’: ‘تحديد بالضبط أين يغادر الناس’,
+‘srv-list-2-c’: ‘إعادة تصميم الأجزاء التي تخسّرك العملاء’,
+‘srv-cta-2’: ‘اصلح موقعي ↗’,
+‘srv-wide-name’: ‘مواقع تعمل —\nلا مجرد مواقع تبدو جميلة.’,
+‘srv-wide-desc’: ‘الموقع الجميل الذي يحيّر الزوار ما هو إلا كتيّب مكلف. كل موقع أبنيه له مهمة واحدة: أخذ الزائر من “وجدتك” إلى “سأتصل بك”. أصمم المسار، ثم أبنيه.’,
+// survey options — step 0
+‘opt-0-0’: ‘خدمة محلية’, ‘opt-0-1’: ‘مستقل / مستشار’, ‘opt-0-2’: ‘متجر / تجارة إلكترونية’, ‘opt-0-3’: ‘مطعم / كافيه’, ‘opt-0-4’: ‘أخرى’,
+// step 1
+‘opt-1-0’: ‘لا يوجد موقع بعد’, ‘opt-1-1’: ‘موجود لكن قديم’, ‘opt-1-2’: ‘موجود لكن لا يحوّل’, ‘opt-1-3’: ‘أستكشف فقط’,
+// step 2
+‘opt-2-0’: ‘المزيد من العملاء’, ‘opt-2-1’: ‘مظهر أكثر احترافية’, ‘opt-2-2’: ‘بيع منتجات أونلاين’, ‘opt-2-3’: ‘أتمتة الحجوزات’, ‘opt-2-4’: ‘أخرى’,
+// step 3
+‘opt-3-0’: ‘الناس لا يجدونني’, ‘opt-3-1’: ‘أبدو أقل مصداقية’, ‘opt-3-2’: ‘أشرح نفسي دائماً’, ‘opt-3-3’: ‘العملاء لا يتحولون’, ‘opt-3-4’: ‘أخرى’,
+// step 4
+‘opt-4-0’: ‘لا أعرف من أين أبدأ’, ‘opt-4-1’: ‘قلق بشأن التكلفة’, ‘opt-4-2’: ‘تجارب سيئة سابقاً’, ‘opt-4-3’: ‘لم أجد الوقت’, ‘opt-4-4’: ‘أخرى’,
+// step 5
+‘opt-5-0’: ‘صباح أيام الأسبوع’, ‘opt-5-1’: ‘مساء أيام الأسبوع’, ‘opt-5-2’: ‘المساء’, ‘opt-5-3’: ‘عطلة نهاية الأسبوع’, ‘opt-5-4’: ‘في أي وقت’, ‘opt-5-5’: ‘أخرى’,
+// other placeholders
+‘other-0’: ‘أخبرني عن نوع مشروعك…’, ‘other-2’: ‘أخبرني ما الذي تسعى إليه…’,
+‘other-3’: ‘صِف ذلك بكلماتك…’, ‘other-4’: ‘أخبرني أكثر…’, ‘other-5’: ‘أخبرني متى يناسبك…’,
+// buttons
+‘btn-next’: ‘التالي’, ‘btn-back’: ‘رجوع’, ‘btn-send’: ‘أرسل’,
+}
 };
 
 function setLang(lang) {
-  const t = translations[lang];
-  const isAr = lang === 'ar';
-  document.body.classList.toggle('rtl', isAr);
-  document.documentElement.lang = lang;
-  document.documentElement.dir  = isAr ? 'rtl' : 'ltr';
-  document.getElementById('btnEn').classList.toggle('active', !isAr);
-  document.getElementById('btnAr').classList.toggle('active',  isAr);
-  document.querySelectorAll('[data-en][data-ar]').forEach(el => {
-    el.innerHTML = el.dataset[lang];
-  });
+const t = translations[lang];
+const isAr = lang === ‘ar’;
+document.body.classList.toggle(‘rtl’, isAr);
+document.documentElement.lang = lang;
+document.documentElement.dir  = isAr ? ‘rtl’ : ‘ltr’;
+document.getElementById(‘btnEn’).classList.toggle(‘active’, !isAr);
+document.getElementById(‘btnAr’).classList.toggle(‘active’,  isAr);
+document.querySelectorAll(’[data-en][data-ar]’).forEach(el => {
+el.innerHTML = el.dataset[lang];
+});
 
-  const q  = (sel)      => document.querySelector(sel);
-  const st = (sel, key) => { const e = q(sel); if (e && t[key]) e.innerHTML = (t[key]).replace(/\n/g,'<br>'); };
+const q  = (sel)      => document.querySelector(sel);
+const st = (sel, key) => { const e = q(sel); if (e && t[key]) e.innerHTML = (t[key]).replace(/\n/g,’<br>’); };
 
-  // hero
-  if (q('.hero-tag'))    q('.hero-tag').textContent = t['hero-tag'];
-  const spans = document.querySelectorAll('.hero-h1 span');
-  ['hero-h1-1','hero-h1-2','hero-h1-3','hero-h1-4'].forEach((k,i) => { if (spans[i] && t[k]) spans[i].textContent = t[k]; });
-  if (q('.hero-sub'))    q('.hero-sub').innerHTML = t['hero-sub'];
-  if (q('.hero-scroll')) q('.hero-scroll').textContent = t['hero-scroll'];
-  if (q('.btn-big'))     { const lbl = q('.btn-big .btn-label'); if (lbl) lbl.textContent = t['hero-cta']; }
+// hero
+if (q(’.hero-tag’))    q(’.hero-tag’).textContent = t[‘hero-tag’];
+const spans = document.querySelectorAll(’.hero-h1 span’);
+[‘hero-h1-1’,‘hero-h1-2’,‘hero-h1-3’,‘hero-h1-4’].forEach((k,i) => { if (spans[i] && t[k]) spans[i].textContent = t[k]; });
+if (q(’.hero-sub’))    q(’.hero-sub’).innerHTML = t[‘hero-sub’];
+if (q(’.hero-scroll’)) q(’.hero-scroll’).textContent = t[‘hero-scroll’];
+if (q(’.btn-big’))     { const lbl = q(’.btn-big .btn-label’); if (lbl) lbl.textContent = t[‘hero-cta’]; }
 
-  // sections
-  st('.pain-section .section-num',     'pain-label');
-  st('.pain-section .section-title',   'pain-title');
-  st('.projects-section .section-num', 'projects-label');
-  st('.projects-section .section-title','projects-title');
-  const ps = q('.projects-sub'); if (ps && t['projects-sub']) ps.textContent = t['projects-sub'];
-  st('.services-header .section-num',  'services-label');
-  st('.services-header .section-title','services-title');
+// sections
+st(’.pain-section .section-num’,     ‘pain-label’);
+st(’.pain-section .section-title’,   ‘pain-title’);
+st(’.projects-section .section-num’, ‘projects-label’);
+st(’.projects-section .section-title’,‘projects-title’);
+const ps = q(’.projects-sub’); if (ps && t[‘projects-sub’]) ps.textContent = t[‘projects-sub’];
+st(’.services-header .section-num’,  ‘services-label’);
+st(’.services-header .section-title’,‘services-title’);
 
-  // bridge lines
-  document.querySelectorAll('.bridge-text').forEach((b, i) => {
-    if (t[i === 0 ? 'bridge-1' : 'bridge-2']) b.textContent = t[i === 0 ? 'bridge-1' : 'bridge-2'];
-  });
+// bridge lines
+document.querySelectorAll(’.bridge-text’).forEach((b, i) => {
+if (t[i === 0 ? ‘bridge-1’ : ‘bridge-2’]) b.textContent = t[i === 0 ? ‘bridge-1’ : ‘bridge-2’];
+});
 
-  // services
-  const srvNames = document.querySelectorAll('.srv-card-name');
-  const srvDescs = document.querySelectorAll('.srv-card-desc');
-  const srvCtas  = document.querySelectorAll('.srv-card-cta');
-  const srvLists = document.querySelectorAll('.srv-card-list');
-  if (srvNames[0]) srvNames[0].innerHTML = (t['srv-name-1']||'').replace(/\n/g,'<br>');
-  if (srvNames[1]) srvNames[1].innerHTML = (t['srv-name-2']||'').replace(/\n/g,'<br>');
-  if (srvNames[2]) srvNames[2].innerHTML = (t['srv-wide-name']||'').replace(/\n/g,'<br>');
-  if (srvDescs[0]) srvDescs[0].textContent = t['srv-desc-1']||'';
-  if (srvDescs[1]) srvDescs[1].textContent = t['srv-desc-2']||'';
-  if (srvDescs[2]) srvDescs[2].textContent = t['srv-wide-desc']||'';
-  if (srvCtas[0])  srvCtas[0].textContent  = t['srv-cta-1']||'';
-  if (srvCtas[1])  srvCtas[1].textContent  = t['srv-cta-2']||'';
-  if (srvLists[0]) { const li = srvLists[0].querySelectorAll('li'); ['a','b','c'].forEach((x,i) => { if (li[i] && t['srv-list-1-'+x]) li[i].textContent = t['srv-list-1-'+x]; }); }
-  if (srvLists[1]) { const li = srvLists[1].querySelectorAll('li'); ['a','b','c'].forEach((x,i) => { if (li[i] && t['srv-list-2-'+x]) li[i].textContent = t['srv-list-2-'+x]; }); }
+// services
+const srvNames = document.querySelectorAll(’.srv-card-name’);
+const srvDescs = document.querySelectorAll(’.srv-card-desc’);
+const srvCtas  = document.querySelectorAll(’.srv-card-cta’);
+const srvLists = document.querySelectorAll(’.srv-card-list’);
+if (srvNames[0]) srvNames[0].innerHTML = (t[‘srv-name-1’]||’’).replace(/\n/g,’<br>’);
+if (srvNames[1]) srvNames[1].innerHTML = (t[‘srv-name-2’]||’’).replace(/\n/g,’<br>’);
+if (srvNames[2]) srvNames[2].innerHTML = (t[‘srv-wide-name’]||’’).replace(/\n/g,’<br>’);
+if (srvDescs[0]) srvDescs[0].textContent = t[‘srv-desc-1’]||’’;
+if (srvDescs[1]) srvDescs[1].textContent = t[‘srv-desc-2’]||’’;
+if (srvDescs[2]) srvDescs[2].textContent = t[‘srv-wide-desc’]||’’;
+if (srvCtas[0])  srvCtas[0].textContent  = t[‘srv-cta-1’]||’’;
+if (srvCtas[1])  srvCtas[1].textContent  = t[‘srv-cta-2’]||’’;
+if (srvLists[0]) { const li = srvLists[0].querySelectorAll(‘li’); [‘a’,‘b’,‘c’].forEach((x,i) => { if (li[i] && t[‘srv-list-1-’+x]) li[i].textContent = t[‘srv-list-1-’+x]; }); }
+if (srvLists[1]) { const li = srvLists[1].querySelectorAll(‘li’); [‘a’,‘b’,‘c’].forEach((x,i) => { if (li[i] && t[‘srv-list-2-’+x]) li[i].textContent = t[‘srv-list-2-’+x]; }); }
 
-  // survey
-  st('.survey-eyebrow', 'cta-eyebrow');
-  const sh = q('.survey-h'); if (sh) sh.innerHTML = (t['cta-title']||'').replace(/\n/g,'<br>');
-  const ss = q('.survey-sub'); if (ss) ss.textContent = t['cta-sub']||'';
-  document.querySelectorAll('.step-q').forEach((e,i) => { if (t['step-q-'+i]) e.textContent = t['step-q-'+i]; });
-  const iN = document.getElementById('inputName');   if (iN) iN.placeholder = t['input-name'];
-  const iE = document.getElementById('inputEmail');  if (iE) iE.placeholder = t['input-contact'];
-  const th = q('.thanks-h'); if (th) th.innerHTML = (t['thanks-h']||'').replace(/\n/g,'<br>');
-  const tp = q('.thanks-p'); if (tp) tp.textContent = t['thanks-p']||'';
+// survey
+st(’.survey-eyebrow’, ‘cta-eyebrow’);
+const sh = q(’.survey-h’); if (sh) sh.innerHTML = (t[‘cta-title’]||’’).replace(/\n/g,’<br>’);
+const ss = q(’.survey-sub’); if (ss) ss.textContent = t[‘cta-sub’]||’’;
+document.querySelectorAll(’.step-q’).forEach((e,i) => { if (t[‘step-q-’+i]) e.textContent = t[‘step-q-’+i]; });
+const iN = document.getElementById(‘inputName’);   if (iN) iN.placeholder = t[‘input-name’];
+const iE = document.getElementById(‘inputEmail’);  if (iE) iE.placeholder = t[‘input-contact’];
+const th = q(’.thanks-h’); if (th) th.innerHTML = (t[‘thanks-h’]||’’).replace(/\n/g,’<br>’);
+const tp = q(’.thanks-p’); if (tp) tp.textContent = t[‘thanks-p’]||’’;
 
-  // contact
-  st('.contact-left h3', 'contact-title');
-  const cs = q('.contact-left p'); if (cs) cs.textContent = t['contact-sub']||'';
+// contact
+st(’.contact-left h3’, ‘contact-title’);
+const cs = q(’.contact-left p’); if (cs) cs.textContent = t[‘contact-sub’]||’’;
 
-  // survey options
-  if (isAr) {
-    const optMap = {
-      0: ['opt-0-0','opt-0-1','opt-0-2','opt-0-3','opt-0-4'],
-      1: ['opt-1-0','opt-1-1','opt-1-2','opt-1-3'],
-      2: ['opt-2-0','opt-2-1','opt-2-2','opt-2-3','opt-2-4'],
-      3: ['opt-3-0','opt-3-1','opt-3-2','opt-3-3','opt-3-4'],
-      4: ['opt-4-0','opt-4-1','opt-4-2','opt-4-3','opt-4-4'],
-      5: ['opt-5-0','opt-5-1','opt-5-2','opt-5-3','opt-5-4','opt-5-5'],
-    };
-    Object.entries(optMap).forEach(([step, keys]) => {
-      const opts = document.querySelectorAll(`.s-opt[data-q="${step}"] .s-opt-label`);
-      keys.forEach((k, i) => { if (opts[i] && t[k]) opts[i].textContent = t[k]; });
-    });
-    // other placeholders
-    ['0','2','3','4','5'].forEach(n => {
-      const el = document.getElementById('other' + n);
-      if (el && t['other-' + n]) el.placeholder = t['other-' + n];
-    });
-    // buttons
-    document.querySelectorAll('.s-btn-next').forEach(btn => {
-      const arrow = btn.querySelector('span');
-      btn.childNodes[0].textContent = t['btn-next'] + ' ';
-      if (arrow) arrow.textContent = '←';
-    });
-    document.getElementById('next6').childNodes[0].textContent = t['btn-send'] + ' ';
-    document.querySelectorAll('.s-btn-back').forEach(btn => { btn.textContent = '→ ' + t['btn-back']; });
-  } else {
-    // restore EN option labels
-    const enOpts = [
-      ['LOCAL SERVICE','FREELANCER / CONSULTANT','SHOP / E-COMMERCE','RESTAURANT / CAFÉ','OTHER'],
-      ['NO WEBSITE YET','HAVE ONE, OUTDATED','HAVE ONE, DOESN\'T CONVERT','JUST LOOKING AROUND'],
-      ['GET MORE CLIENTS','LOOK MORE PROFESSIONAL','SELL PRODUCTS ONLINE','AUTOMATE BOOKINGS','OTHER'],
-      ['PEOPLE CAN\'T FIND ME','LOOK LESS CREDIBLE','ALWAYS EXPLAINING MYSELF','LEADS DON\'T CONVERT','OTHER'],
-      ['DON\'T KNOW WHERE TO START','WORRIED ABOUT COST','BAD EXPERIENCE BEFORE','NEVER GOT AROUND TO IT','OTHER'],
-      ['WEEKDAY MORNINGS','WEEKDAY AFTERNOONS','EVENINGS','WEEKENDS','ANYTIME','OTHER'],
-    ];
-    enOpts.forEach((labels, step) => {
-      const opts = document.querySelectorAll(`.s-opt[data-q="${step}"] .s-opt-label`);
-      labels.forEach((lbl, i) => { if (opts[i]) opts[i].textContent = lbl; });
-    });
-    // other placeholders EN
-    const enPlaceholders = {0:'Tell me what kind of business…',2:'Tell me what you\'re after…',3:'Describe it in your own words…',4:'Tell me more…',5:'Let me know when works for you…'};
-    Object.entries(enPlaceholders).forEach(([n, ph]) => { const el = document.getElementById('other'+n); if (el) el.placeholder = ph; });
-    // buttons EN
-    document.querySelectorAll('.s-btn-next').forEach(btn => {
-      const arrow = btn.querySelector('span');
-      btn.childNodes[0].textContent = 'NEXT ';
-      if (arrow) arrow.textContent = '→';
-    });
-    document.getElementById('next6').childNodes[0].textContent = 'SEND IT ';
-    document.querySelectorAll('.s-btn-back').forEach(btn => { if (btn.style.visibility !== 'hidden') btn.textContent = '← BACK'; });
-  }
+// survey options
+if (isAr) {
+const optMap = {
+0: [‘opt-0-0’,‘opt-0-1’,‘opt-0-2’,‘opt-0-3’,‘opt-0-4’],
+1: [‘opt-1-0’,‘opt-1-1’,‘opt-1-2’,‘opt-1-3’],
+2: [‘opt-2-0’,‘opt-2-1’,‘opt-2-2’,‘opt-2-3’,‘opt-2-4’],
+3: [‘opt-3-0’,‘opt-3-1’,‘opt-3-2’,‘opt-3-3’,‘opt-3-4’],
+4: [‘opt-4-0’,‘opt-4-1’,‘opt-4-2’,‘opt-4-3’,‘opt-4-4’],
+5: [‘opt-5-0’,‘opt-5-1’,‘opt-5-2’,‘opt-5-3’,‘opt-5-4’,‘opt-5-5’],
+};
+Object.entries(optMap).forEach(([step, keys]) => {
+const opts = document.querySelectorAll(`.s-opt[data-q="${step}"] .s-opt-label`);
+keys.forEach((k, i) => { if (opts[i] && t[k]) opts[i].textContent = t[k]; });
+});
+// other placeholders
+[‘0’,‘2’,‘3’,‘4’,‘5’].forEach(n => {
+const el = document.getElementById(‘other’ + n);
+if (el && t[‘other-’ + n]) el.placeholder = t[‘other-’ + n];
+});
+// buttons
+document.querySelectorAll(’.s-btn-next’).forEach(btn => {
+const arrow = btn.querySelector(‘span’);
+btn.childNodes[0].textContent = t[‘btn-next’] + ’ ‘;
+if (arrow) arrow.textContent = ‘←’;
+});
+document.getElementById(‘next6’).childNodes[0].textContent = t[‘btn-send’] + ’ ‘;
+document.querySelectorAll(’.s-btn-back’).forEach(btn => { btn.textContent = ‘→ ’ + t[‘btn-back’]; });
+} else {
+// restore EN option labels
+const enOpts = [
+[‘LOCAL SERVICE’,‘FREELANCER / CONSULTANT’,‘SHOP / E-COMMERCE’,‘RESTAURANT / CAFÉ’,‘OTHER’],
+[‘NO WEBSITE YET’,‘HAVE ONE, OUTDATED’,‘HAVE ONE, DOESN'T CONVERT’,‘JUST LOOKING AROUND’],
+[‘GET MORE CLIENTS’,‘LOOK MORE PROFESSIONAL’,‘SELL PRODUCTS ONLINE’,‘AUTOMATE BOOKINGS’,‘OTHER’],
+[‘PEOPLE CAN'T FIND ME’,‘LOOK LESS CREDIBLE’,‘ALWAYS EXPLAINING MYSELF’,‘LEADS DON'T CONVERT’,‘OTHER’],
+[‘DON'T KNOW WHERE TO START’,‘WORRIED ABOUT COST’,‘BAD EXPERIENCE BEFORE’,‘NEVER GOT AROUND TO IT’,‘OTHER’],
+[‘WEEKDAY MORNINGS’,‘WEEKDAY AFTERNOONS’,‘EVENINGS’,‘WEEKENDS’,‘ANYTIME’,‘OTHER’],
+];
+enOpts.forEach((labels, step) => {
+const opts = document.querySelectorAll(`.s-opt[data-q="${step}"] .s-opt-label`);
+labels.forEach((lbl, i) => { if (opts[i]) opts[i].textContent = lbl; });
+});
+// other placeholders EN
+const enPlaceholders = {0:‘Tell me what kind of business…’,2:‘Tell me what you're after…’,3:‘Describe it in your own words…’,4:‘Tell me more…’,5:‘Let me know when works for you…’};
+Object.entries(enPlaceholders).forEach(([n, ph]) => { const el = document.getElementById(‘other’+n); if (el) el.placeholder = ph; });
+// buttons EN
+document.querySelectorAll(’.s-btn-next’).forEach(btn => {
+const arrow = btn.querySelector(‘span’);
+btn.childNodes[0].textContent = ’NEXT ’;
+if (arrow) arrow.textContent = ‘→’;
+});
+document.getElementById(‘next6’).childNodes[0].textContent = ‘SEND IT ‘;
+document.querySelectorAll(’.s-btn-back’).forEach(btn => { if (btn.style.visibility !== ‘hidden’) btn.textContent = ‘← BACK’; });
+}
 
-  localStorage.setItem('uxabdul-lang', lang);
+localStorage.setItem(‘uxabdul-lang’, lang);
 }
 
 (function() {
-  const saved = localStorage.getItem('uxabdul-lang');
-  const bl = navigator.language || '';
-  setLang(saved || (bl.startsWith('ar') ? 'ar' : 'en'));
+const saved = localStorage.getItem(‘uxabdul-lang’);
+const bl = navigator.language || ‘’;
+setLang(saved || (bl.startsWith(‘ar’) ? ‘ar’ : ‘en’));
 })();
 
 // ── SURVEY ──
 let currentStep = 0;
 const answers = {};
 
-document.querySelectorAll('.s-opt').forEach(opt => {
-  opt.addEventListener('click', () => {
-    const q = opt.dataset.q;
-    document.querySelectorAll(`.s-opt[data-q="${q}"]`).forEach(o => o.classList.remove('selected'));
-    opt.classList.add('selected');
-    answers[q] = opt.dataset.val;
+document.querySelectorAll(’.s-opt’).forEach(opt => {
+opt.addEventListener(‘click’, () => {
+const q = opt.dataset.q;
+document.querySelectorAll(`.s-opt[data-q="${q}"]`).forEach(o => o.classList.remove(‘selected’));
+opt.classList.add(‘selected’);
+answers[q] = opt.dataset.val;
 
-    const otherInput = document.getElementById('other' + q);
-    if (otherInput) {
-      if (opt.dataset.val === 'Other') {
-        otherInput.classList.add('show');
-        otherInput.focus();
-        otherInput.addEventListener('input', () => { answers[q] = otherInput.value.trim() || 'Other'; });
-      } else {
-        otherInput.classList.remove('show');
-      }
-    }
-    const nextBtn = document.getElementById('next' + q);
-    if (nextBtn) nextBtn.disabled = false;
-  });
+```
+const otherInput = document.getElementById('other' + q);
+if (otherInput) {
+  if (opt.dataset.val === 'Other') {
+    otherInput.classList.add('show');
+    otherInput.focus();
+    otherInput.addEventListener('input', () => { answers[q] = otherInput.value.trim() || 'Other'; });
+  } else {
+    otherInput.classList.remove('show');
+  }
+}
+const nextBtn = document.getElementById('next' + q);
+if (nextBtn) nextBtn.disabled = false;
+```
+
+});
 });
 
 function checkContactInputs() {
-  const n = document.getElementById('inputName').value.trim();
-  const c = document.getElementById('inputEmail').value.trim();
-  document.getElementById('next6').disabled = !(n && c);
+const n = document.getElementById(‘inputName’).value.trim();
+const c = document.getElementById(‘inputEmail’).value.trim();
+document.getElementById(‘next6’).disabled = !(n && c);
 }
-document.getElementById('inputName').addEventListener('input', checkContactInputs);
-document.getElementById('inputEmail').addEventListener('input', checkContactInputs);
-document.getElementById('next6').addEventListener('click', submitSurvey);
+document.getElementById(‘inputName’).addEventListener(‘input’, checkContactInputs);
+document.getElementById(‘inputEmail’).addEventListener(‘input’, checkContactInputs);
+document.getElementById(‘next6’).addEventListener(‘click’, submitSurvey);
 
 function updateDots(step) {
-  document.querySelectorAll('.s-dot').forEach((dot, i) => {
-    dot.classList.remove('active','done');
-    if (i < step) dot.classList.add('done');
-    else if (i === step) dot.classList.add('active');
-  });
+document.querySelectorAll(’.s-dot’).forEach((dot, i) => {
+dot.classList.remove(‘active’,‘done’);
+if (i < step) dot.classList.add(‘done’);
+else if (i === step) dot.classList.add(‘active’);
+});
 }
 
 function goNext(fromStep) {
-  const steps = document.querySelectorAll('.survey-step');
-  steps[fromStep].classList.remove('active');
-  currentStep = fromStep + 1;
-  steps[currentStep].classList.add('active');
-  updateDots(currentStep);
+const steps = document.querySelectorAll(’.survey-step’);
+steps[fromStep].classList.remove(‘active’);
+currentStep = fromStep + 1;
+steps[currentStep].classList.add(‘active’);
+updateDots(currentStep);
 }
 
 function goBack() {
-  const steps = document.querySelectorAll('.survey-step');
-  steps[currentStep].classList.remove('active');
-  currentStep--;
-  steps[currentStep].classList.add('active');
-  updateDots(currentStep);
+const steps = document.querySelectorAll(’.survey-step’);
+steps[currentStep].classList.remove(‘active’);
+currentStep–;
+steps[currentStep].classList.add(‘active’);
+updateDots(currentStep);
 }
 
 [0,1,2,3,4,5].forEach(i => {
-  document.getElementById('next'+i).addEventListener('click', () => goNext(i));
+document.getElementById(‘next’+i).addEventListener(‘click’, () => goNext(i));
 });
 
 function submitSurvey() {
-  const name    = document.getElementById('inputName').value.trim();
-  const contact = document.getElementById('inputEmail').value.trim();
-  document.getElementById('surveyHeader').style.display = 'none';
-  document.getElementById('surveySteps').style.display  = 'none';
-  document.getElementById('surveyThanks').classList.add('show');
+const name    = document.getElementById(‘inputName’).value.trim();
+const contact = document.getElementById(‘inputEmail’).value.trim();
+document.getElementById(‘surveyHeader’).style.display = ‘none’;
+document.getElementById(‘surveySteps’).style.display  = ‘none’;
+document.getElementById(‘surveyThanks’).classList.add(‘show’);
 
-  // Web3Forms: go to web3forms.com, enter abedzoabi917@gmail.com, paste your key below
-  fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
-      access_key:      'fd362674-23a1-4acc-9eb0-7b6f43c8cefa',
-      subject:         'New lead from UX Abdul — ' + name,
-      from_name:       'UX Abdul Website',
-      name,
-      contact,
-      business_type:   answers[0] || '—',
-      website_status:  answers[1] || '—',
-      main_goal:       answers[2] || '—',
-      biggest_problem: answers[3] || '—',
-      stopping_them:   answers[4] || '—',
-      best_time:       answers[5] || '—',
-    })
-  }).catch(() => {});
+// Web3Forms: go to web3forms.com, enter abedzoabi917@gmail.com, paste your key below
+fetch(‘https://api.web3forms.com/submit’, {
+method: ‘POST’,
+headers: { ‘Content-Type’: ‘application/json’, ‘Accept’: ‘application/json’ },
+body: JSON.stringify({
+access_key:      ‘fd362674-23a1-4acc-9eb0-7b6f43c8cefa’,
+subject:         ’New lead from UX Abdul — ’ + name,
+from_name:       ‘UX Abdul Website’,
+name,
+contact,
+business_type:   answers[0] || ‘—’,
+website_status:  answers[1] || ‘—’,
+main_goal:       answers[2] || ‘—’,
+biggest_problem: answers[3] || ‘—’,
+stopping_them:   answers[4] || ‘—’,
+best_time:       answers[5] || ‘—’,
+})
+}).catch(() => {});
 }
 
 // ── NOTIFICATION STACK ANIMATION ──
 (function() {
-  const ids     = ['hn1','hn2','hn3','hn4'];
-  const mobileIds = ['hn1m','hn2m','hn3m','hn4m'];
-  const delays  = [400, 1100, 2000, 2900];
-  let fired = false;
+const ids     = [‘hn1’,‘hn2’,‘hn3’,‘hn4’];
+const mobileIds = [‘hn1m’,‘hn2m’,‘hn3m’,‘hn4m’];
+const delays  = [400, 1100, 2000, 2900];
+let fired = false;
 
-  function animateSet(set) {
-    set.forEach((id, i) => {
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) el.classList.add('show');
-      }, delays[i]);
-    });
-  }
+function animateSet(set) {
+set.forEach((id, i) => {
+setTimeout(() => {
+const el = document.getElementById(id);
+if (el) el.classList.add(‘show’);
+}, delays[i]);
+});
+}
 
-  // desktop: trigger when bg wrap enters view
-  const wrap = document.getElementById('heroNotifWrap');
-  if (wrap) {
-    const obs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && !fired) {
-        fired = true;
-        animateSet(ids);
-        animateSet(mobileIds);
-      }
-    }, { threshold: 0.1 });
-    obs.observe(wrap);
-  }
+// desktop: trigger when bg wrap enters view
+const wrap = document.getElementById(‘heroNotifWrap’);
+if (wrap) {
+const obs = new IntersectionObserver(entries => {
+if (entries[0].isIntersecting && !fired) {
+fired = true;
+animateSet(ids);
+animateSet(mobileIds);
+}
+}, { threshold: 0.1 });
+obs.observe(wrap);
+}
 
-  // mobile fallback: if bg is hidden, trigger on mobile block
-  setTimeout(() => {
-    if (!fired) {
-      fired = true;
-      animateSet(ids);
-      animateSet(mobileIds);
-    }
-  }, 300);
+// mobile fallback: if bg is hidden, trigger on mobile block
+setTimeout(() => {
+if (!fired) {
+fired = true;
+animateSet(ids);
+animateSet(mobileIds);
+}
+}, 300);
 })();
 
 </script>
