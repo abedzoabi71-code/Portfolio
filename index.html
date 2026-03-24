@@ -152,13 +152,105 @@ body.rtl .s-btn-back::before { content: none; }
     linear-gradient(to bottom, rgba(6,12,15,0.7) 0%, transparent 22%);
 }
 
-/* ── NOTIFICATIONS IN BACKGROUND ── */
-.hero-notif-bg {
+/* ── HERO VISUAL (replaces notification mockups) ── */
+.hero-visual {
   position: absolute; inset: 0; z-index: 1;
-  display: flex; flex-direction: column;
-  align-items: flex-end; justify-content: center;
-  padding: calc(var(--nav-h) + 2rem) 3.5rem 12rem 3rem;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding: calc(var(--nav-h) + 2rem) 4rem 8rem 3rem;
   pointer-events: none;
+}
+.hero-visual img {
+  width: clamp(260px, 32vw, 420px);
+  height: auto; display: block; border-radius: 20px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+@media (max-width:600px) {
+  .hero-visual { padding: 0; justify-content: center; }
+  /* small gap between nav and image */
+  .hero-visual img {
+    position: absolute; top: calc(var(--nav-h) + 12px); left: 0; width: 100vw; max-width: none;
+    height: 44vh; border-radius: 0; object-fit: cover; object-position: center top;
+  }
+}
+
+/* ── PHONE FRAME ── */
+.phone-frame {
+  position: relative;
+  width: clamp(260px, 28vw, 340px);
+  background: #0d1a1f;
+  border-radius: 44px;
+  border: 2px solid rgba(0,194,212,0.18);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.6),
+    0 32px 80px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.04),
+    0 0 60px rgba(0,194,212,0.05);
+  padding: 14px 10px 20px;
+}
+/* power button */
+.phone-side-btn {
+  position: absolute;
+  background: #0d1a1f;
+  border: 2px solid rgba(0,194,212,0.15);
+  border-radius: 2px;
+}
+.phone-btn-power {
+  right: -4px; top: 100px;
+  width: 4px; height: 52px;
+  border-radius: 0 2px 2px 0;
+}
+.phone-btn-vol1 {
+  left: -4px; top: 80px;
+  width: 4px; height: 36px;
+  border-radius: 2px 0 0 2px;
+}
+.phone-btn-vol2 {
+  left: -4px; top: 126px;
+  width: 4px; height: 36px;
+  border-radius: 2px 0 0 2px;
+}
+.phone-screen {
+  background: #060c0f;
+  border-radius: 34px;
+  overflow: hidden;
+  position: relative;
+}
+.phone-notch {
+  width: 90px; height: 28px;
+  background: #0d1a1f;
+  border-radius: 0 0 20px 20px;
+  margin: 0 auto 0;
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+}
+.phone-notch::after {
+  content: '';
+  width: 10px; height: 10px;
+  background: #0a1214;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0,194,212,0.2);
+}
+.phone-status-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 6px 16px 10px;
+  font-family: var(--fm); font-size: 0.52rem; letter-spacing: 0.1em;
+  color: #2a4a58;
+}
+.phone-icons {
+  font-size: 0.38rem; letter-spacing: 0.05em; color: #1a3040;
+}
+.phone-frame .notif-stack {
+  width: 100%;
+  padding: 0 8px 14px;
+  gap: 6px;
+}
+.notif-frame-label {
+  font-family: var(--fm);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: rgba(0,194,212,0.55);
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 .notif-time-label {
   font-family: var(--fm);
@@ -236,6 +328,13 @@ body.rtl .s-btn-back::before { content: none; }
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+
+.phone-frame .hero-notif {
+  border-radius: 10px;
+  padding: 9px 11px;
+}
+.phone-frame .hn-title { font-size: 0.7rem; }
+.phone-frame .hn-icon { width: 30px; height: 30px; font-size: 13px; }
 
 /* notif label badge */
 .notif-label-badge {
@@ -344,6 +443,17 @@ body.rtl .s-btn-back::before { content: none; }
   .hero-notif-mobile { display: flex; }
   .hero-notif-bg { display: none !important; }
 }
+.hero-eyeline {
+  font-family: var(--fb);
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  color: #4a6a78;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  margin-bottom: 1.4rem;
+  max-width: 560px;
+}
+
 /* pill button with arrow circle */
 .btn-big {
   display: inline-flex; align-items: center; gap: 0;
@@ -405,6 +515,19 @@ body.rtl .btn-big .btn-arrow {
 }
 .btn-big:hover { color: var(--bg); }
 .btn-big:hover .btn-arrow { background: transparent; }
+.btn-ghost-cta {
+  font-family: var(--fm);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: #2a4a58;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid #1a2a30;
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost-cta:hover { color: var(--accent); border-color: var(--accent); }
+
 .hero-scroll { font-family: var(--fm); font-size: 0.62rem; letter-spacing: 0.2em; color: #2a3a40; margin-top: 1rem; }
 
 
@@ -619,6 +742,16 @@ body.rtl .btn-big .btn-arrow {
   color: var(--accent); opacity: 0; transition: opacity 0.2s;
 }
 
+.s-multi-hint {
+  font-family: var(--fm);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  color: rgba(10,13,15,0.45);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  margin-top: -1.2rem;
+}
+
 /* name input step */
 .s-name-wrap { display: flex; flex-direction: column; gap: 1rem; }
 .s-input {
@@ -733,8 +866,9 @@ footer {
   .lang-btn { padding: 0.3rem 0.55rem; }
   .nav-cta { padding: 0.4rem 0.9rem !important; font-size: 0.6rem !important; letter-spacing: 0.12em !important; }
 
-  /* hero: tighter on mobile */
-  .hero { padding: 0 1.5rem 3.5rem; justify-content: flex-end; }
+  /* hero: tighter on mobile. push content below the visual area */
+  /* ensure space between image bottom and hero heading */
+  .hero { padding: calc(var(--nav-h) + 44vh + 16px) 1.5rem 3.5rem; justify-content: flex-end; }
   .hero-h1 { font-size: clamp(2.6rem, 10vw, 4rem); margin-bottom: 0.9rem; }
   .hero-bottom { flex-direction: column; align-items: flex-start; gap: 1.2rem; padding-top: 0.9rem; }
   .hero-cta-group { margin-left: 0; }
@@ -970,110 +1104,20 @@ footer {
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg" aria-hidden="true"></div>
-
-  <!-- NOTIFICATIONS: background layer (desktop) -->
-  <div class="hero-notif-bg" id="heroNotifWrap" aria-hidden="true">
-    <div class="notif-time-label">2:47 AM</div>
-    <div class="notif-stack">
-
-      <div class="hero-notif booking" id="hn1">
-        <span class="notif-label-badge" data-en="LIVE EXAMPLE" data-ar="مثال حقيقي">LIVE EXAMPLE</span>
-        <div class="hn-icon booking">📅</div>
-        <div class="hn-body">
-          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-          <div class="hn-title" data-en="New Booking — Sara K." data-ar="حجز جديد — سارة ك.">New Booking — Sara K.</div>
-          <div class="hn-sub" data-en="Tomorrow 09:00 · Confirmed" data-ar="غداً 09:00 · مؤكد">Tomorrow 09:00 · Confirmed</div>
-        </div>
-        <div class="hn-time" data-en="now" data-ar="الآن">now</div>
-      </div>
-
-      <div class="hero-notif payment" id="hn2">
-        <div class="hn-icon payment">💳</div>
-        <div class="hn-body">
-          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-          <div class="hn-title" data-en="Payment Received — ₪480" data-ar="دفعة واردة — ₪480">Payment Received — ₪480</div>
-          <div class="hn-sub" data-en="Deposit · Youssef M." data-ar="عربون · يوسف م.">Deposit · Youssef M.</div>
-        </div>
-        <div class="hn-time" data-en="2m ago" data-ar="منذ 2د">2m ago</div>
-      </div>
-
-      <div class="hero-notif review" id="hn3">
-        <div class="hn-icon review">⭐</div>
-        <div class="hn-body">
-          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-          <div class="hn-title" data-en="New 5-Star Review" data-ar="تقييم 5 نجوم جديد">New 5-Star Review</div>
-          <div class="hn-sub" data-en="&quot;Booked online at midnight, easy.&quot;" data-ar="&quot;حجزت أونلاين بمنتصف الليل، سهل جداً.&quot;">"Booked online at midnight, easy."</div>
-        </div>
-        <div class="hn-time" data-en="14m ago" data-ar="منذ 14د">14m ago</div>
-      </div>
-
-      <div class="hero-notif contact" id="hn4">
-        <div class="hn-icon contact">✉️</div>
-        <div class="hn-body">
-          <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-          <div class="hn-title" data-en="New Lead — Nour A." data-ar="عميل محتمل — نور أ.">New Lead — Nour A.</div>
-          <div class="hn-sub" data-en="Asked about pricing · Ready to book" data-ar="سأل عن الأسعار · مستعد للحجز">Asked about pricing · Ready to book</div>
-        </div>
-        <div class="hn-time" data-en="31m ago" data-ar="منذ 31د">31m ago</div>
-      </div>
-
-    </div>
+  <!-- HERO VISUAL (replaces notification mockups) -->
+  <div class="hero-visual" aria-hidden="true">
+    <img src="hero-visual.webp" alt="Hero visual" loading="lazy" decoding="async">
   </div>
-
-  <!-- FOREGROUND: full-width text anchored to bottom -->
   <div class="hero-content">
-    <!-- NOTIFICATIONS: mobile only (inline flow) -->
-    <div class="hero-notif-mobile" aria-hidden="true">
-      <div class="notif-time-label">2:47 AM</div>
-      <div class="notif-stack">
-        <div class="hero-notif booking" id="hn1m">
-          <span class="notif-label-badge" data-en="LIVE EXAMPLE" data-ar="مثال حقيقي">LIVE EXAMPLE</span>
-          <div class="hn-icon booking">📅</div>
-          <div class="hn-body">
-            <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-            <div class="hn-title" data-en="New Booking — Sara K." data-ar="حجز جديد — سارة ك.">New Booking — Sara K.</div>
-            <div class="hn-sub" data-en="Tomorrow 09:00 · Confirmed" data-ar="غداً 09:00 · مؤكد">Tomorrow 09:00 · Confirmed</div>
-          </div>
-          <div class="hn-time" data-en="now" data-ar="الآن">now</div>
-        </div>
-        <div class="hero-notif payment" id="hn2m">
-          <div class="hn-icon payment">💳</div>
-          <div class="hn-body">
-            <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-            <div class="hn-title" data-en="Payment Received — ₪480" data-ar="دفعة واردة — ₪480">Payment Received — ₪480</div>
-            <div class="hn-sub" data-en="Deposit · Youssef M." data-ar="عربون · يوسف م.">Deposit · Youssef M.</div>
-          </div>
-          <div class="hn-time" data-en="2m ago" data-ar="منذ 2د">2m ago</div>
-        </div>
-        <div class="hero-notif review" id="hn3m">
-          <div class="hn-icon review">⭐</div>
-          <div class="hn-body">
-            <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-            <div class="hn-title" data-en="New 5-Star Review" data-ar="تقييم 5 نجوم جديد">New 5-Star Review</div>
-            <div class="hn-sub" data-en="&quot;Booked online at midnight, easy.&quot;" data-ar="&quot;حجزت أونلاين بمنتصف الليل، سهل جداً.&quot;">"Booked online at midnight, easy."</div>
-          </div>
-          <div class="hn-time" data-en="14m ago" data-ar="منذ 14د">14m ago</div>
-        </div>
-        <div class="hero-notif contact" id="hn4m">
-          <div class="hn-icon contact">✉️</div>
-          <div class="hn-body">
-            <div class="hn-app" data-en="Your Site" data-ar="موقعك">Your Site</div>
-            <div class="hn-title" data-en="New Lead — Nour A." data-ar="عميل محتمل — نور أ.">New Lead — Nour A.</div>
-            <div class="hn-sub" data-en="Asked about pricing · Ready to book" data-ar="سأل عن الأسعار · مستعد للحجز">Asked about pricing · Ready to book</div>
-          </div>
-          <div class="hn-time" data-en="31m ago" data-ar="منذ 31د">31m ago</div>
-        </div>
-      </div>
-    </div>
     <div class="hero-text">
       <h1 class="hero-h1">
-        <span class="stroke">A WEBSITE THAT</span><br>
-        <span class="fill-white">WORKS WHILE YOU SLEEP.</span>
+        <span class="stroke">I MAKE WEBSITES</span><br>
+        <span class="fill-white">THAT WORK WHILE YOU SLEEP.</span>
       </h1>
+      <p class="hero-eyeline" data-en="I build websites for local businesses — so clients find you, trust you, and book you without a single DM." data-ar="أبني مواقع للأعمال المحلية — حتى يجدك العملاء، يثقون بك، ويحجزون بدون أي رسائل.">I build websites for local businesses — so clients find you, trust you, and book you without a single DM.</p>
       <div class="hero-bottom">
-        <p class="hero-sub">Most business websites lose the customer<br><strong>before they even make contact.</strong></p>
         <div class="hero-cta-group">
-          <a href="#cta" class="btn-big"><span class="btn-label">Start here</span><span class="btn-arrow"></span></a>
+          <a href="#cta" class="btn-ghost-cta" data-en="Already decided? Start here →" data-ar="قررت بالفعل؟ ابدأ هنا ←">Already decided? Start here →</a>
         </div>
       </div>
       <p class="hero-scroll">↓ SCROLL TO SEE THE WORK</p>
@@ -1299,6 +1343,7 @@ footer {
       <!-- Step 2: main goal -->
       <div class="survey-step" data-step="2">
         <p class="step-q">What's your main goal?</p>
+        <p class="s-multi-hint">Pick all that apply</p>
         <div class="s-options">
           <div class="s-opt" data-q="2" data-val="Get more clients / leads"><span class="s-opt-label">GET MORE CLIENTS</span><span class="s-opt-check">✓ SELECTED</span></div>
           <div class="s-opt" data-q="2" data-val="Look more professional"><span class="s-opt-label">LOOK MORE PROFESSIONAL</span><span class="s-opt-check">✓ SELECTED</span></div>
@@ -1316,6 +1361,7 @@ footer {
       <!-- Step 3: pain points -->
       <div class="survey-step" data-step="3">
         <p class="step-q">What's your biggest problem right now?</p>
+        <p class="s-multi-hint">Pick all that apply</p>
         <div class="s-options">
           <div class="s-opt" data-q="3" data-val="People can't find me online"><span class="s-opt-label">PEOPLE CAN'T FIND ME</span><span class="s-opt-check">✓ SELECTED</span></div>
           <div class="s-opt" data-q="3" data-val="I look less credible than competitors"><span class="s-opt-label">LOOK LESS CREDIBLE</span><span class="s-opt-check">✓ SELECTED</span></div>
@@ -1350,6 +1396,7 @@ footer {
       <!-- Step 5: availability -->
       <div class="survey-step" data-step="5">
         <p class="step-q">When are you usually free to chat?</p>
+        <p class="s-multi-hint">Pick all that apply</p>
         <div class="s-options">
           <div class="s-opt" data-q="5" data-val="Weekday mornings"><span class="s-opt-label">WEEKDAY MORNINGS</span><span class="s-opt-check">✓ SELECTED</span></div>
           <div class="s-opt" data-q="5" data-val="Weekday afternoons"><span class="s-opt-label">WEEKDAY AFTERNOONS</span><span class="s-opt-check">✓ SELECTED</span></div>
@@ -1472,7 +1519,7 @@ if (painGrid) {
 const translations = {
   en: {
     'hero-tag': 'Web Design · Based in Israel · Built to convert',
-    'hero-h1-1': 'A WEBSITE THAT', 'hero-h1-2': 'WORKS WHILE YOU SLEEP.', 'hero-h1-3': '', 'hero-h1-4': '',
+    'hero-h1-1': 'I MAKE WEBSITES', 'hero-h1-2': 'THAT WORK WHILE YOU SLEEP.', 'hero-h1-3': '', 'hero-h1-4': '',
     'hero-sub': 'Most business websites lose the customer<br><strong>before they even make contact.</strong>',
     'hero-scroll': '↓ SCROLL TO SEE THE WORK',
     'hero-cta': 'Start here',
@@ -1715,25 +1762,64 @@ function setLang(lang) {
 let currentStep = 0;
 const answers = {};
 
+// Steps where multiple options can be selected
+const multiSelectSteps = new Set(['2', '3', '5']); // main goal, biggest problem, availability
+
 document.querySelectorAll('.s-opt').forEach(opt => {
   opt.addEventListener('click', () => {
     const q = opt.dataset.q;
-    document.querySelectorAll(`.s-opt[data-q="${q}"]`).forEach(o => o.classList.remove('selected'));
-    opt.classList.add('selected');
-    answers[q] = opt.dataset.val;
+    const isMulti = multiSelectSteps.has(q);
+
+    if (isMulti) {
+      // Toggle this option
+      const wasSelected = opt.classList.contains('selected');
+      if (wasSelected) {
+        opt.classList.remove('selected');
+      } else {
+        opt.classList.add('selected');
+      }
+      // Collect all selected values
+      const selected = [...document.querySelectorAll(`.s-opt[data-q="${q}"].selected`)]
+        .map(o => o.dataset.val);
+      answers[q] = selected.length ? selected.join(', ') : undefined;
+    } else {
+      // Single select — deselect others, select this one (toggle if already selected)
+      const wasSelected = opt.classList.contains('selected');
+      document.querySelectorAll(`.s-opt[data-q="${q}"]`).forEach(o => o.classList.remove('selected'));
+      if (!wasSelected) {
+        opt.classList.add('selected');
+        answers[q] = opt.dataset.val;
+      } else {
+        delete answers[q];
+      }
+    }
 
     const otherInput = document.getElementById('other' + q);
     if (otherInput) {
-      if (opt.dataset.val === 'Other') {
+      const anyOtherSelected = [...document.querySelectorAll(`.s-opt[data-q="${q}"].selected`)]
+        .some(o => o.dataset.val === 'Other');
+      if (anyOtherSelected) {
         otherInput.classList.add('show');
         otherInput.focus();
-        otherInput.addEventListener('input', () => { answers[q] = otherInput.value.trim() || 'Other'; });
+        otherInput.addEventListener('input', () => {
+          if (isMulti) {
+            const selected = [...document.querySelectorAll(`.s-opt[data-q="${q}"].selected`)]
+              .map(o => o.dataset.val === 'Other' ? (otherInput.value.trim() || 'Other') : o.dataset.val);
+            answers[q] = selected.join(', ');
+          } else {
+            answers[q] = otherInput.value.trim() || 'Other';
+          }
+        });
       } else {
         otherInput.classList.remove('show');
       }
     }
+
     const nextBtn = document.getElementById('next' + q);
-    if (nextBtn) nextBtn.disabled = false;
+    const hasSelection = isMulti
+      ? document.querySelectorAll(`.s-opt[data-q="${q}"].selected`).length > 0
+      : document.querySelectorAll(`.s-opt[data-q="${q}"].selected`).length > 0;
+    if (nextBtn) nextBtn.disabled = !hasSelection;
   });
 });
 
@@ -1801,44 +1887,7 @@ function submitSurvey() {
   }).catch(() => {});
 }
 
-// ── NOTIFICATION STACK ANIMATION ──
-(function() {
-  const ids     = ['hn1','hn2','hn3','hn4'];
-  const mobileIds = ['hn1m','hn2m','hn3m','hn4m'];
-  const delays  = [400, 1100, 2000, 2900];
-  let fired = false;
-
-  function animateSet(set) {
-    set.forEach((id, i) => {
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) el.classList.add('show');
-      }, delays[i]);
-    });
-  }
-
-  // desktop: trigger when bg wrap enters view
-  const wrap = document.getElementById('heroNotifWrap');
-  if (wrap) {
-    const obs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && !fired) {
-        fired = true;
-        animateSet(ids);
-        animateSet(mobileIds);
-      }
-    }, { threshold: 0.1 });
-    obs.observe(wrap);
-  }
-
-  // mobile fallback: if bg is hidden, trigger on mobile block
-  setTimeout(() => {
-    if (!fired) {
-      fired = true;
-      animateSet(ids);
-      animateSet(mobileIds);
-    }
-  }, 300);
-})();
+// notifications removed — no animation required
 
 </script>
 
